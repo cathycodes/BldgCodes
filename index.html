@@ -16,10 +16,10 @@
 	height: 50px;
 	width: 70px;	 
 } 
-#codeContainer{
+#codeList{
 	overflow-y: auto;
 }
-#codeList{
+#codeContainer{
 	overflow-y: auto;
 }
 select{
@@ -99,15 +99,26 @@ select{
 	overflow: hidden;
 	float: right;
 }
-.input-sm{
+<!-- .input-sm{ -->
+	<!-- height: 25px; -->
+<!-- } -->
+input[type=search]{
+	font-size: 14px;
+}
+button, html input[type=button], input[type=reset], input[type=submit]{
 	height: 25px;
+}
+button, input, select, textarea{
+	line-height: 0px;
 }
 mark{
     background: yellow;
     color: black;
 	padding: 0;
 }
-
+mark.current {
+  background: orange;
+}
 </style>
 
 <body class="application">
@@ -662,7 +673,11 @@ mark{
             NYC General Admin. Provisions 2014
 
 				<div id='searchForm'>
-					 <input type="text" name="keyword" class="form-control input-sm" placeholder="Search Text">
+					 <!-- <input type="text" id="search" name="keyword" class="form-control input-sm" placeholder="Search Text"> -->
+					  <input type="search" placeholder="Search Text">
+					  <button data-search="next">&darr;</button>
+					  <button data-search="prev">&uarr;</button>
+					  <button data-search="clear">✖</button>
 				</div>
           </div>
           <div class="chart-stage" id="codeContainer" style="height:80vh">
@@ -1381,32 +1396,132 @@ $(document).ready(function(){
 	  });
 	}
 
-	$(function() {
+	<!-- $(function() { -->
 
-	  var mark = function() {
+	  <!-- var mark = function() { -->
 
-		// Read the keyword
-		var keyword = $("input[name='keyword']").val();
+		<!-- // Read the keyword -->
+		<!-- var keyword = $("input[name='keyword']").val(); -->
 
-		// Determine selected options
-		var options = {};
-		$("input[name='opt[]']").each(function() {
-		  options[$(this).val()] = $(this).is(":checked");
-		});
+		<!-- // Determine selected options -->
+		<!-- var options = {}; -->
+		<!-- $("input[name='opt[]']").each(function() { -->
+		  <!-- options[$(this).val()] = $(this).is(":checked"); -->
+		<!-- }); -->
 
-		// Remove previous marked elements and mark
-		// the new keyword inside the context
-		$("#code").unmark({
-		  done: function() {
-			$("#code").mark(keyword, options);
-		  }
-		});
-	  };
+		<!-- // Remove previous marked elements and mark -->
+		<!-- // the new keyword inside the context -->
+		<!-- $("#code").unmark({ -->
+		  <!-- done: function() { -->
+			<!-- $("#code").mark(keyword, options); -->
+		  <!-- } -->
+		<!-- }); -->
+	  <!-- }; -->
+	  
+	  <!-- $("input[name='keyword']").on("input", mark); -->
+	  <!-- $("input[type='checkbox']").on("change", mark); -->
 
-	  $("input[name='keyword']").on("input", mark);
-	  $("input[type='checkbox']").on("change", mark);
+	<!-- }); -->
+	
+	
+	
+$(function() {
 
-	});
+  // the input field
+  var $input = $("input[type='search']"),
+    // clear button
+    $clearBtn = $("button[data-search='clear']"),
+    // prev button
+    $prevBtn = $("button[data-search='prev']"),
+    // next button
+    $nextBtn = $("button[data-search='next']"),
+    // the context where to search
+    $code = $("#code"),
+    // jQuery object to save <mark> elements
+    $results,
+    // the class that will be appended to the current
+    // focused element
+    currentClass = "current",
+    // top offset for the jump (the search bar)
+    offsetTop = 50,
+    // the current index of the focused element
+    currentIndex = 0;
+
+  /**
+   * Jumps to the element matching the currentIndex
+   */
+  function jumpTo() {
+    if ($results.length) {
+      var position,
+        $current = $results.eq(currentIndex);
+      $results.removeClass(currentClass);
+      if ($current.length) {
+        $current.addClass(currentClass);
+		
+		var parent = $current.closest('#codeContainer')
+		if (parent.length) {
+		$('html').scrollTop(parent.offset().top - offsetTop)
+		parent.scrollTop(parent.scrollTop() - parent.offset().top + $current.offset().top);
+		}
+		else {
+		$('html').animate({
+		  scrollTop: $current.offset().top - offsetTop
+		}, 300);
+		}		
+		
+        //position = $current.offset().top - offsetTop;
+        //window.scrollTo(0, position);
+      }
+    }
+  }
+
+  /**
+   * Searches for the entered keyword in the
+   * specified context on input
+   */
+  $input.on("input", function() {
+  	var searchVal = this.value;
+    $code.unmark({
+      done: function() {
+        $code.mark(searchVal, {
+          separateWordSearch: true,
+          done: function() {
+            $results = $code.find("mark");
+            currentIndex = 0;
+            jumpTo();
+          }
+        });
+      }
+    });
+  });
+
+  /**
+   * Clears the search
+   */
+  $clearBtn.on("click", function() {
+    $code.unmark();
+    $input.val("").focus();
+  });
+
+  /**
+   * Next and previous search jump to
+   */
+  $nextBtn.add($prevBtn).on("click", function() {
+    if ($results.length) {
+      currentIndex += $(this).is($prevBtn) ? -1 : 1;
+      if (currentIndex < 0) {
+        currentIndex = $results.length - 1;
+      }
+      if (currentIndex > $results.length - 1) {
+        currentIndex = 0;
+      }
+      jumpTo();
+    }
+  });
+});
+
+	
+	
 	
 
 	$('#backCodes').on('click', function() {
