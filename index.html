@@ -16,7 +16,7 @@
 	height: 50px;
 	width: 70px;	 
 } 
-#codeList{
+#codeContainer{
 	overflow-y: auto;
 }
 select{
@@ -92,6 +92,19 @@ select{
   text-decoration: none !important;
   color: black !important; 
 }
+#searchForm{
+	overflow: hidden;
+	float: right;
+}
+.input-sm{
+	height: 25px;
+}
+mark{
+    background: yellow;
+    color: black;
+	padding: 0;
+}
+
 </style>
 
 <body class="application">
@@ -121,6 +134,7 @@ select{
         <div class="chart-wrapper" id="treelist" style="height:86vh">			
 			<ul id="myTreeView">
 				<span id="backCodes" style='cursor:pointer'><span style='font-size:20px'>&#8701;</span>&nbsp;&nbsp;Back to Codes</span>
+
 
 				<li><span><u>NYC General Admin. Provisions 2014</u></span></li>
 				<li>
@@ -643,8 +657,13 @@ select{
        <div class="chart-wrapper">
           <div class="chart-title">
             NYC General Admin. Provisions 2014
+
+				<div id='searchForm'>
+					 <input type="text" name="keyword" class="form-control input-sm" placeholder="Search Text">
+				</div>
           </div>
-          <div class="chart-stage" id="codeList" style="height:80vh">
+          <div class="chart-stage" id="codeContainer" style="height:80vh">
+		  <div id="code">
 			<div id="Ch1_Admin" name="Ch1_Admin"><h4>Chapter 1 Administration</h4></div>
 			<br>
 			<div id="art101" name="art101"><b>Article 101 General</b></div>
@@ -1062,10 +1081,12 @@ select{
 			<br>*Section 28-103.11 was amended by Local Law 10 of 2016. This law has an effective date of May 8, 2016.
 			<br>
 			<br> 
-			<br><br><div id="28_103_12" name="28_103_12"><b>§28-103.12 Identification</b></div> 
+			<br><br>
+			<div id="28_103_12" name="28_103_12"><b>§28-103.12 Identification</b></div> 
 			<br>Department personnel shall carry metal badges with suitable inscriptions thereon or other prescribed identification when inspecting structures or premises or otherwise in the performance of their duties under this code.
 			<br> 
-			<br><br><div id="28_103_13" name="28_103_13"><b>§28-103.13 Right of Entry</b></div> 
+			<br><br>
+			<div id="28_103_13" name="28_103_13"><b>§28-103.13 Right of Entry</b></div> 
 			<br>The commissioner or his or her authorized representatives, in the discharge of their duties, shall have the right to enter upon and inspect, at all reasonable times, any buildings, enclosure, premises, or any part thereof, or any signs or service equipment contained therein or attached thereto for the purpose of determining compliance with the provisions of this code and other applicable building laws and rules. Officers and employees of the department shall identify themselves by exhibiting the official badge or other identification prescribed by the department; and other authorized representatives of the commissioner shall identify themselves by producing and exhibiting their authority in writing signed by the commissioner. If access is not obtained, the commissioner shall have recourse to remedies provided by law to secure entry.
 			<br> 
 			<br><br><div id="28_103_14" name="28_103_14"><b>§28-103.14 Department Records</b></div> 
@@ -1334,6 +1355,7 @@ select{
 			<br>
 			<br>*Section 28-103.35 was added by Local Law 59 of 2019. This law has an effective date of September 27, 2019.
 			<br>
+</div>		
 		  </div>
 	  </div>
 	  </div>
@@ -1343,6 +1365,7 @@ select{
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="assets/lib/keen-js/dist/keen.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.es6.js"></script>
   
 <script>
 $(document).ready(function(){
@@ -1354,6 +1377,34 @@ $(document).ready(function(){
 		this.classList.toggle("expanded");
 	  });
 	}
+
+	$(function() {
+
+	  var mark = function() {
+
+		// Read the keyword
+		var keyword = $("input[name='keyword']").val();
+
+		// Determine selected options
+		var options = {};
+		$("input[name='opt[]']").each(function() {
+		  options[$(this).val()] = $(this).is(":checked");
+		});
+
+		// Remove previous marked elements and mark
+		// the new keyword inside the context
+		$("#code").unmark({
+		  done: function() {
+			$("#code").mark(keyword, options);
+		  }
+		});
+	  };
+
+	  $("input[name='keyword']").on("input", mark);
+	  $("input[type='checkbox']").on("change", mark);
+
+	});
+	
 
 	$('#backCodes').on('click', function() {
 			$('#yearCol').show();
