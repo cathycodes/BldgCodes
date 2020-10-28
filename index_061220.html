@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html>
+<title>NYC Building Codes</title>
+<meta name='viewport' content='width=device-width, initial-scale=1.0' charset="utf-8"/>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">  
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="assets/css/keen-dashboards.css" />
+
+<style>
+.logo{
+	background-image: url('https://nycdob.github.io/EssentialActiveConstruction/images/dob_logo_white.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	float: right;
+	background-size: 70px;
+	height: 50px;
+	width: 70px;	 
+} 
+#codeList{
+	overflow-y: auto;
+}
+#codeContainer{
+	overflow-y: auto;
+}
+select{
+	width: 100%;
+}
+@media only screen and (max-width: 700px) {
+	#yearCol{
+		margin-top: 100px;
+	}
+	#genAdmin2014{
+		margin-top: 100px;
+	}
+}
+#genAdmin2014Tree{
+	height: 100%;
+	font-size: 12px;
+	margin-left: 5px;
+}
+
+
+
+
+
+#myTreeView {
+  list-style-type: none;
+}
+<!-- #myTreeView ul { -->
+<!-- list-style-type:none; -->
+<!-- } -->
+#myTreeView {
+  margin: 0;
+  padding: 5px;
+}
+.expandable {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+.expandable::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+.expanded::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);  
+}
+.non-expandable {
+  display: none;
+}
+.active {
+  display: block;
+}
+#row {
+	color: black !important;
+}
+#row:hover {
+	cursor: pointer;
+	background-color:#f5f5f5;
+}
+#treelist {
+	overflow-y: auto;
+}
+.expandable a {
+  text-decoration: none !important;
+  color: black !important; 
+}
+.non-expandable a {
+  text-decoration: none !important;
+  color: black !important; 
+}
+#searchForm{
+	overflow: hidden;
+	float: right;
+}
+<!-- .input-sm{ -->
+	<!-- height: 25px; -->
+<!-- } -->
+input[type=search]{
+	font-size: 14px;
+}
+button, html input[type=button], input[type=reset], input[type=submit]{
+	height: 25px;
+}
+button, input, select, textarea{
+	line-height: 0px;
+}
+mark{
+    background: yellow;
+    color: black;
+	padding: 0;
+}
+mark.current {
+  background: orange;
+}
+</style>
+
+<body class="application">
+<div class="container">
+			<div class="navbar navbar-fixed-top" role="navigation" style="color:white;background-color:RGB(40,56,124);">
+			<a class="logo" href="https://www1.nyc.gov/site/buildings/index.page" target="_blank"> </a>
+				<div class="nav navbar-nav" style="margin-left:15px;margin-top:7px;font-size:28px;font-weight:bold;text-align:center;">
+					NEW YORK CITY BUILDING CODES 					
+				</div>
+			</div>
+</div>
+<div class="container-fluid">
+      <div id="yearCol" class="col-sm-2">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            CODE YEAR
+          </div>
+			<select class="bootstrap-select" id="codeYear">
+			  <option value="1" selected="selected">Current</option>
+			  <option value="2">2008</option>
+			  <option value="3">1968</option>
+			  <option value="4">1938</option>
+			</select>
+        </div>
+      </div>
+	  <div style="display:none;" id="genAdmin2014" class="col-sm-4">
+        <div class="chart-wrapper" id="treelist" style="height:86vh">			
+			<ul id="myTreeView">
+				<span id="backCodes" style='cursor:pointer'><span style='font-size:20px'>&#8701;</span>&nbsp;&nbsp;Back to Codes</span>
+
+
+				<li><span><u>NYC General Admin. Provisions 2014</u></span></li>
+				<li>
+				<span id="row" class="expandable"><a href="#Ch1_Admin">Chapter 1 Administration</a></span>
+					<ul class="non-expandable">
+						<li><span id="row" class="expandable"><a href="#art101">101 General</a></span>
+						<ul class="non-expandable">
+						  <li id="row"><a href="#28_101_1">§28-101.1 Title</a></li>
+						  <li id="row"><a href="#28_101_2">§28-101.2 Intent</a></li>
+						  <li><span id="row" class="expandable"><a href="#28_101_3">§28-101.3 Codes</a></span>
+							<ul class="non-expandable">
+							  <li id="row"><a href="#28_101_3_1">§28-101.3.1 Occupancy Classifications in Prior Codes</a></li>
+							</ul>
+						  </li>
+						  <li><span id="row" class="expandable"><a href="#28_101_4">§28-101.4 Effective Date</a></span>
+							<ul class="non-expandable">
+							  <li id="row"><a href="#28_101_4_1">§28-101.4.1 Permit Issued or Work Commenced Prior to July 1, 2008</a></li>
+							  <li id="row"><a href="#28_101_4_2">§28-101.4.2 Applications for Construction Document Approval Submitted Prior to and Within Twelve Months After July 1, 2008</a></li>
+							  <li id="row"><a href="#28_101_4_3">§28-101.4.3 Optional Use of the 1968 Building Code for Work on Prior Code Buildings</a></li>
+							  <li id="row"><a href="#28_101_4_4">§28-101.4.4 Reductions of Fire Safety or Structural Safety of Prior Code Buildings Prohibited</a></li>
+							</ul>
+						  </li>
+						  <li><span id="row" class="expandable"><a href="#28_101_4_5">§28-101.4.5 Work That Increases Existing Floor Surface Area of a Prior Code Building by More Than 110 Percent</a></span>
+							<ul class="non-expandable">
+							  <li id="row"><a href="#28_101_4_5_1">§28-101.4.5.1 Changes in Scope of Work</a></li>
+							  <li id="row"><a href="#28_101_4_5_2">§28-101.4.5.2 Definitions</a></li>
+							  <li id="row"><a href="#28_101_4_5_3">§28-101.4.5.3 Effect on Zoning Resolution</a></li>
+							</ul>
+						  </li>
+						  <li id="row"><a href="#28_101_5">§28-101.5 Definitions</a></li>
+						</ul>
+						</li>  					
+						<li><span id="row" class="expandable"><a href="#art102">102 Applicability</a></span>
+							<ul class="non-expandable">
+							  <li id="row"><a href="#28_102_1">§28-102.1 General</a></li>
+							  <li id="row"><a href="#28_102_2">§28-102.2 Other Laws</a></li>
+							  <li id="row"><a href="#28_102_3">§28-102.3 Separability</a></li>
+							  <li><span id="row" class="expandable"><a href="#28_102_4">§28-102.4 Existing Buildings</a></span>
+								<ul class="non-expandable">
+								  <li id="row"><a href="#28_102_4_1">§28-102.4.1 Prior Code Buildings Must Comply With the Applicable Retroactive Requirements of the 1968 Building Code</a></li>
+								  <li id="row"><a href="#28_102_4_2">§28-102.4.2 Change in Use or Occupancy</a></li>
+								  <li id="row"><a href="#28_102_4_3">§28-102.4.3 Alteration of Prior Code Buildings</a></li>
+								  <li id="row"><a href="#28_102_4_4">§28-102.4.4 Continuation of Unlawful Use or Occupancy</a></li>
+								  <li id="row"><a href="#28_102_4_5">§28-102.4.5 Fire District Maps</a></li>
+								</ul>
+							  </li>
+							  <li id="row"><a href="#28_102_5">§28-102.5 Regulation of Lots</a></li>
+							  <li id="row"><a href="#28_102_6">§28-102.6 Appendices</a></li>
+							  <li id="row"><a href="#28_102_7">§28-102.7 References in Other Laws</a></li>
+							</ul>
+						</li> 
+						<li><span id="row" class="expandable"><a href="#art103">103 Duties and Powers of Commissioner of Buildings</a></span>
+						<ul class="non-expandable">
+							<li id="row"><a href="#28_103_1">§28-103.1 Jurisdiction</a></li>
+							<li><span id="row" class="expandable"><a href="#ast28_103_1">*§28-103.1 Jurisdiction</a></span>
+								<ul class="non-expandable">
+									<li id="row"><a href="#28_103_1_1">*§28-103.1.1 Installation of Equipment Required by the New York City Fire Code</a></li>
+									<li id="row"><a href="#28_103_1_2">§28-103.1.2 Enforcement of New York City Construction Codes on Property Within the Jurisdiction of the Department of Small Business Services</a></li>
+									<li><span id="row" class="expandable"><a href="#28_103_1_3">§28-103.1.3 Innovation Review Board</a></span>
+										<ul class="non-expandable">
+											<li id="row"><a href="#28_103_1_3_1">§28-103.1.3.1 Meetings and Recommendations</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li id="row"><a href="#28_103_2">§28-103.2 Interpretation</a></li>
+							<li id="row"><a href="#28_103_3">§28-103.3 Variations</a></li>
+							<li id="row"><a href="#28_103_4">§28-103.4 Appeals</a></li>
+							<li id="row"><a href="#28_103_5">§28-103.5 Seal; Judicial Notice</a></li>
+							<li id="row"><a href="#28_103_6">§28-103.6 Proofs, Affidavits and Oaths</a></li>
+							<li><span id="row" class="expandable"><a href="#28_103_7">§28-103.7 Cooperation of Other Departments</a></span>
+								<ul class="non-expandable">
+									<li id="row"><a href="#28_103_7_1">§28-103.7.1 Sharing Results of Buildings Inspections</a></li>
+								</ul>
+							</li>
+							<li id="row"><a href="#28_103_8">§28-103.8 Matters Not Provided For</a></li>
+							<li id="row"><a href="#28_103_9">§28-103.9 Additional Tests</a></li>
+							<li id="row"><a href="#28_103_10">§28-103.10 Supporting Documentation for Materials</a></li>
+							<li id="row"><a href="#28_103_11">*§28-103.11 Applications and Permits</a></li>
+							<li id="row"><a href="#28_103_12">§28-103.12 Identification</a></li>
+							<li id="row"><a href="#28_103_13">§28-103.13 Right of Entry</a></li>
+							<li><span id="row" class="expandable"><a href="#28_103_14">§28-103.14 Department Records</a></span>
+								<ul class="non-expandable">
+									<li id="row"><a href="#28_103_14_1">§28-103.14.1 List of Permits for Cellular Antenna</a></li>
+								</ul>
+							</li>
+							<li id="row"><a href="#28_103_15">§28-103.15 Insurance</a></li>
+							<li id="row"><a href="#28_103_16">§28-103.16 Inspections of Existing Buildings, Structures, Signs, Service Equipment and Construction Machinery and Equipment</a></li>
+							<li id="row"><a href="#28_103_17">§28-103.17 Certain Outside Work, Employment and Financial Interests of Department Employees Prohibited</a></li>
+							<li><span id="row" class="expandable"><a href="#28_103_18">§28-103.18 Investigation of Complaints</a></span>
+								<ul class="non-expandable">
+									<li id="row"><a href="#28_103_18_1">§28-103.18.1 Complaint Records</a></li>
+								</ul>							
+							</li>
+							<li id="row"><a href="#28_103_19">§28-103.19 Addition, Modification, and Deletion of Referenced Standards</a></li>
+							<li id="row"><a href="#28_103_20">§28-103.20 Existing Rules Continued</a></li>
+							<li><span id="row" class="expandable"><a href="#28_103_21">*§28-103.21 Incident Lists</a></span>
+								<ul class="non-expandable">
+									<li id="row"><a href="#28_103_21_1">*§28-103.21.1 Reporting</a></li>
+								</ul>
+							</li>
+							<li id="row"><a href="#28_103_22">§28-103.22 Outreach on Security Grille Visibility Requirements</a></li>
+							<li id="row"><a href="#28_103_23">§28-103.23 Manual on Flood Construction and Protection Standards</a></li>
+							<li id="row"><a href="#28_103_24">§28-103.24 Electronic Submissions</a></li>
+							<li id="row"><a href="#28_103_25">*§28-103.25 Hotel Development Plans</a></li>
+							<li id="row"><a href="#28_103_26">*§28-103.26 Reporting to the Federal Occupational Safety and Health Administration</a></li>
+							<li id="row"><a href="#28_103_27">*§28-103.27 Disclosure of Building Occupancy Status for Buildings Subject to Permit</a></li>
+							<li id="row"><a href="#28_103_28">*§28-103.28 Site Safety Training (SST) Task Force</a></li>
+							<li><span id="row" class="expandable"><a href="#28_103_29">*§28-103.29 Reporting Regarding Implementation of Section 3321 of the New York City Building Code</a></span>
+								<ul class="non-expandable">
+									<li id="row"><a href="#28_103_29_1">**§28-103.29.1 Audits of Training Provided in Connection With Section 3321 of the New York City Building Code</a></li>
+								</ul>
+							</li>
+							<li><span id="row" class="expandable"><a href="#28_103_30">**§28-103.30 Real Time Enforcement Unit</a></span>
+								<ul class="non-expandable">
+									<li id="row"><a href="#28_103_30_1">**§28-103.30.1 Tracking Complaints Related to Work Without a Permit</a></li>
+									<li id="row"><a href="#28_103_30_2">**§28-103.30.2 Monitoring Occupied Multiple Dwellings With Permits for Alteration or Addition</a></li>
+									<li id="row"><a href="#28_103_30_3">**§28-103.30.3 Inspections</a></li>
+									<li id="row"><a href="#28_103_30_4">**§28-103.30.4 Violations</a></li>
+									<li id="row"><a href="#28_103_30_5">**§28-103.30.5 Report</a></li>
+								</ul>
+							</li>	
+							<li id="row"><a href="#28_103_31_SSM">*§28-103.31 Report on Site Safety Manager and Coordinator Certifications</a></li>
+							<li><span id="row" class="expandable"><a href="#28_103_31">*§28-103.31 Office of Alternative Energy</a></span>
+								<ul class="non-expandable">
+									<li id="row"><a href="#28_103_31_1">*§28-103.31.1 Definition</a></li>
+									<li id="row"><a href="#28_103_31_2">*§28-103.31.2 Duties of the Office of Alternative Energy</a></li>
+									<li id="row"><a href="#28_103_31_3">*§28-103.31.3 Reporting</a></li>
+									<li id="row"><a href="#28_103_31_4">*§28-103.31.4 Posting of Information</a></li>
+								</ul>
+							</li>
+							<li><span id="row" class="expandable"><a href="#28_103_32">*§28-103.32 Education and Outreach Regarding Single-Occupant Toilet Room Requirements</a></span>
+								<ul class="non-expandable">
+									<li id="row"><a href="#28_103_32_1">*§28-103.32.1 Reporting</a></li>
+								</ul>
+							</li>
+							<li><span id="row" class="expandable"><a href="#28_103_33">**§28-103.33 Office of Alternative Energy</a></span>
+								<ul class="non-expandable">
+									<li id="row"><a href="#28_103_33_1">**§28-103.33.1 Definitions</a></li>
+									<li id="row"><a href="#28_103_33_2">**§28-103.33.2 Duties of the Office of Alternative Energy</a></li>
+									<li id="row"><a href="#28_103_33_3">*§28-103.33.3 Reporting</a></li>
+									<li><span id="row" class="expandable"><a href="#28_103_33_4">**§28-103.33.4 Posting of Information</a></span>
+										<ul class="non-expandable">
+											<li id="row"><a href="#28_103_33_4_1">*§28-103.33.4.1 Information Regarding Installation of Green Roof Systems</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li id="row"><a href="#28_103_35">*§28-103.35 E-Mail Notice of Construction Project Updates</a></li>
+						</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>			
+        </div>	  
+	  </div>
+      <div class="col-sm-10" id="codeCol">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            CODE BOOKS
+          </div>
+          <div class="chart-stage" id="codeList" style="height:80vh">
+			<div class="list-group" id="codeCurrent">
+			  <a href="#" id="genAdmin2014List" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC General Admin. Provisions 2014</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Building Code 2014</h5>
+				  <small class="text-muted">adopts the IBC 2009 with amendments</small>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Mechanical Code 2014</h5>
+				  <small class="text-muted">adopts the IMC 2009 with amendments</small>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Plumbing Code 2014</h5>
+				  <small class="text-muted">adopts the IPC 2009 with amendments</small>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Fuel Gas Code 2014</h5>
+				  <small class="text-muted">adopts the IFGC 2009 with amendments</small>
+				</div>
+			  </a>
+			  <div class="chart-notes">ADDITIONAL NYC CODES</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Fire Code 2014</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2016 [PDF]</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2014</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2011 [PDF]</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">ZONING</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Zoning Resolution</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">RULES & REGULATIONS</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 1 - Department of Buildings</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 2 - Board of Standards and Appeals</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 3 - Fire Department</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">ADDITIONAL RESOURCES</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Multiple Dwelling Law</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">§27 - Housing Maintenance Code</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">§27 - Electrical Code</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">2010 ADA Standards</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Fair Housing Act Design Manual [PDF]</h5>
+				</div>
+			  </a>
+			</div>
+			<div style='display:none;' class="list-group" id="code2008">
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC General Admin. Provisions 2008</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Building Code 2008</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Mechanical Code 2008</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Plumbing Code 2008</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Fuel Gas Code 2008</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">ADDITIONAL NYC CODES</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Fire Code 2014</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2016 [PDF]</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2014</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2011 [PDF]</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">ZONING</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Zoning Resolution</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">RULES & REGULATIONS</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 1 - Department of Buildings</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 2 - Board of Standards and Appeals</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 3 - Fire Department</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">ADDITIONAL RESOURCES</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Multiple Dwelling Law</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">§27 - Housing Maintenance Code</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">§27 - Electrical Code</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">2010 ADA Standards</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Fair Housing Act Design Manual [PDF]</h5>
+				</div>
+			  </a>
+			</div>
+			<div style='display:none;' class="list-group" id="code1968">
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC 1968 Code (Vol I)</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC 1968 Code (Vol II) [PDF]</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">ADDITIONAL NYC CODES</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Fire Code 2014</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2016 [PDF]</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2014</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2011 [PDF]</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">ZONING</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Zoning Resolution</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">RULES & REGULATIONS</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 1 - Department of Buildings</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 2 - Board of Standards and Appeals</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 3 - Fire Department</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">ADDITIONAL RESOURCES</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Multiple Dwelling Law</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">§27 - Housing Maintenance Code</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">§27 - Electrical Code</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">2010 ADA Standards</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Fair Housing Act Design Manual [PDF]</h5>
+				</div>
+			  </a>
+			</div>
+			<div style='display:none;' class="list-group" id="code1938">
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC 1938 Code [PDF]</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">ADDITIONAL NYC CODES</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Fire Code 2014</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2016 [PDF]</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2014</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Energy Code 2011 [PDF]</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">ZONING</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">NYC Zoning Resolution</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">RULES & REGULATIONS</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 1 - Department of Buildings</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 2 - Board of Standards and Appeals</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Title 3 - Fire Department</h5>
+				</div>
+			  </a>
+			  <div class="chart-notes">ADDITIONAL RESOURCES</div>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Multiple Dwelling Law</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">§27 - Housing Maintenance Code</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">§27 - Electrical Code</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">2010 ADA Standards</h5>
+				</div>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+				  <h5 class="mb-1">Fair Housing Act Design Manual [PDF]</h5>
+				</div>
+			  </a>
+			</div>
+          </div>
+        </div>
+      </div>
+	  <div style="display:none;" id="genAdmin2014content" class="col-sm-8">
+       <div class="chart-wrapper">
+          <div class="chart-title">
+            NYC General Admin. Provisions 2014
+
+				<div id='searchForm'>
+					 <!-- <input type="text" id="search" name="keyword" class="form-control input-sm" placeholder="Search Text"> -->
+					  <input type="search" placeholder="Search Text">
+					  <button data-search="next">&darr;</button>
+					  <button data-search="prev">&uarr;</button>
+					  <button data-search="clear">✖</button>
+				</div>
+          </div>
+          <div class="chart-stage" id="codeContainer" style="height:80vh">
+		  <div id="code">
+			<div id="Ch1_Admin" name="Ch1_Admin"><h4>Chapter 1 Administration</h4></div>
+			<br>
+			<div id="art101" name="art101"><b>Article 101 General</b></div>
+			<br>
+			<div id="28_101_1" name="28_101_1"><b>§28-101.1 Title</b></div>
+			<br>
+			The provisions of this chapter shall apply to the administration of the codes set forth in this title and the 1968 building code. This title shall be known and may be cited as the "New York city construction codes" and includes:
+			<br><br>
+			The New York city plumbing code.
+			<br><br>
+			The New York city building code.
+			<br><br>
+			The New York city mechanical code.
+			<br><br>
+			The New York city fuel gas code.
+			<br><br>
+			The New York city energy conservation code.
+			<br><br><br>
+			<div id="28_101_2" name="28_101_2"><b>§28-101.2 Intent</b></div>
+			<br>
+			The purpose of the New York city construction codes is to provide reasonable minimum requirements and standards, based upon current scientific and engineering knowledge, experience and techniques, and the utilization of modern machinery, equipment, materials, and forms and methods of construction, for the regulation of building construction in the city of New York in the interest of public safety, health, welfare and the environment, and with due regard for building construction and maintenance costs.
+			<br><br><br>
+			<div id="28_101_3" name="28_101_3"><b>§28-101.3 Codes</b></div>
+			<br>
+			Any reference in this title to "this code" or "the code" shall be deemed to be a reference to this title and all of the codes comprising the New York city construction codes unless the context or subject matter requires otherwise. Whenever a section or subsection of this code is cited or referred to, subordinate consecutively numbered sections and subsections of the cited provision are deemed to be included in such reference unless the context or subject matter requires otherwise.
+			<br><br><br>
+			<div id="28_101_3_1" name="28_101_3_1"><b>§28-101.3.1 Occupancy Classifications in Prior Codes</b></div>
+			<br>
+			With regard to prior code buildings, references to occupancy classifications in this code shall be deemed to refer to the equivalent occupancy classification under the 1968 or prior building codes.
+			<br><br><br>
+			<div id="28_101_4" name="28_101_4"><b>§28-101.4 Effective Date</b></div>
+			<br>
+			Except as otherwise provided in sections 28-101.4.1, 28-101.4.2, 28-101.4.3 and 28-101.4.4 on and after July 1, 2008, all work shall be performed in accordance with the provisions of this code.
+			<br><br><br>
+			<div id="28_101_4_1" name="28_101_4_1"><b>§28-101.4.1 Permit Issued or Work Commenced Prior to July 1, 2008</b></div>
+			<br>
+			If a permit for work was issued prior to July 1, 2008 or, if no permit was necessary, work was commenced prior to July 1, 2008, all of the provisions of chapter 1 of title 27 of the administrative code as heretofore in effect shall apply to such work.
+			<br><br><br>
+			<div id="28_101_4_2" name="28_101_4_2"><b>§28-101.4.2 Applications for Construction Document Approval Submitted Prior to and Within Twelve Months After<br> July 1, 2008</b></div>
+			<br>
+			Any work for which an application for construction document approval was submitted to the department prior to July 1, 2008 and not thereafter abandoned, or for which an application for construction document approval is submitted to the department within a period of twelve months after such date may, at the option of the owner, be performed in its entirety in accordance with the provisions of this code, or in accordance with the 1968 building code, provided that such work is commenced within twelve months after the date of issuance of a permit therefore and is diligently carried on to completion. The commissioner may, for good cause, extend the time period for commencement of the work beyond 12 months. Where the owner elects to perform the work in compliance with the 1968 building code, the following conditions shall apply:
+			<br><br>
+			Except as otherwise limited by the commissioner, administration and enforcement of the 1968 building code shall be in accordance with this code, including but not limited to approval of construction documents, issuance of permits and certificates of occupancy, tests and inspections, penalties and enforcement. Controlled inspections and semi-controlled inspections as referenced in the 1968 building code shall be deemed to be special inspections and shall comply with the provisions of this code relating to special inspections. Materials regulated in their use by the 1968 building code shall be subject to applicable provisions of this code.
+			Safety of public and property during construction operations including demolition shall be governed by chapter 33 of the New York city building code.
+			<br><br><br>
+			<div id="28_101_4_3" name="28_101_4_3"><b>§28-101.4.3 Optional Use of the 1968 Building Code for Work on Prior Code Buildings<br> July 1, 2008</b></div>
+			<br>
+			At the option of the owner, and subject to applicable provisions of this code, work on prior code buildings may be performed in accordance with the requirements and standards set forth in the 1968 building code, or where the 1968 code so authorizes, the code in effect prior to December 6, 1968.
+			<br><br>
+			Exceptions:
+			<br>
+			Fuel gas, plumbing and mechanical work. The installation of and work on all appliances, equipment and systems regulated by the New York city fuel gas code, the New York city plumbing code and the New York city mechanical code shall be governed by applicable provisions of those codes relating to new and existing installations.
+			<br> 
+			Fire protection systems. Alterations of buildings and changes of use or occupancy shall be governed by chapter 9 of the New York city building code, subject to special provisions for prior code buildings as set forth therein.
+			<br>
+			Elevators, conveyors and amusement rides. The installation of and work on elevators, conveyors, and amusement rides shall be governed by chapter 30 and appendix K of the New York city building code and the rules of the department, subject to special provisions for prior code buildings as set forth therein.
+			<br>
+			Safety during construction operations. Safety of public and property during construction operations including demolition shall be governed by chapter 33 of the New York city building code.
+			<br>
+			Accessibility. Alterations, including minor alterations, of buildings and changes of use or occupancy, shall be governed by chapter 11 of the New York city building code, subject to special provisions for prior code buildings as set forth therein.
+			<br> Encroachments into the public right of way. Encroachments onto the public right of way shall be governed by chapter 32 of the New York city building code.
+			<br> Administration and enforcement. Except as otherwise limited by the commissioner, administration and enforcement of the 1968 building code shall be in accordance with this code, including but not limited to approval of construction documents, issuance of permits and certificates of occupancy, tests and inspections, penalties and enforcement.
+			<br> Special inspections. Controlled inspections and semi-controlled inspections as referenced in the 1968 building code shall be deemed to be special inspections and shall be governed by the provisions of this code relating to special inspections.
+			<br> Materials. Materials regulated in their use by the 1968 building code shall be subject to applicable provisions of this code.
+			<br> Security grilles. The installation and replacement of security grilles shall comply with section 1008.1.4.5 of the New York city building code.
+			<br> Energy efficiency. All work related to energy efficiency shall be regulated by the New York city energy conservation code.
+			<br> *Roof recovering and replacements.
+			<br> Installation and materials. Work involving the recovering or replacing of an existing roof covering shall be governed by sections 1510.1 through 1510.6 of the New York city building code.
+			<br> Cool roofs. Work involving the recovering or replacing of an existing roof covering shall comply with section 1504.9 of the New York city building code unless the area to be recovered or replaced is less than fifty percent of the roof area and less than 500 square feet (46 m2).
+			<br> Green roofs. Notwithstanding the applicant's election to use the 1968 building code or prior code, work involving green roof systems and container gardens shall be permitted to be performed pursuant to Chapter 15 of the New York city building code.
+			<br> Sustainable roofs. Work involving the replacing of an entire existing roof deck or roof assembly shall comply with section 1511.2 of the New York city building code.
+			<br>*Section 28-101.4.3 (#12) was amended by Local Law 94 of 2019. This law has an effective date of November 15, 2019.
+			<br>
+			<br> Handrails. Where the alteration of a building includes the addition or replacement of an entire stair enclosure including the stairs, handrails shall comply with section 1009.12 and section 1012 of the New York city building code. Where the alteration of a building includes the addition or replacement of ramps, handrails shall comply with section 1010.8 and section 1012 of such code.
+			<br> Guards. Where the alteration or repair of a building involves the addition or replacement of guards, such guards shall comply with sections 1013 and 1607.7 of the New York city building code.
+			<br> Areas of special flood hazard. Within areas of special flood hazard in accordance with section 28-104.9.4, all work for any activity regulated by Appendix G of the New York city building code shall be governed by such appendix.
+			<br> Structural. The use of load resistance factor design (LRFD), calculation of live loads, and applicability of seismic and wind loads shall be governed by special provisions for prior code buildings as set forth in section 1601.2 of the New York city building code.
+			<br> Emergency and standby power systems. The installation of and work on emergency and standby power systems shall comply with section 2702.1 of the New York city building code.
+			<br> Parking garages and open parking lots. Where an alteration of a parking garage or an open parking lot includes an increase in the size of the electric service, such alteration shall include provisions for the installation of electric vehicle charging stations in accordance with section 406.2.11 or 406.7.11 of the New York city building code, as applicable.
+			<br> Mold protection. Alterations shall comply with sections 2506 and 2509 of the New York city building code relating to areas subject to moisture or water damage.
+			<br><br><br>
+			<div id="28_101_4_4" name="28_101_4_4"><b>§28-101.4.4 Reductions of Fire Safety or Structural Safety of Prior Code Buildings Prohibited</b></div>
+			<br>
+			Notwithstanding any other provision of this code, where the alteration of any prior code building or structure in accordance with a provision of this code would result in a reduction of the fire safety or structural safety of such building, relevant provisions of the 1968 building code shall apply to such alteration unless there is full compliance with those provisions of this code that would mitigate or offset such reduction of fire protection or structural safety. Where the owner, having a choice to elect the 1968 building code or this code, chooses this code, the applicant shall submit a comparative analysis acceptable to the commissioner of the relevant fire safety and structural safety provisions under the 1968 building code and this code, demonstrating that the alteration does not result in a reduction to the fire and life safety of the building.
+			<br>
+			<br>Exception: The use of automatic-closing by smoke detection for doors serving vertical exit enclosures in accordance with section 708.7 of the New York city building code in a prior code building shall not be deemed to result in a reduction of the fire safety or structural safety of such a building.
+			<br> 
+			<br><br><div id="28_101_4_5" name="28_101_4_5"><b>§28-101.4.5 Work That Increases Existing Floor Surface Area of a Prior Code Building by More Than 110 Percent</b></div>
+			<br>Notwithstanding sections 28-101.4.3 and 28-102.4.3 or any other provision of this code that would authorize alterations of prior code buildings in accordance with the 1968 building code or prior codes, where the proposed work at the completion of construction will increase the amount of floor surface area of a prior code building by more than 110 percent, over the amount of existing floor surface area, such entire building shall be made to comply with the provisions of this code as if it were a new building hereafter erected. See Section 28-105.2 for permits for such work.
+			<br>
+			<br>Exceptions: When determining the amount of existing floor surface area for the purposes of section 28-101.4.5, the following shall be excluded from the measured square footage of floor surface area:
+			<br>The square footage of floors removed during the course of the work when such floors are removed together with the supporting beams, joists, decking and slabs on grade.
+			<br>The square footage of any floor that was installed together with the supporting beams, joists, decking and slabs on grade less than 12 months prior to submission of the application for construction document approval for the proposed work. For the purposes of this exception, floors installed pursuant to a work permit signed off less than 12 months before such submission shall not be counted as existing floor surface area.
+			<br> 
+			<br><br><div id="28_101_4_5_1" name="28_101_4_5_1"><b>§28-101.4.5.1 Changes in Scope of Work</b></div>
+			<br>In cases where changes in the scope of work during the course of construction would result in increasing the floor surface area at the completion of construction by more than 110 percent over the amount of existing floor surface area as determined pursuant to section 28-101.4.5, such entire building shall be made to comply with the provisions of this code as if hereafter erected and such work shall be refiled as a new building application in accordance with the provisions of section 28-105.2.
+			<br>Exception: Work to the extent necessary to relieve an emergency condition may be performed prior to amending plans or obtaining a new permit pursuant to sections 28-105.4.1 and 28-105.12.2.
+			<br> 
+			<br><br><div id="28_101_4_5_2" name="28_101_4_5_2"><b>§28-101.4.5.2 Definitions</b></div>
+			<br>As used in section 28-101.4.5, the following term shall have the following meaning unless the context or subject matter requires otherwise.
+			<br>
+			<br>FLOOR SURFACE AREA. Floor surface area is the gross square foot area of all horizontal floor and roof surfaces, including roofs of bulkheads and superstructures, of a building or structure at any level, including cellar, attic and roof.
+			<br> 
+			<br><br><div id="28_101_4_5_3" name="28_101_4_5_3"><b>§28-101.4.5.3 Effect on Zoning Resolution</b></div>
+			<br>The provisions of section 28-101.4.5 shall not be construed to affect the status of any nonconforming use or non-complying bulk otherwise permitted to be retained pursuant to the New York city zoning resolution.
+			<br> 
+			<br><br><div id="28_101_5" name="28_101_5"><b>§28-101.5 Definitions</b></div>
+			<br>As used in this chapter and elsewhere in this title, the following terms shall have the following meanings unless the context or subject matter requires otherwise:
+			<br>
+			<br>1968 BUILDING CODE. Chapter 1 of title 27 of the administrative code as hereafter in effect.
+			<br>
+			<br>1968 OR PRIOR CODE BUILDINGS OR STRUCTURES (PRIOR CODE BUILDINGS). (i) A building or structure in existence prior to July 1, 2008 or one for which a lawful building permit was issued for the erection of such building or structure prior to July 1, 2008. (ii) A building or structure erected in accordance with the 1968 building code under a lawful building permit issued for the erection of such building or structure on or after July 1, 2008 in accordance with section 28-101.4.2 of this code.
+			<br>
+			<br>ACCEPTANCE OR ACCEPTED. In reference to construction documents, the endorsement by the department of construction documents with less than full examination by the department based on the professional certification of a registered design professional in accordance with a program established by the commissioner.
+			<br>
+			<br>ADDITION. An alteration of a building in existence that increases its exterior dimensions including but not limited to an extension or increase in floor area or height (including an increase in height or area resulting from the construction of a rooftop structure or rooftop mechanical equipment) of the building.
+			<br>
+			<br>ADMINISTRATIVE CODE. The administrative code of the city of New York.
+			<br>
+			<br>ALTERATION. Any construction, addition, change of use or occupancy, or renovation to a building or structure in existence.
+			<br>
+			<br>APPROVAL OR APPROVED. In reference to construction documents, the determination by the department after full examination that submitted construction documents comply with this code and other applicable laws and rules. In reference to materials, the determination by the commissioner that material is acceptable for its intended use.
+			<br>
+			<br>APPROVED AGENCY. An established and recognized agency, or other qualified person, engaged in conducting tests or furnishing inspection services, when approved pursuant to department rules as qualified to perform or witness identified testing or inspection services.
+			<br>
+			<br>APPROVED FABRICATOR. An established and qualified person, firm or corporation approved by the commissioner to custom manufacture or build products or assemblies regulated by this code, including the production of concrete.
+			<br>
+			<br>APPROVED INSPECTION AGENCY. An approved agency that is approved by the department as qualified to perform one or more of the inspections required by this code.
+			<br>
+			<br>APPROVED TESTING AGENCY. An approved agency that is approved by the department as qualified to test and evaluate the performance of one or more of the materials regulated in their use by this code. Such term shall include, when approved pursuant to department rules, a third party testing or certification agency, evaluation agency, testing laboratory, testing service, licensed concrete testing laboratory, or other entity concerned with product evaluation.
+			<br>
+			<br>ARCHITECT. A person licensed and registered to practice the profession of architecture under the education law of the state of New York.
+			<br>
+			<br>BUILDING. Any structure used or intended for supporting or sheltering any use or occupancy. The term shall be construed as if followed by the phrase "structure, premises, lot or part thereof" unless otherwise indicated by the text.
+			<br>
+			<br>CHARTER. The New York city charter.
+			<br>
+			<br>CERTIFICATE OF COMPLIANCE. A certificate stating that materials meet specified standards, that work was done in compliance with approved construction documents and other applicable provisions of law, or with respect to specified service equipment, a certificate issued by the department authorizing the operation of such equipment.
+			<br>
+			<br>CITY. The city of New York.
+			<br>
+			<br>COMMISSIONER. The commissioner of buildings of the city of New York, or his or her duly authorized representative.
+			<br>
+			<br>CONSTRUCTION DOCUMENTS. Plans and specifications and other written, graphic and pictorial documents, prepared or assembled for describing the design, location, physical characteristics, and other elements of the project necessary for obtaining a building permit.
+			<br>
+			<br>DAY. A calendar day, computed in accordance with section 20 of the New York state general construction law, unless otherwise specified as a business day.
+			<br>
+			<br>DEFERRED SUBMITTAL. Those portions of the design that are not submitted at the time of the application for construction document approval and that are to be submitted to the department within a specified period of time after the issuance of a permit.
+			<br>
+			<br>DEMOLITION. Full or partial demolition.
+			<br>
+			<br>DEMOLITION, FULL: The dismantling, razing, or removal of all of a building or structure, including all operations incidental thereto.
+			<br>
+			<br>DEMOLITION, PARTIAL: The dismantling, razing, or removal of structural members, floors, interior bearing walls, and/or exterior walls or portions thereof, including all operations incidental thereto.
+			<br>
+			<br>DEPARTMENT. The department of buildings of the city of New York.
+			<br>
+			<br>ENGINEER. A person licensed and registered to practice the profession of engineering under the education law of the state of New York.
+			<br>
+			<br>ENLARGEMENT. An addition.
+			<br>
+			<br>EXISTING BUILDING OR STRUCTURE. A completed building or structure that is in existence at the time of an applicable reference in this code.
+			<br>
+			<br>FABRICATED ITEM. Products and assemblies regulated by this code, that are custom manufactured, or built prior to their incorporation into the work at the construction site. Fabricated items shall not include listed, labeled or approved products or assemblies. Materials produced in accordance with standard specifications referenced by this code, such as rolled structural steel shapes, steel-reinforcing bars, masonry units, and wood structural panels or in accordance with a referenced standard, listed in this code, which provides requirements for quality control done under the supervision of a third-party quality control agency shall not be considered fabricated items.
+			<br>
+			<br>FIRE PROTECTION PLAN. A report containing a narrative description of the life and fire safety systems and evacuation system for a structure.
+			<br>
+			<br>HEREAFTER. On or after July 1, 2008.
+			<br>
+			<br>HERETOFORE. Before July 1, 2008.
+			<br>
+			<br>INSPECTION CERTIFICATE. Identification applied to a product by an approved agency containing the name of the manufacturer, the function and performance characteristics, and the name and identification of the approved agency that indicates that the product or material has been inspected and evaluated by such approved agency. An inspection certificate shall also mean a certificate issued by the department upon satisfactory completion of an inspection or test.
+			<br>
+			<br>LABEL. An identification applied to material by the manufacturer that contains the name of the manufacturer, the function and performance characteristics of the material, and the name and identification of the approved agency and that indicates that the representative sample of the material has been tested and evaluated by an approved agency.
+			<br>
+			<br>LABELED. Material to which has been attached a label, symbol or other identifying mark of the manufacturer that contains the name of the manufacturer, the function and performance characteristics of the product or material, and the name and identification of an approved agency and that indicates that a representative sample of the material has been tested and evaluated by an approved agency for compliance with nationally recognized standards or tests to determine suitable usage in a specified manner.
+			<br>
+			<br>LAND SURVEYOR. A person licensed and registered to practice the profession of land surveying under the education law of the state of New York.
+			<br>
+			<br>LANDSCAPE ARCHITECT. A person licensed and registered to practice the profession of landscape architecture under the Education Law of the State of New York.
+			<br>
+			<br>LETTER OF COMPLETION. A document issued by the department indicating that permitted work has been completed, including satisfactory final inspection in accordance with this code. A letter of completion is issued only in circumstances where a certificate of occupancy is not required upon completion of the permitted work.
+			<br>
+			<br>LIMITED OIL-BURNING BOILER ALTERATIONS. An alteration to an oil burner/boiler system that is limited in scope, falling into one of the following categories:
+			<br>
+			<br>Category 1. An alteration to an oil burner/boiler system where the total cost of the proposed Category 1 work in the building does not exceed thirty-five thousand dollars in any 12-month period and where the proposed work is limited to the replacement of oil equipment or oil piping including oil tanks with 330 gallons (1250 L) or less capacity provided the replacement tanks have a UL listing or labeling or meet the alternative tank design and construction standards contained in section 1305.14 of the New York city mechanical code.
+			<br>
+			<br>Category 2. An alteration to an oil burner/boiler system that is not subject to cost or duration limitations and that is limited to the following:
+			<br>Replacement of oil-burning boilers or water heater with heat input of 1 million Btu/h (293 kW) or less.
+			<br>Replacement of oil burners with heat input of 2.8 million Btu/h (821 kW) or less.
+			<br>Relocation of an oil burner or oil-burning boiler or water heater within the same, unaltered fire-rated enclosure or room.
+			<br>Placement of a temporary department of buildings registered oil fired mobile boiler at a site for emergency heating.
+			<br>LIMITED PLUMBING ALTERATIONS. An alteration to a plumbing or fuel gas piping system that is limited in scope, falling into one of the following categories:
+			<br>
+			<br>Category 1. An alteration to a plumbing or fuel gas piping system where the total cost of the proposed Category 1 work in the building does not exceed thirty-five thousand dollars in any 12-month period and where the proposed work is limited to the following:
+			<br>The addition of not more than 5 plumbing fixtures or fixture connections in a building within any 12-month period, including any associated plumbing necessary to serve such additional fixtures or fixture connections;
+			<br>The installation of new plumbing or fuel gas piping, excluding work in Category 2;
+			<br>The installation of up to five new sprinkler heads off of an existing domestic water system within any 12-month period;
+			<br>Rearrangement of not more than 20 sprinkler heads in areas classified in light hazard occupancy, as such term is defined in NFPA 13 as amended by appendix Q of the New York city building code, provided such areas are already sprinklered and such areas will remain in such occupancy, and provided further that all such sprinkler heads are off of a domestic water system;
+			<br>Rearrangement of not more than 20 sprinkler heads in restaurant service areas classified in Group 1 ordinary hazard occupancy, as such term is defined by NFPA 13 as amended by appendix Q of the New York city building code, provided such areas are already sprinklered and such areas will remain in such occupancy, and provided further that all such sprinkler heads are off of a domestic water system;
+			<br>Rearrangement of not more than 20 sprinkler heads in mercantile areas classified in Group 2 ordinary hazard occupancy, as such term is defined by NFPA 13 as amended by appendix Q of the New York city building code, provided such areas are already sprinklered and such areas will remain in such occupancy, and provided further that all such sprinkler heads are off of a domestic water system;
+			<br>In-kind replacement of piping and parts is required for the operation of a standpipe, provided that a sprinkler is not connected or is not now being connected to such system; and
+			<br>Replacement of parts required for the operation of a standpipe system that is not a combined standpipe system.
+			<br>Category 2. An alteration to a plumbing or fuel gas piping system that is not subject to cost or duration limitations and that is limited to the following:
+			<br>The rerouting of existing plumbing or fuel gas branch piping to serve the same number of fixtures and appliances;
+			<br>The in-kind replacement of plumbing fixtures and gas appliances when not constituting a minor alteration or ordinary repair under this code;
+			<br>The relocation and mounting of new plumbing fixtures on existing roughing, other than the mere replacement of existing fixtures constituting a minor alteration or ordinary repair under this code;
+			<br>The installation or replacement of primary backflow preventers;
+			<br>Replacement of gas-fired boilers with heat input of 1 million Btu/h (293 kW) or less;
+			<br>Replacement of gas burners with heat input of 2.8 million Btu/h (821 kW) or less;
+			<br>Relocation of a gas burner/boiler within the same, unaltered fire-rated enclosure or room;
+			<br>In-kind replacement with the following direct-vent appliances that are vented directly through exterior walls serving buildings occupied exclusively as one- or two-family dwellings not more than four stories in height, as provided for in rules by the department, regarding gas-fired boilers, hot water heaters and furnaces;
+			<br>Installation of a new single domestic gas dryer that is vented directly through an exterior wall in buildings occupied exclusively as one- or two-family dwellings not more than four stories in height, as provided for in rules by the department;
+			<br>Placement of a registered gas fired temporary boiler at a site for emergency heating; and
+			<br>Replacement of up to thirty existing sprinkler heads providing that orifice sizes, type and deflector positions remain the same, and all such sprinkler heads are off of a domestic water system.
+			<br>LIMITED SPRINKLER ALTERATIONS. An alteration to a sprinkler system that is limited in scope, falling into one of the following categories:
+			<br>
+			<br>Category 1. An alteration to an existing sprinkler system where the total cost of the proposed Category 1 work in the building does not exceed thirty-five thousand dollars in any 12-month period and where the proposed work is limited to the following:
+			<br>Replacement of parts required for the operation of a sprinkler system;
+			<br>Changes that do not alter the type of sprinkler system;
+			<br>Relocation of piping that does not affect the operation of the sprinkler system;
+			<br>Rearrangement of not more than 20 sprinkler heads in areas classified in light hazard occupancy, as such term is defined in NFPA 13 as amended by appendix Q of the New York city building code, provided such areas are already sprinklered and such areas will remain in such occupancy;
+			<br>Rearrangement of not more than 20 sprinkler heads in restaurant service areas classified in Group 1 ordinary hazard occupancy, as such term is defined in NFPA 13 as amended by appendix Q of the New York city building code, provided such areas are already sprinklered and such areas will remain in such occupancy;
+			<br>Rearrangement of not more than 20 sprinkler heads in mercantile areas classified in Group 2 ordinary hazard occupancy, as such term is defined by NFPA 13 as amended by appendix Q of the New York city building code, provided such areas are already sprinklered and such areas will remain in such occupancy; and
+			<br>The installation of up to five new sprinkler heads off of an existing sprinkler system.
+			<br>Category 2. An alteration to an existing sprinkler system that is not subject to cost or duration limitations and that is limited to the replacement of sprinkler heads, provided that orifice sizes, type and deflector positions remain the same.
+			<br>
+			<br>LIMITED STANDPIPE ALTERATIONS. An alteration to an existing combined standpipe system that is limited in scope falling into the following category:
+			<br>
+			<br>Category 1. An alteration to an existing combined standpipe system where the total cost of the proposed work in the building does not exceed thirty five thousand dollars in any 12-month period and the proposed work is limited to one or more of the following:
+			<br>Replacement of parts required for the operation of a combined standpipe system; and
+			<br>Relocation of combined standpipe auxiliary hose sources and cabinets within 10 feet (3048 mm) of their original location, provided that the existing covered area is not affected and provided that such relocation complies with this code for a new installation.
+			<br>LISTED. Material identified in a list published by an approved agency that maintains periodic inspection of production of listed material or periodic evaluation services whose listing states either that the material meets identified nationally recognized standards or has been tested and found suitable for a specified purpose when installed in accordance with the manufacturer's installation instructions.
+			<br>
+			<br>MAIN USE OR DOMINANT OCCUPANCY (OF A BUILDING). Refers to a single occupancy classification assigned to a structure by the department according to such structure's main use or dominant occupancy.
+			<br>
+			<br>MANUFACTURER'S DESIGNATION. Identification applied to material by the manufacturer indicating that the material complies with a specified standard or set of rules.
+			<br>
+			<br>MARK. Identification applied to a product by the manufacturer indicating the name of the manufacturer and the function of a product or material.
+			<br>
+			<br>MATERIALS. Materials, assemblies, appliances, equipment, devices, systems, products and methods of construction regulated in their use by this code or regulated in their use by the 1968 building code.
+			<br>
+			<br>OCCUPANCY. The purpose or activity for which a building or space is used or is designed, arranged or intended to be used.
+			<br>
+			<br>OWNER. Any person, agent, firm, partnership, corporation or other legal entity having a legal or equitable interest in, or control of the premises.
+			<br>
+			<br>PARTY WALL. A fire division on an interior lot line common to two adjoining buildings.
+			<br>
+			<br>PERMIT. An official document or certificate issued by the commissioner that authorizes performance of specified work or activity.
+			<br>
+			<br>PERSON. An individual, partnership, corporation, or other legal entity.
+			<br>
+			<br>PREMISES. Land, improvements thereon, or any part thereof.
+			<br>
+			<br>PRIOR CODE BUILDING. See 1968 OR PRIOR CODE BUILDING OR STRUCTURE (PRIOR CODE BUILDING).
+			<br>
+			<br>PROFESSIONAL CERTIFICATION. A personal verification of a registered design professional made under such professional's signature and seal that accompanies construction documents and other related documents filed with the department and that attests that such documents do not contain false information and are in compliance with all applicable provisions of law.
+			<br>
+			<br>PROGRESS INSPECTION. Inspection of permitted construction work in progress to verify compliance with the code and with approved construction documents.
+			<br>
+			<br>PROJECT. A design and construction undertaking comprised of work related to one or more buildings or structures and the site improvements. A project is represented by one or more plan/work applications, including construction documents compiled in accordance with article 104 of this chapter, that relate either to the construction of new buildings or structures or to the demolition or alteration of existing buildings or structures. Applications for a project may have different registered design professionals and different application numbers, and may result in the issuance of one or more permits.
+			<br>
+			<br>REGISTERED DESIGN PROFESSIONAL. An architect or engineer.
+			<br>
+			<br>REGISTERED DESIGN PROFESSIONAL OF RECORD. The registered design professional who prepared or supervised the preparation of applicable construction documents filed with the department.
+			<br>
+			<br>REQUIRED. Shall mean required by the provisions of this code.
+			<br>
+			<br>RETAINING WALL. A wall designed to prevent the lateral displacement of soil or other materials.
+			<br>
+			<br>SERVICE EQUIPMENT. Equipment or systems, and all components thereof, that provide sanitation, power, light, heat, ventilation, air conditioning, refuse disposal, fire-fighting, transportation or other facilities for buildings.
+			<br>
+			<br>SIGN-OFF. The issuance by the department of a letter of completion or certificate of occupancy for permitted work indicating the satisfactory completion of all required inspections and receipt by the department of all required submittal documents.
+			<br>
+			<br>SINGLE ROOM OCCUPANCY MULTIPLE DWELLING. See section 28-107.2.
+			<br>
+			<br>SPECIAL INSPECTION. Inspection of selected materials, equipment, installation, fabrication, erection or placement of components and connections, to ensure compliance with approved construction documents and referenced standards as required by chapter 17 of the New York city building code or elsewhere in this code or its referenced standards.
+			<br>
+			<br>SPECIAL INSPECTION AGENCY. An agency employing one or more persons who are special inspectors and that meets the requirements of department rules.
+			<br>
+			<br>SPECIAL INSPECTOR. An individual employed by a special inspection agency having required qualifications and authorized by department rules to perform or witness particular special inspections required by this code or by the rules of the department, including but not limited to a qualified registered design professional so authorized.
+			<br>
+			<br>STRUCTURE. That which is built or constructed, including among others: buildings, stadia, tents, reviewing stands, platforms, stagings, observation towers, radio towers, tanks, trestles, open sheds, shelters, fences, and display signs.
+			<br>
+			<br>SUBMITTAL DOCUMENTS. Completed application forms, construction documents, reports and any other documents submitted in compliance with this code or other applicable laws and rules including but not limited to special inspection reports, certifications or approvals from other governmental agencies and other data required by this code or by the department.
+			<br>
+			<br>SUPERINTENDENT OF CONSTRUCTION (CONSTRUCTION SUPERINTENDENT). An individual, when authorized pursuant to department rules as qualified to superintend permitted construction work on behalf of the owner.
+			<br>
+			<br>USE (USED). The purpose for which a building, structure, or space is occupied or utilized, unless otherwise indicated by the text. Use (used) shall be construed as if followed by the words "or is intended, arranged, or designed to be used."
+			<br>
+			<br>UTILITY COMPANY OR PUBLIC UTILITY COMPANY. The term shall be construed to have the same meaning as that contained in section two of the New York state public service law.
+			<br>
+			<br>UTILITY CORPORATION OR PUBLIC UTILITY CORPORATION. The term shall be construed to have the same meaning as that contained in section two of the New York state public service law.
+			<br>
+			<br>WORK NOT CONSTITUTING MINOR ALTERATIONS OR ORDINARY REPAIRS. See section 28-105.4.2.1.
+			<br>
+			<br>WRITING (WRITTEN). The term shall be construed to include handwriting, typewriting, printing, photo-offset, or any other form of reproduction in legible symbols or characters, including, in the discretion of the commissioner, electronic media.
+			<br>
+			<br>WRITTEN NOTICE. A notification in writing delivered by hand to the person or parties intended, or delivered at or sent by mail or in the discretion of the commissioner by electronic media to the last address known to the party giving such notice.
+			<br>
+			<br>ZONING RESOLUTION. The zoning resolution of the city of New York, adopted December fifteenth, nineteen hundred sixty-one, including all amendments thereto.
+			<br><br><br>
+			<div id="art102" name="art102"><b>Article 102 Applicability</b></div>
+			<br> 
+			<br><br><div id="28_102_1" name="28_102_1"><b>§28-102.1 General</b></div>
+			<br>Where, in any specific case, different sections of this code specify different materials, methods of construction or other requirements, the most restrictive shall govern. Where a general requirement conflicts with a specific requirement, the specific requirement shall govern. Where British and metric units of measurement conflict, the British units shall govern.
+			<br> 
+			<br><br><div id="28_102_2" name="28_102_2"><b>§28-102.2 Other Laws</b></div>
+			<br>The provisions of this code do not presumptively provide for matters that are contained in the charter, the labor law, the multiple dwelling law, the zoning resolution, or the general city law. Where there is conflict or inconsistency between the requirements of this code and other applicable laws and rules, unless otherwise required, such conflict shall be resolved in favor of the more restrictive requirement.
+			<br> 
+			<br><br><div id="28_102_3" name="28_102_3"><b>§28-102.3 Separability</b></div>
+			<br>If any clause, sentence, paragraph, section or part of this code shall be adjudged to be invalid, such judgment shall not affect, impair or invalidate the remainder thereof, but shall be confined in its operation to the clause, sentence, paragraph, or part thereof directly involved in the controversy in which such judgment shall have been rendered.
+			<br> 
+			<br><br><div id="28_102_4" name="28_102_4"><b>§28-102.4 Existing Buildings</b></div>
+			<br>The lawful use or occupancy of any existing building or structure, including the use of any service equipment therein, may be continued unless a retroactive change is specifically required by the provisions of this code or other applicable laws or rules.
+			<br> 
+			<br><br><div id="28_102_4_1" name="28_102_4_1"><b>§28-102.4.1 Prior Code Buildings Must Comply With the Applicable Retroactive Requirements of the 1968 Building Code</b></div>
+			<br>Prior code buildings must comply with the applicable retroactive requirements of the 1968 building code including those requiring the installation of fire safety and building safety systems and the filing of verifying reports with the department of such installations by the dates specified in section 27-228.5 of the administrative code or in other applicable provisions of such 1968 building code. A violation of such provisions shall be a violation of this code.
+			<br> 
+			<br><br><div id="28_102_4_2" name="28_102_4_2"><b>§28-102.4.2 Change in Use or Occupancy</b></div>
+			<br>Except as otherwise provided in sections 28-101.4.1, 28-101.4.2,28-101.4.3 or 28-101.4.4 changes in the use or occupancy of any building or structure made after July 1, 2008 shall comply with the provisions of this code. Any changes made in the use or occupancy of a building or structure not in compliance with this code shall be prohibited and shall be a violation of this code. After a change in use or occupancy has been made in a building, the re-establishment of a prior use or occupancy that would not be lawful in a new building of the same construction class shall be prohibited unless and until all the applicable provisions of this code and other applicable laws and rules for such reestablished use or occupancy shall have been complied with. A change from a use prohibited by the provisions of this code, but which was permitted prior to July 1, 2008, to another use prohibited by the provisions of this code shall be deemed a violation of this code.
+			<br> 
+			<br><br><div id="28_102_4_3" name="28_102_4_3"><b>§28-102.4.3 Alteration of Prior Code Buildings</b></div>
+			<br>Except as otherwise provided in sections 28-101.4.1, 28-101.4.2, 28-101.4.3 and 28-101.4.4, prior code buildings altered after July 1, 2008 shall comply with the provisions of this code. In accordance with subdivision eleven of section three of the multiple dwelling law and article 4 of subchapter 1 of the 1968 building code, at the option of the owner, multiple dwellings erected prior to December 6, 1969 may be altered and buildings erected prior to December 6, 1969 may be converted to multiple dwellings in accordance with applicable provisions of the multiple dwelling law and the building laws and regulations in effect prior to December 6, 1968, provided the general safety and public welfare are not thereby endangered.
+			<br> 
+			<br><br><div id="28_102_4_4" name="28_102_4_4"><b>§28-102.4.4 Continuation of Unlawful Use or Occupancy</b></div>
+			<br>The continuation of the unlawful use or occupancy of a building or structure contrary to the provisions of this code, or contrary to the provisions of prior codes or other applicable law or rule, shall be a violation of this code.
+			<br> 
+			<br><br><div id="28_102_4_5" name="28_102_4_5"><b>§28-102.4.5 Fire District Maps</b></div>
+			<br>The boundaries of fire districts shall be in accordance with the maps set forth in appendix D of the New York city building code.
+			<br> 
+			<br><br><div id="28_102_5" name="28_102_5"><b>§28-102.5 Regulation of Lots</b></div>
+			<br>The regulation of lots, in conformity with the street on which they are situated, shall be calculated at curb level. Where a lot has more than one street frontage, and is so situated that the street frontages intersect, the curb of the longest street frontage shall be used. When the street frontages do not intersect, the curb along each frontage shall be used to one-half the depth of the lot between street frontages. A lot as referred to in this section 28-102.5 shall mean a parcel of land twenty-five feet by one hundred feet, or less, in one ownership whether adjacent land be in the same or other ownership; but, for this purpose, no land in the same ownership may be divided into lots smaller than twenty-five feet by one hundred feet.
+			<br> 
+			<br><br><div id="28_102_6" name="28_102_6"><b>§28-102.6 Appendices</b></div>
+			<br>All enacted appendices are a part of the provisions of this code.
+			<br> 
+			<br><br><div id="28_102_7" name="28_102_7"><b>§28-102.7 References in Other Laws</b></div>
+			<br>References to provisions of the building code of the city of New York or to chapter 1 of title 27 of the administrative code in other laws shall be deemed to refer to equivalent provisions of the 1968 building code or the New York city construction codes as the context in which such references appear may require.
+			<br><br>
+			<br><div id="art103" name="art103"><b>Article 103 Duties and Powers of Commissioner of Buildings</b></div>
+			<br>
+			<br> 
+			<br><div id="28_103_1" name="28_103_1"><b>§28-103.1 Jurisdiction</b></div>
+			<br>This code shall be enforced by the commissioner of buildings, pursuant to the provisions of section six hundred forty-three of the New York city charter. However, the commissioner of small business services may also enforce all of the provisions of this code with respect to buildings under the jurisdiction of the department of small business services and the fire commissioner may also enforce all the provisions of this code relating to:
+			<br>The approved number of persons in places of assembly (overcrowding);
+			<br>Obstruction of aisles, corridors, and exits;
+			<br>The posting and availability for inspection of certificates of occupancy or other authorization of lawful occupancy, certificates of compliance and place of assembly certificates of operation;
+			<br>The maintenance of fire, smoke and carbon monoxide detection and alarm systems, fire extinguishing systems, refrigerating systems, storage tanks and auxiliary storage tanks for oil-burning equipment, exit signs and path markings, and any fire or life safety system, equipment or device intended for use by fire fighting personnel or whose use or operation is subject to the New York city fire code or other law or rule enforced by the New York city fire department, and any related installation and signage;
+			<br>The installation and testing of fire alarm systems, smoke-detecting and carbon monoxide detecting devices that are interconnected with a fire alarm system or monitored by a central station, alternative automatic fire extinguishing systems, including but not limited to fire extinguishing systems for commercial cooking equipment, and fire protection plans;
+			<br>Fire fighting equipment, access to and within premises upon or in which construction and demolition work is being conducted, and the conduct of all construction or demolition work affecting fire prevention and fire fighting;
+			<br>Any exhaust system designed or used for commercial cooking equipment, when such commercial cooking equipment is required to be protected by a fire extinguishing system; and
+			<br>The installation and testing of natural gas distribution piping systems designed for or operated at a gas pressure of 15 psig (103 kPa gauge) or greater.
+			<br> 
+			<br>
+			<br><div id="ast28_103_1" name="ast28_103_1"><b>*§28-103.1 Jurisdiction</b></div>
+			<br>This code shall be enforced by the commissioner of buildings, pursuant to the provisions of section six hundred forty-three of the New York city charter. However, the commissioner of small business services may also enforce all of the provisions of this code with respect to buildings under the jurisdiction of the department of small business services and the fire commissioner may also enforce all the provisions of this code relating to:
+			<br>The approved number of persons in places of assembly (overcrowding);
+			<br>Obstruction of aisles, corridors, and exits;
+			<br>The posting and availability for inspection of certificates of occupancy or other authorization of lawful occupancy, certificates of compliance and place of assembly certificates of operation;
+			<br>The maintenance of fire, smoke and carbon monoxide detection and alarm systems, fire extinguishing systems, refrigerating systems, storage tanks and auxiliary storage tanks for oil-burning equipment, exit signs and path markings, and any fire or life safety system, equipment or device intended for use by fire fighting personnel or whose use or operation is subject to the New York city fire code or other law or rule enforced by the New York city fire department, and any related installation and signage;
+			<br>The installation and testing of fire alarm systems, smoke-detecting and carbon monoxide detecting devices that are interconnected with a fire alarm system or monitored by a central station, alternative automatic fire extinguishing systems, including but not limited to fire extinguishing systems for commercial cooking equipment, and fire protection plans;
+			<br>Fire fighting equipment, access to and within premises upon or in which construction and demolition work is being conducted, and the conduct of all construction or demolition work affecting fire prevention and fire fighting;
+			<br>Any exhaust system designed or used for commercial cooking equipment, when such commercial cooking equipment is required to be protected by a fire extinguishing system; and
+			<br>The installation and testing of natural gas distribution piping systems designed for or operated at a gas pressure of 15 psig (103 kPa gauge) or greater.
+			<br>*Section 28-103.1, Item #5 was amended by Local Law 195 of 2018. This law has an effective date of May 30, 2019.
+			<br> 
+			<br><br><div id="28_103_1_1" name="28_103_1_1"><b>*§28-103.1.1 Installation of Equipment Required by the New York City Fire Code</b></div>
+			<br>Where the installation of exit signs, emergency means of egress illumination, special mechanical ventilation, sprinkler systems, fire alarm systems and alternative automatic fire extinguishing systems is required by the New York city fire code, the fire commissioner shall require such installations to be in accordance with this code.
+			<br>
+			<br>*Section 28-103.1.1 was amended by Local Law 195 of 2018. This law has an effective date of May 30, 2019.
+			<br> 
+			<br><br><div id="28_103_1_2" name="28_103_1_2"><b>§28-103.1.2 Enforcement of New York City Construction Codes on Property Within the Jurisdiction of the Department of Small Business Services</b></div>
+			<br>This code and the 1968 building code shall apply to property within the jurisdiction of the department of small business services pursuant to the New York city charter including, but not limited to, structures on waterfront property used in conjunction with and in furtherance of waterfront commerce and/or navigation. It shall be administered and enforced by the department of small business services in the same manner as property within the jurisdiction of the department.
+			<br> 
+			<br><br><div id="28_103_1_3" name="28_103_1_3"><b>§28-103.1.3 Innovation Review Board</b></div>
+			<br>There is hereby established within the department an innovation review board which shall include as members in addition to the commissioner, the commissioners of environmental protection, health and mental hygiene and design and construction and the chairperson of the city planning commission, or their respective designees. The commissioner shall also designate members from among the fire commissioner and the commissioners of transportation, parks and recreation, consumer affairs, emergency management, housing preservation and development and sanitation and the chairperson of the landmarks preservation commission, and non-governmental organizations and individuals, or their respective designees, with respect to specific matters being considered by the board where the commissioner determines it appropriate to do so.
+			<br> 
+			<br><br><div id="28_103_1_3_1" name="28_103_1_3_1"><b>§28-103.1.3.1 Meetings and Recommendations</b></div> 
+			<br>The commissioner shall convene the innovation review board at least quarterly, or more often as the commissioner may deem necessary to address issues in a timely manner to (i) review specific projects that propose to employ new technologies, design or construction techniques, materials or products, (ii) review proposals for approval of and to initiate reviews of such new technologies, design or construction techniques, materials or products in order to determine their environmental and sustainability benefits, (iii) make recommendations as to under what conditions and for what purposes each may be appropriately employed in New York city, and (iv) streamline approvals of specific innovative projects. If the board recommends that a technology, design or construction technique, material or product may appropriately be employed, the commissioner shall consider such recommendation and may by rule or other method as the commissioner deems appropriate, authorize the use of such technology, design or construction technique, material or product and under what conditions and for what purposes each may be appropriately employed. The commissioner shall state in writing to the interagency green team established pursuant to subdivision i of section twenty of the charter what action the commissioner shall take with respect to each such recommendation and the reasons for the action taken.
+			<br> 
+			<br><br><div id="28_103_2" name="28_103_2"><b>§28-103.2 Interpretation</b></div> 
+			<br>This code shall be liberally interpreted to secure the beneficial purposes thereof.
+			<br> 
+			<br><br><div id="28_103_3" name="28_103_3"><b>§28-103.3 Variations</b></div> 
+			<br>The requirements and standards prescribed in this code shall be subject to variation in specific cases by the commissioner, or by the board of standards and appeals, under and pursuant to the provisions of paragraph two of subdivision (b) of section six hundred forty-five and section six hundred sixty-six of the New York city charter, as amended.
+			<br> 
+			<br><br><div id="28_103_4" name="28_103_4"><b>§28-103.4 Appeals</b></div> 
+			<br>An appeal from any decision or interpretation of the commissioner may be taken to the board of standards and appeals pursuant to the procedures of the board, except as provided in section 25-204 of the administrative code or as otherwise provided in this code.
+			<br> 
+			<br><br><div id="28_103_5" name="28_103_5"><b>§28-103.5 Seal; Judicial Notice</b></div> 
+			<br>The commissioner may design and adopt a seal for the department for use in the authentication of the orders and proceedings of the department, and for such other purposes as the commissioner may prescribe. The courts shall take judicial notice of such seal, and of the signature of the commissioner, the deputy commissioners, and the borough superintendents of the department.
+			<br> 
+			<br><br><div id="28_103_6" name="28_103_6"><b>§28-103.6 Proofs, Affidavits and Oaths</b></div> 
+			<br>Proofs, affidavits and examinations as to any matter arising in connection with the performance of any of the duties of the department may be taken by or before the commissioner, or a deputy commissioner, or such other person as the commissioner may designate; and such commissioner, deputy or other person may administer oaths in connection therewith.
+			<br> 
+			<br><br><div id="28_103_7" name="28_103_7"><b>§28-103.7 Cooperation of Other Departments</b></div> 
+			<br>Upon request of the commissioner, it shall be the duty of all departments to cooperate with the department of buildings at all times, and to furnish to such department such information, reports and assistance as the commissioner may require.
+			<br> 
+			<br><br><div id="28_103_7_1" name="28_103_7_1"><b>§28-103.7.1 Sharing Results of Buildings Inspections</b></div> 
+			<br>The commissioner, the fire commissioner and the commissioner of the department of environmental protection shall establish a procedure, the implementation of which shall begin within six months of the effective date of this section, to share information regarding violations issued as a result of inspections of buildings meeting agreed-upon criteria that are relevant to the responsibilities of each department.
+			<br> 
+			<br><br><div id="28_103_8" name="28_103_8"><b>§28-103.8 Matters Not Provided For</b></div> 
+			<br>Any matter or requirement essential for fire or structural safety or essential for the safety or health of the occupants or users of a structure or the public, and which is not covered by the provisions of this code or other applicable laws and rules, shall be subject to determination and requirements by the commissioner in specific cases.
+			<br> 
+			<br><br><div id="28_103_9" name="28_103_9"><b>§28-103.9 Additional Tests</b></div> 
+			<br>Whenever there is insufficient evidence of compliance with the provisions of this code, or evidence that a material or method of construction does not conform to the requirements of this code, or in order to substantiate claims for alternative materials or methods, the commissioner shall have the authority to require tests as evidence of compliance to be made at no expense to the city. Test methods shall be as specified in this code, or by other recognized test standards approved by the commissioner. In the absence of recognized and accepted test methods, the commissioner shall approve the testing procedures. Tests shall be performed as directed by the commissioner. Reports of such tests shall be retained by the department for the period required for retention of public records.
+			<br> 
+			<br><br><div id="28_103_10" name="28_103_10"><b>§28-103.10 Supporting Documentation for Materials</b></div> 
+			<br>Whenever this code or the rules of the department permits the use of material regulated in its use by this code or the 1968 building code without the prior approval of the commissioner, the commissioner may, in the interest of public safety, require the submittal of supporting documentation that any material used or proposed to be used complies with the applicable code standard for such use. Such supporting documentation may consist of but shall not be limited to certification documents of an approved agency, test reports, analysis, computations or other evidence of such compliance.
+			<br> 
+			<br><br><div id="28_103_11" name="28_103_11"><b>*§28-103.11 Applications and Permits</b></div> 
+			<br>The department shall receive and review applications, construction documents, and other related documents and shall issue permits, in accordance with the provisions of this code. The department shall, on a weekly basis, send council members and community boards, by electronic mail, a copy of all completed applications for a new building or an alteration that will require a new certificate of occupancy for a building, received during the prior week, disaggregated by community board. In addition, the department shall post such information on its website on a weekly basis.
+			<br>
+			<br>*Section 28-103.11 was amended by Local Law 10 of 2016. This law has an effective date of May 8, 2016.
+			<br>
+			<br> 
+			<br><br>
+			<div id="28_103_12" name="28_103_12"><b>§28-103.12 Identification</b></div> 
+			<br>Department personnel shall carry metal badges with suitable inscriptions thereon or other prescribed identification when inspecting structures or premises or otherwise in the performance of their duties under this code.
+			<br> 
+			<br><br>
+			<div id="28_103_13" name="28_103_13"><b>§28-103.13 Right of Entry</b></div> 
+			<br>The commissioner or his or her authorized representatives, in the discharge of their duties, shall have the right to enter upon and inspect, at all reasonable times, any buildings, enclosure, premises, or any part thereof, or any signs or service equipment contained therein or attached thereto for the purpose of determining compliance with the provisions of this code and other applicable building laws and rules. Officers and employees of the department shall identify themselves by exhibiting the official badge or other identification prescribed by the department; and other authorized representatives of the commissioner shall identify themselves by producing and exhibiting their authority in writing signed by the commissioner. If access is not obtained, the commissioner shall have recourse to remedies provided by law to secure entry.
+			<br> 
+			<br><br><div id="28_103_14" name="28_103_14"><b>§28-103.14 Department Records</b></div> 
+			<br>The department shall keep official records of applications received, permits and certificates issued, fees collected, reports of inspections, and notices and orders issued. Such records shall be retained in the official records for the period required for retention of public records.
+			<br> 
+			<br><br><div id="28_103_14_1" name="28_103_14_1"><b>§28-103.14.1 List of Permits for Cellular Antenna</b></div> 
+			<br>The commissioner shall maintain a separate list of alteration permits issued for the erection or placement of antennae used to provide cellular telephone or similar service or any structure related to such service which shall, at a minimum, set forth the name, business address and business telephone number of the applicant, the date of the application, the date the permit was issued, the location for which the permit was issued, including the premises address and the zoning district, whether residential, commercial, or manufacturing, and the number of permits issued for such purpose at the same location. Such list shall be made available to the public upon request between regular business hours and shall be available to the public in electronic format on a 24-hour basis on the department's website.
+			<br> 
+			<br><br><div id="28_103_15" name="28_103_15"><b>§28-103.15 Insurance</b></div> 
+			<br>The commissioner may require applicants for permits to obtain and furnish proof of workers' compensation, disability and general liability insurance in such amounts and in accordance with such specifications as shall be set forth in the rules of the department or as otherwise required by law.
+			<br> 
+			<br><br><div id="28_103_16" name="28_103_16"><b>§28-103.16 Inspections of Existing Buildings, Structures, Signs, Service Equipment and Construction Machinery and Equipment</b></div> 
+			<br>In addition to other required inspections, the commissioner may make or require inspections of existing buildings, structures, signs, service equipment installations and construction machinery and equipment to ascertain compliance with the provisions of this code and other laws that are enforced by the department. Such inspections may be made on behalf of the department by officers and employees of the department and other city departments and governmental agencies; and by approved agencies, special inspectors or other persons when the commissioner is satisfied as to their qualifications and reliability. The commissioner may accept inspection and test reports from persons authorized by this code or by the commissioner to perform such inspections. Such reports shall be filed with the department.
+			<br> 
+			<br><br><div id="28_103_17" name="28_103_17"><b>§28-103.17 Certain Outside Work, Employment and Financial Interests of Department Employees Prohibited</b></div> 
+			<br>It shall be unlawful for any officer or employee of the department to be engaged in conducting or carrying on business as an architect, engineer, carpenter, plumber, iron worker, mason or builder, or any other profession or business concerned with the construction, alteration, sale, rental, development, or equipment of buildings. It shall also be unlawful for such employees to be engaged in the manufacture or sale of automatic sprinklers, fire extinguishing apparatus, fire protection devices, fire prevention devices, devices relating to the means or adequacy of exit from buildings, or articles entering into the construction or alteration of buildings, or to act as agent for any person engaged in the manufacture or sale of such articles, or own stock in any corporation engaged in the manufacture or sale of such articles.
+			<br> 
+			<br><br><div id="28_103_18" name="28_103_18"><b>§28-103.18 Investigation of Complaints</b></div> 
+			<br>The commissioner shall cause all complaints to be investigated. For purposes of investigating complaints of violations of law enforced by the department, the commissioner may by rule establish a program to classify structures based on their enforcement history and may create criteria for such classification and assign enforcement resources accordingly.
+			<br> 
+			<br><br><div id="28_103_18_1" name="28_103_18_1"><b>§28-103.18.1 Complaint Records</b></div> 
+			<br>The department shall keep records of complaints made by any person in reference to any building or other matter under the jurisdiction of the department. Recorded complaints shall include the name and residence of the complainant, the name of the person complained of, the date of the entry of the complaint and any suggested remedies. Except for entries of names and residences of the complainants, such records shall be made available for public examination.
+			<br> 
+			<br><br><div id="28_103_19" name="28_103_19"><b>§28-103.19 Addition, Modification, and Deletion of Referenced Standards</b></div> 
+			<br>The standards referenced in this code may be added to, deleted or modified pursuant to local law or by rule of the department. Every such rule adding, deleting or modifying a referenced standard shall indicate the promulgating agency of the standard, the standard identification, the effective date and title and the section or sections of this code to which such standard applies. The commissioner shall act in consultation with the fire commissioner on matters relating to fire safety.
+			<br>
+			<br>Exception: Referenced standards in the New York city plumbing code, other than referenced national standards contained in chapter 13 of such code, shall not be added to, deleted, or modified by rule.
+			<br> 
+			<br><br><div id="28_103_20" name="28_103_20"><b>§28-103.20 Existing Rules Continued</b></div> 
+			<br>Rules promulgated by the department in accordance with the law in effect prior to July 1, 2008 shall remain in effect for the matters covered to the extent that such rules are not inconsistent with this code unless and until such rules are amended or repealed by the department.
+			<br> 
+			<br><br><div id="28_103_21" name="28_103_21"><b>*§28-103.21 Incident Lists</b></div> 
+			<br>The commissioner shall, by January 2018 and monthly thereafter, post on the department's website, in a machine-readable format, a list of every incident, reported to the department in accordance with section 28-103.21.1, that occurred on every construction site where construction work subject to permitting by the commissioner resulted in (i) a fatality to any individual, including a member of the general public or a construction worker, or (ii) an injury to any individual, including a member of the general public or a construction worker, that requires transport by emergency medical services or requires immediate emergency care at a hospital or offsite medical clinic, regardless of whether such incident involved a violation of this code or any other law or rule. Such list shall identify, at a minimum, the following information for each incident that the department is required to report on pursuant to this section:
+			<br>The owner of the site where the incident occurred;
+			<br>If the incident involved a construction worker, the name of the general contractor or the subcontractor who employed such worker at the time of the incident;
+			<br>A detailed description of the incident, including the nature of the work being performed at the time of the incident;
+			<br>Violations issued by the department as a result of the incident and to whom such violations were issued;
+			<br>The number of persons injured and/or killed in the incident, and whether such persons were members of the public, construction workers or other persons;
+			<br>If the incident involved an injury, a description of the type of injury;
+			<br>Whether the incident involved a fatality;
+			<br>The date and time of the incident;
+			<br>The address where the incident occurred;
+			<br>The total square footage of the site where the incident occurred;
+			<br>The number of floors and height of the building involved where the incident occurred or, in the case of a new building, the proposed number of floors and proposed height;
+			<br>A list of active permits issued by the department associated with the construction site where an incident occurred, disaggregated by type;
+			<br>If the incident involved a construction worker, the length of time the injured or deceased worker had been employed by their employer at the time of the incident;
+			<br>If the incident involved a construction worker, the number of hours the injured or deceased worker had been working when the incident occurred;
+			<br>If the incident involved a construction worker, whether or not the injured or deceased worker was a union member; and
+			<br>Whether or not the construction site where the incident occurred was a union site.
+			<br>*Section 28-103.21 was amended by Local Law 78 of 2017. This law has an effective date of May 10, 2017.
+			<br> 
+			<br><br><div id="28_103_21_1" name="28_103_21_1"><b>*§28-103.21.1 Reporting</b></div> 
+			<br>Where construction work subject to permitting by the commissioner that results in a fatality or injury to any individual, including a member of the general public or a construction worker, occurs on a construction site within the city, the owner of person otherwise in control of the site at which such incident occurred, or, if the incident involved a construction worker, the general contractor or subcontractor that employed such worker, shall report to the department, within three business days after the occurrence of such incident, the information required by section 28-103.21.
+			<br>
+			<br>*Section 28-103.21.1 was added by Local Law 78 of 2017. This law has an effective date of May 10, 2017.
+			<br> 
+			<br><br><div id="28_103_22" name="28_103_22"><b>§28-103.22 Outreach on Security Grille Visibility Requirements</b></div> 
+			<br>The commissioner shall, through or in cooperation with the department of small business services, the department of consumer affairs, and other city agencies deemed appropriate, develop an outreach program to manufacturers and installers of security grilles, business improvement districts, local development corporations, chambers of commerce and community boards to alert these groups and the businesses that utilize security grilles of the permit requirements and the requirements of this section, the penalties associated with violation thereof and the availability of any business loans, grants or tax subsidies related to the installation or use of such security grilles.
+			<br> 
+			<br><br><div id="28_103_23" name="28_103_23"><b>§28-103.23 Manual on Flood Construction and Protection Standards</b></div> 
+			<br>The commissioner shall create and make publicly available, in print and on the department's website, a manual explaining in detail the flood construction and protection requirements and standards applicable to the city. Such manual shall be made available in plain English and Spanish and in other languages as determined by the commissioner and shall be updated as necessary to reflect changes to applicable flood construction requirements and standards. Such manual shall include, but need not be limited to, a description and explanation of the following:
+			<br>The materials requirements imposed by applicable flood construction requirements and standards, including the elements of structures subject to such material requirements;
+			<br>The manner in which specific utilities and attendant equipment must be protected from flooding; and
+			<br>The application of the flood construction and protection requirements and standards to existing structures.
+			<br> 
+			<br><br><div id="28_103_24" name="28_103_24"><b>§28-103.24 Electronic Submissions</b></div> 
+			<br>The commissioner shall have the discretion to require that any document submitted to the department be submitted electronically.
+			<br> 
+			<br><br><div id="28_103_25" name="28_103_25"><b>*§28-103.25 Hotel Development Plans</b></div> 
+			<br>Where the department receives applications for new construction of or conversions to transient hotels, as defined in the zoning resolution, the department shall provide written notice, or notice by electronic mail, of the proposed construction or conversion to:
+			<br>The borough president of the borough in which such proposed construction is located;
+			<br>The council member in whose district such proposed construction is located;
+			<br>The community board of the community district in which such proposed construction is located; and
+			<br>If such proposed construction involved land within two or more community districts in a borough, the borough board.
+			<br>*Section 28-103.25 was added by Local Law 45 of 2015. This law has an effective date of November 13, 2015.
+			<br> 
+			<br><br><div id="28_103_26" name="28_103_26"><b>*§28-103.26 Reporting to the Federal Occupational Safety and Health Administration</b></div> 
+			<br>As soon as practicable after the issuance of (i) an immediately hazardous or major violation of chapter 33 of the New York city building code or (ii) a violation of section 3310.10.2 of the New York city building code, the commissioner shall report such violation to the federal occupational safety and health administration.
+			<br>
+			<br>*Section 28-103.26 was added by Local Law 68 of 2017. This law has an effective date of September 7, 2017
+			<br> 
+			<br><br><div id="28_103_27" name="28_103_27"><b>*§28-103.27 Disclosure of Building Occupancy Status for Buildings Subject to Permit</b></div> 
+			<br>For each building for which a permit for work has been issued, the commissioner shall post on the department's website a statement of whether the construction documents relating to such permit indicate that one or more dwelling units within such building will be occupied during such work.
+			<br>
+			<br>*Section 28-103.27 was added by Local Law 158 of 2017. This law has an effective date of August 30, 2018.
+			<br> 
+			<br><br><div id="28_103_28" name="28_103_28"><b>*§28-103.28 Site Safety Training (SST) Task Force</b></div> 
+			<br>The commissioner shall convene and provide staff for an SST task force in accordance with the following:
+			<br> Such task force shall be composed as follows:
+			<br> The commissioner, or the designee of such commissioner, shall serve as the chairperson of such task force.
+			<br> The task force shall consist of 14 members, in addition to the chairperson. Seven of the additional members of such task force shall be appointed by the mayor or the mayor's designee, and seven of the additional members of such task force shall be appointed by the speaker of the council. Such task force shall include members who represent (i) parts of the construction industry that are represented by labor unions or labor organizations, (ii) parts of such industry that are not represented by such unions or organizations, (iii) minority-owned business enterprises or women-owned business enterprises that are certified in accordance with section 1304 of the New York city charter and primarily engaged in construction work and (iv) day laborers.
+			<br> All members of the task force shall have significant experience (i) in a construction or demolition related field or (ii) developing or providing construction site safety training, except that one of the members appointed by the mayor pursuant to Item 1.2 may be a municipal officer with experience related to the program to be established pursuant to section 22-509 of the code.
+			<br> Such task force shall meet at least quarterly each year for the first two years of its existence and at least annually for three years thereafter.
+			<br> Such task force shall from time to time on its own initiative or upon request of the commissioner provide the commissioner with recommendations relating to training required by section 3321 of the New York city building code.
+			<br> Such task force shall establish a mechanism for receiving and reviewing recommendations from the public relating to training required by such section.
+			<br> By no later than March 1, 2018, such task force shall provide the commissioner with recommendations relating to the amount of additional SST credits required for satisfying item 1.1 of the definition of limited SST card and the topics that such additional SST credits must cover. Such task force shall consider, but need not include in its recommendations, the following topics insofar as such topics relate to safeguarding the public from potential dangers posed by building sites.
+			<br>Fall protection.
+			<br>Personal protection equipment.
+			<br>Safely working with machines.
+			<br>Working with hazardous chemicals or other materials.
+			<br>OSHA and its role in construction industry safety and health.
+			<br>Handling heavy materials and proper lifting techniques.
+			<br>Exit routes, emergency action plans, fire prevention and fire protection.
+			<br>Confined space awareness.
+			<br>Walking and working surfaces.
+			<br>Electrical safety.
+			<br>Hazard communication.
+			<br>Concrete operations.
+			<br>Demolition work.
+			<br>Excavation work.
+			<br>Construction and demolition work at major building sites.
+			<br>Material handling.
+			<br>Material hoisting.
+			<br>Site perimeter protection.
+			<br>Sidewalk sheds and fences.
+			<br>Steel erection.
+			<br>Tenant and occupant protection.
+			<br>Ladders and stairs.
+			<br>Drug and alcohol awareness.
+			<br>Asbestos awareness.
+			<br>Lead awareness.
+			<br>First aid, including cardiopulmonary resuscitation (CPR) and automated external defibrillator (AED) use.
+			<br>*Section 28-103.28 was added by Local Law 196 of 2017. This law has an effective date of October 16, 2017.
+			<br> 
+			<br><br><div id="28_103_29" name="28_103_29"><b>*§28-103.29 Reporting Regarding Implementation of Section 3321 of the New York City Building Code</b></div> 
+			<br>No later than three months after the end of each fiscal year, the commissioner shall report to the mayor and the speaker of the council, and make publicly available online, a report on implementation of section 3321 of the New York city building code. In addition to any information the commissioner deems relevant, such report shall include:
+			<br> The number of SST providers in existence at the end of such fiscal year. Such number shall also be disaggregated by which condition of item 1 of the definition of "site safety training (SST) provider" set forth in section 3302.1 of the New York city building code is satisfied by each such provider.
+			<br> The number of SST cards issued in such fiscal year.
+			<br> The number of temporary SST cards issued in such fiscal year.
+			<br> The number of violations of such section issued in such fiscal year, disaggregated by violation type.
+			<br> A list of building sites where violations of such section were issued and, for each such site, the following information disaggregated by violation type:
+			<br> The number of follow-up inspections conducted pursuant to section 28-204.1.1.
+			<br> The average frequency of such follow-up inspections.
+			<br> The number of violations of section 3321 of the New York city building code issued as a result of such inspections.
+			<br> A description of the enforcement mechanisms used by the department to ensure the integrity of training provided by SST providers in connection with section 3321 of the New York city building code and that such training satisfies the requirements of such section and any rules or department requirements relating to such training.
+			<br>**Section 28-103.29 was added by Local Law 196 of 2017. This law has an effective date of October 16, 2017. Section 28-103.29 was amended by Local Law 219 of 2019. This law has an effective date of December 15, 2019.
+			<br> 
+			<br><br><div id="28_103_29_1" name="28_103_29_1"><b>**§28-103.29.1 Audits of Training Provided in Connection With Section 3321 of the New York City Building Code</b></div> 
+			<br>In addition to any other enforcement mechanisms, the department shall periodically audit SST providers and training provided in connection with section 3321 of the New York city building code by such providers in order to ensure the integrity of such training and compliance with such section and any rules or department requirements relating to such training.
+			<br>
+			<br>**Section 28-103.29.1 was added by Local Law 196 of 2017. This law has an effective date of October 16, 2017 and was renumbered by Local Law 93 of 2019. This law has an effective date of September 16, 2019.
+			<br> 
+			<br><br><div id="28_103_30" name="28_103_30"><b>**§28-103.30 Real Time Enforcement Unit</b></div> 
+			<br>There is hereby established within the department a real time enforcement unit. Such unit and an agency that is delegated authority by the commissioner shall be responsible for enforcing the construction codes with respect to:
+			<br>occupied multiple dwellings with complaints related to work without a permit; and
+			<br>occupied multiple dwellings with valid permits for (i) the alteration of 10 percent or more of the existing floor surface area of the building or (ii) an addition to the building.
+			<br>**Section 28-103.30 was added by Local Law 188 of 2017. This law has an effective date of February 13, 2018 and was renumbered by Local Law 233 of 2017. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_30_1" name="28_103_30_1"><b>**§28-103.30.1 Tracking Complaints Related to Work Without a Permit</b></div> 
+			<br>The real time enforcement unit shall receive and track all complaints related to work without a permit in occupied multiple dwellings. The unit shall retain records of such complaints.
+			<br>
+			<br>**Section 28-103.30.1 was added by Local Law 188 of 2017. This law has an effective date of February 13, 2018 and was renumbered by Local Law 233 of 2017. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_30_2" name="28_103_30_2"><b>**§28-103.30.2 Monitoring Occupied Multiple Dwellings With Permits for Alteration or Addition</b></div> 
+			<br>The real time enforcement unit shall monitor all occupied multiple dwellings with valid permits for (i) the alteration of 10 percent or more of the existing floor surface area of the building or (ii) an addition to the building. Owners of such buildings shall notify the department in writing at least 72 hours prior to the commencement of any work pursuant to such permits.
+			<br>
+			<br>**Section 28-103.30.2 was added by Local Law 188 of 2017. This law has an effective date of February 13, 2018 and was renumbered by Local Law 233 of 2017. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_30_3" name="28_103_30_3"><b>**§28-103.30.3 Inspections</b></div> 
+			<br>For immediately hazardous complaints related to work without a permit in occupied multiple dwellings, the real time enforcement unit shall conduct inspections of such occupied multiple dwellings within 12 hours of the receipt of such complaints, except that complaints received after 8:00 p.m. shall be inspected by 10:00 a.m. on the following day. For all other complaints related to work without a permit in occupied multiple dwellings, such unit shall conduct inspections of such multiple dwelling within ten days of receipt of such complaints. The real time enforcement unit shall also conduct initial inspections of no fewer than five percent of occupied multiple dwellings with valid permits for alteration or addition as described in section 28-103.26.2, within 20 days of commencement of work for such alterations or additions and shall conduct periodic unannounced inspections thereafter until such work is complete. The unit shall be available to conduct inspections seven days a week, between the hours of 8:30 a.m. and 10:00 p.m.
+			<br>
+			<br>**Section 28-103.30.3 was added by Local Law 188 of 2017. This law has an effective date of February 13, 2018 and was renumbered by Local Law 233 of 2017. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_30_4" name="28_103_30_4"><b>**§28-103.30.4 Violations</b></div> 
+			<br>The real time enforcement unit shall issue notices of violation or stop work orders as necessary.
+			<br>
+			<br>**Section 28-103.30.4 was added by Local Law 188 of 2017. This law has an effective date of February 13, 2018 and was renumbered by Local Law 233 of 2017. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_30_5" name="28_103_30_5"><b>**§28-103.30.5 Report</b></div> 
+			<br>The department shall publish online an annual report with the following information related to the effectiveness of the real time enforcement unit: (i) the number of complaints received disaggregated by building; (ii) the average time taken to respond to complaints; (iii) the number of monitored occupied multiple dwellings with valid permits for alteration or addition as described in section 28-103.26.2; (iv) the number of initial and periodic inspections conducted disaggregated by building; and (v) the number and type of violations issued disaggregated by building.
+			<br>
+			<br>**Section 28-103.30.5 was added by Local Law 188 of 2017. This law has an effective date of February 13, 2018 and was renumbered by Local Law 233 of 2017. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_31_SSM" name="28_103_31_SSM"><b>*§28-103.31 Report on Site Safety Manager and Coordinator Certifications</b></div> 
+			<br>The commissioner shall, in October of 2018 and each year thereafter, electronically submit to the city council and post on the department's website a report that includes the following information regarding site safety managers and site safety coordinators:
+			<br>The (i) number of active site safety manager certificates and (ii) number of active site safety coordinator certificates;
+			<br>The (i) number of active site safety manager certificates on the last day of the preceding year and (ii) number of active site safety coordinator certificates on the last day of the preceding year;
+			<br>The (i) number of sites for which a site safety manager was required by this code during the preceding year and (ii) number of such sites for which a site safety manager was required by this code but for which a site safety coordinator may be designated in lieu of such manager pursuant to the exception to section 3310.5 of the New York city building code;
+			<br>The (i) number of site safety manager certificates issued in the preceding year and (ii) number of site safety coordinator certificates issued in the preceding year;
+			<br>The (i) number of applicants for site safety manager certificates who submitted applications during the preceding year and (ii) number of applicants for site safety coordinator certificates who submitted applications during the preceding year;
+			<br>The (i) average length of time for an applicant who submitted an application for a site safety manager certificate during the preceding year to receive such certificate, measured from the date a completed application is submitted to the department and (ii) average length of time for an applicant who submitted an application for a site safety coordinator certificate during the preceding year to receive such certificate, measured from the date a completed application is submitted to the department; and
+			<br>The (i) average length of time for an applicant who submitted an application for a site safety manager certificate during the preceding year to complete a background check, if any, for such certificate, measured from the date such applicant submitted all documentation necessary to complete such check, (ii) average length of time for an applicant who submitted an application for a site safety coordinator certificate during the preceding year to complete a background check, if any, for such certificate, measured from the date such applicant submitted all documentation necessary to complete such check (iii) the main three reasons for completions of background checks for applicants who submitted applications for site safety manager certificates during the preceding year exceeding the average length of time for completion of such background checks and (iv) the main three reasons for completions of background checks for applicants who submitted applications for site safety coordinator certificates during the preceding year exceeding the average length of time for completion of such background checks.
+			<br>*Section 28-103.31 was added by Local Law 224 of 2017. This law has an effective date of December 1, 2017.
+			<br> 
+			<br><br><div id="28_103_31" name="28_103_31"><b>*§28-103.31 Office of Alternative Energy</b></div> 
+			<br>There is hereby established within the department an office of alternative energy.
+			<br>
+			<br>*Section 28-103.31 was added by Local Law 233 of 2017. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_31_1" name="28_103_31_1"><b>*§28-103.31.1 Definition</b></div> 
+			<br>As used in this section, the term "alternative energy project" means construction work on a building, as such term is defined in section 28-101.5 of the administrative code, that will result in such building having at least 50 kilowatts of alternative energy capacity installed onsite from:
+			<br>A qualified energy resource, as such term is defined in section 45 of title 26 of the United States code; or
+			<br>A source that is determined to be renewable by the commissioner or the head of another agency designated by the mayor.
+			<br>*Section 28-103.31.1 was added by Local Law 233 of 2017. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_31_2" name="28_103_31_2"><b>*§28-103.31.2 Duties of the Office of Alternative Energy</b></div> 
+			<br>The duties of the office of alternative energy include, but need not be limited to:
+			<br>Establishing a program to (i) assist with the technical review and approval of applications and other documents submitted to the department in connection with alternative energy projects, (ii) provide guidance to applicants in connection with such projects, (iii) support technical research for advancing energy legislation and policy within the city and (iv) receive and respond to comments, questions and complaints with respect to such program;
+			<br>Coordinating with the office of long-term planning and sustainability, fire department, department of small business services, department of housing preservation and development, and other relevant agencies to ensure that policies are in place to encourage the installation and maintenance of alternative energy projects, and seeking cooperation and assistance from the city university of New York with respect to such policies; and
+			<br>Making recommendations to the commissioner and the heads of other agencies with respect to streamlining the process for obtaining the necessary approvals to install and maintain alternative energy projects.
+			<br>*Section 28-103.31.2 was added by Local Law 233 of 2017. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_31_3" name="28_103_31_3"><b>*§28-103.31.3 Reporting</b></div> 
+			<br>The head of the office of the alternative energy shall submit an annual report to the commissioner and to the head of any other relevant agency providing (i) a description of the most commonly received comments, questions and complaints received with respect to such office, (ii) a description of actions undertaken by such office to coordinate with other agencies and the results of such coordination, (iii) recommendations made pursuant to section 28-103.31.2 and (iv) recommendations with respect to expanding the definition of alternative energy project. By no later than three months after the end of each fiscal year, such office shall submit a report to the mayor and the speaker of the city council that includes a summary of the actions taken by any agency as a result of any comment, question, complaint or recommendation from or forwarded by such office.
+			<br>
+			<br>*Section 28-103.31.3 was added by Local Law 233 of 2017. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_31_4" name="28_103_31_4"><b>*§28-103.31.4 Posting of Information</b></div> 
+			<br>The office of alternative energy shall maintain a website and shall post on such website the contact information for such office and a statement indicating that any person may contact such office if such person has a comment, question or complaint with respect to such office.
+			<br>
+			<br>*Section 28-103.31.4 was added by Local Law 233 of 2017. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_32" name="28_103_32"><b>*§28-103.32 Education and Outreach Regarding Single-Occupant Toilet Room Requirements</b></div> 
+			<br>The department, in conjunction with (i) the mayor's office of immigrant affairs, (ii) the commission on human rights, (iii) the department of consumer affairs, (iv) the department of health and mental hygiene, (v) the department of small business services, (vi) the department of citywide administrative services and (vii) any other office or agency designated by the mayor, shall conduct education and outreach to increase awareness of sections 403.2.1 and 403.4 of the New York city plumbing code, regarding single-occupant toilet room requirements. Such education and outreach shall be tailored to business owners, and shall, at a minimum, include educational materials concerning such single-occupant toilet room requirements and the related posting and signage requirements, including samples of acceptable signage. Such materials and sample signage shall be available in the designated citywide languages as defined in section 23-1101. Information concerning such requirements shall also be made available on the department's website.
+			<br>
+			<br>*Section 28-103.32 was added by Local Law 190 of 2018. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_32_1" name="28_103_32_1"><b>*§28-103.32.1 Reporting</b></div> 
+			<br>By no later than April 1, 2019, and annually thereafter until April 1, 2023, the commissioner of buildings shall submit to the mayor and the speaker of the council, and post on the department's website, a report on:
+			<br>The education and outreach conducted as required by section 28-103.32 including a description of how such outreach was conducted and the number of business owners reached through the outreach;
+			<br>The number of complaints related to sections 403.2.1 and 403.4 of the New York city plumbing code reported to 311, disaggregated by online complaints and phone complaints;
+			<br>The number of violations issued as a result of such complaints;
+			<br>The total amount of penalties imposed as a result of such violations for the immediately preceding year; and
+			<br>Whether subsequent inspections were conducted by the department to ensure future compliance with such sections of the New York city plumbing code.
+			<br>*Section 28-103.32.1 was added by Local Law 190 of 2018. This law has an effective date of December 1, 2018.
+			<br> 
+			<br><br><div id="28_103_33" name="28_103_33"><b>**§28-103.33 Office of Alternative Energy</b></div> 
+			<br>There is hereby established within the department an office of alternative energy.
+			<br>
+			<br>**Section 28-103.33 was added by Local Law 233 of 2017. This law has an effective date of December 1, 2018 and was renumbered by Local Law 93 of 2019. This law has an effective date of September 16, 2019.
+			<br> 
+			<br><br><div id="28_103_33_1" name="28_103_33_1"><b>**§28-103.33.1 Definitions</b></div> 
+			<br>As used in this section, the following terms have the following meaning:
+			<br>
+			<br>ALTERNATIVE ENERGY PROJECT. Construction work on a building that will result in such building having at least 50 kilowatts of alternative energy capacity installed onsite from:
+			<br>A qualified energy resource, as such term is defined in section 45 of title 26 of the United States code; or
+			<br>A source that is determined to be renewable by the commissioner or the head of another agency designated by the mayor.
+			<br>GREEN ROOF SYSTEM. See section 1502.1 of the New York city building code.
+			<br>
+			<br>**Section 28-103.33.1 was added by Local Law 233 of 2017. This law has an effective date of December 1, 2018 and was renumbered and further amended by Local Law 93 of 2019. This law has an effective date of September 16, 2019.
+			<br> 
+			<br><br><div id="28_103_33_2" name="28_103_33_2"><b>**§28-103.33.2 Duties of the Office of Alternative Energy</b></div> 
+			<br>The duties of the office of alternative energy include, but need not be limited to:
+			<br>Establishing a program to (i) assist with the technical review and approval of applications and other documents submitted to the department in connection with alternative energy projects, (ii) provide guidance to applicants in connection with such projects, (iii) support technical research for advancing energy legislation and policy within the city and (iv) receive and respond to comments, questions and complaints with respect to such program;
+			<br>Coordinating with the office of long-term planning and sustainability, fire department, department of small business services, department of housing preservation and development, and other relevant agencies to ensure that policies are in place to encourage the installation and maintenance of alternative energy projects, and seeking cooperation and assistance from the city university of New York with respect to such policies; and
+			<br>Making recommendations to the commissioner and the heads of other agencies with respect to streamlining the process for obtaining the necessary approvals to install and maintain alternative energy projects.
+			<br>**Section 28-103.33.2 was added by Local Law 233 of 2017. This law has an effective date of December 1, 2018 and was renumbered by Local Law 93 of 2019. This law has an effective date of September 16, 2019.
+			<br> 
+			<br><br><div id="28_103_33_3" name="28_103_33_3"><b>*§28-103.33.3 Reporting</b></div> 
+			<br>The head of the office of the alternative energy shall submit an annual report to the commissioner and to the head of any other relevant agency providing (i) a description of the most commonly received comments, questions and complaints received with respect to such office, (ii) a description of actions undertaken by such office to coordinate with other agencies and the results of such coordination, (iii) recommendations made pursuant to section 28-103.31.2 and (iv) recommendations with respect to expanding the definition of alternative energy project. By no later than three months after the end of each fiscal year, such office shall submit a report to the mayor and the speaker of the city council that includes a summary of the actions taken by any agency as a result of any comment, question, complaint or recommendation from or forwarded by such office.
+			<br>
+			<br>**Section 28-103.33.3 was added by Local Law 233 of 2017. This law has an effective date of December 1, 2018 and was renumbered by Local Law 93 of 2019. This law has an effective date of September 16, 2019.
+			<br> 
+			<br><br><div id="28_103_33_4" name="28_103_33_4"><b>**§28-103.33.4 Posting of Information</b></div> 
+			<br>The office of alternative energy shall maintain a website and shall post on such website the contact information for such office and a statement indicating that any person may contact such office if such person has a comment, question or complaint with respect to such office.
+			<br>
+			<br>**Section 28-103.31.4 was added by Local Law 233 of 2017. This law has an effective date of December 1, 2018 and was renumbered by Local Law 93 of 2019. This law has an effective date of September 16, 2019.
+			<br> 
+			<br><br><div id="28_103_33_4_1" name="28_103_33_4_1"><b>§28-103.33.4.1 Information Regarding Installation of Green Roof Systems</b></div> 
+			<br>The office of alternative energy shall further post and maintain links on its website to information regarding the installation of green roof systems and other resources and materials regarding the installation of green roof systems and other resources and materials regarding green roof systems.
+			<br>
+			<br>*Section 28-103.33.4.1 was added by Local Law 93 of 2019. This law has an effective date of September 16, 2019.
+			<br> 
+			<br><br><div id="28_103_35" name="28_103_35"><b>*§28-103.35 E-Mail Notice of Construction Project Updates</b></div> 
+			<br>The department shall provide, free of charge, a service allowing users to register to receive an automated e-mail notification each time a change in status is recorded with respect to one or more construction projects, selected by such user. Such email notifications shall include any updates to work permits issued by the department for each such selected construction project, including issuance of any stop work order issued pursuant to section 28-207.2.
+			<br>
+			<br>*Section 28-103.35 was added by Local Law 59 of 2019. This law has an effective date of September 27, 2019.
+			<br>
+</div>		
+		  </div>
+	  </div>
+	  </div>
+</div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="assets/lib/keen-js/dist/keen.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.es6.js"></script>
+  
+<script>
+$(document).ready(function(){
+	var toggler = document.getElementsByClassName("expandable");
+	var i;
+	for (i = 0; i < toggler.length; i++) {
+	  toggler[i].addEventListener("click", function() {
+		this.parentElement.querySelector(".non-expandable").classList.toggle("active");
+		this.classList.toggle("expanded");
+	  });
+	}
+
+	<!-- $(function() { -->
+
+	  <!-- var mark = function() { -->
+
+		<!-- // Read the keyword -->
+		<!-- var keyword = $("input[name='keyword']").val(); -->
+
+		<!-- // Determine selected options -->
+		<!-- var options = {}; -->
+		<!-- $("input[name='opt[]']").each(function() { -->
+		  <!-- options[$(this).val()] = $(this).is(":checked"); -->
+		<!-- }); -->
+
+		<!-- // Remove previous marked elements and mark -->
+		<!-- // the new keyword inside the context -->
+		<!-- $("#code").unmark({ -->
+		  <!-- done: function() { -->
+			<!-- $("#code").mark(keyword, options); -->
+		  <!-- } -->
+		<!-- }); -->
+	  <!-- }; -->
+	  
+	  <!-- $("input[name='keyword']").on("input", mark); -->
+	  <!-- $("input[type='checkbox']").on("change", mark); -->
+
+	<!-- }); -->
+	
+	
+	
+$(function() {
+
+  // the input field
+  var $input = $("input[type='search']"),
+    // clear button
+    $clearBtn = $("button[data-search='clear']"),
+    // prev button
+    $prevBtn = $("button[data-search='prev']"),
+    // next button
+    $nextBtn = $("button[data-search='next']"),
+    // the context where to search
+    $code = $("#code"),
+    // jQuery object to save <mark> elements
+    $results,
+    // the class that will be appended to the current
+    // focused element
+    currentClass = "current",
+    // top offset for the jump (the search bar)
+    offsetTop = 50,
+    // the current index of the focused element
+    currentIndex = 0;
+
+  /**
+   * Jumps to the element matching the currentIndex
+   */
+  function jumpTo() {
+    if ($results.length) {
+      var position,
+        $current = $results.eq(currentIndex);
+      $results.removeClass(currentClass);
+      if ($current.length) {
+        $current.addClass(currentClass);
+		
+		var parent = $current.closest('#codeContainer')
+		if (parent.length) {
+		$('html').scrollTop(parent.offset().top - offsetTop)
+		parent.scrollTop(parent.scrollTop() - parent.offset().top + $current.offset().top);
+		}
+		else {
+		$('html').animate({
+		  scrollTop: $current.offset().top - offsetTop
+		}, 300);
+		}		
+		
+        //position = $current.offset().top - offsetTop;
+        //window.scrollTo(0, position);
+      }
+    }
+  }
+
+  /**
+   * Searches for the entered keyword in the
+   * specified context on input
+   */
+  $input.on("input", function() {
+  	var searchVal = this.value;
+    $code.unmark({
+      done: function() {
+        $code.mark(searchVal, {
+          separateWordSearch: true,
+          done: function() {
+            $results = $code.find("mark");
+            currentIndex = 0;
+            jumpTo();
+          }
+        });
+      }
+    });
+  });
+
+  /**
+   * Clears the search
+   */
+  $clearBtn.on("click", function() {
+    $code.unmark();
+    $input.val("").focus();
+  });
+
+  /**
+   * Next and previous search jump to
+   */
+  $nextBtn.add($prevBtn).on("click", function() {
+    if ($results.length) {
+      currentIndex += $(this).is($prevBtn) ? -1 : 1;
+      if (currentIndex < 0) {
+        currentIndex = $results.length - 1;
+      }
+      if (currentIndex > $results.length - 1) {
+        currentIndex = 0;
+      }
+      jumpTo();
+    }
+  });
+});
+
+	
+	
+	
+
+	$('#backCodes').on('click', function() {
+			$('#yearCol').show();
+			$('#codeCol').show();
+			$('#genAdmin2014').hide();
+			$('#genAdmin2014content').hide();		
+	})
+	$('#genAdmin2014List').on('click', function() {
+			$('#yearCol').hide();
+			$('#codeCol').hide();
+			$('#genAdmin2014').show();
+			$('#genAdmin2014content').show();
+			
+	})
+	$('#codeYear').on('change', function () {
+		if (this.value == '1') {
+			$("#codeCurrent").show();
+			$("#code2008").hide();
+			$("#code1968").hide();
+			$("#code1938").hide();
+		} else if (this.value == '2'){
+			$("#codeCurrent").hide();
+			$("#code2008").show();
+			$("#code1968").hide();
+			$("#code1938").hide();
+		} else if (this.value == '3'){
+			$("#codeCurrent").hide();
+			$("#code2008").hide();
+			$("#code1968").show();
+			$("#code1938").hide();
+		} else if (this.value == '4'){
+			$("#codeCurrent").hide();
+			$("#code2008").hide();
+			$("#code1968").hide();
+			$("#code1938").show();
+		}
+
+	});
+});
+</script>
+</body>
+</html>
