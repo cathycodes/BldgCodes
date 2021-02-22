@@ -8,15 +8,16 @@
 <link rel="stylesheet" type="text/css" href="assets/css/keen-dashboards.css" />
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <style>
-
 	body.application {
 		padding: 60px 0px 0px; 
 	}
-
-
-	a:hover {
+	a:hover:not(.myTreeView) {
 		background-color:  #F0F0F0;
 		text-decoration: none;
+	}
+	.strikeit {
+		  text-decoration: line-through;
+
 	}
 
 	.logo {
@@ -57,19 +58,15 @@
 		margin-left: 5px;
 	}
 
-
-
-
-
 	#myTreeView {
 		list-style-type: none;
 	}
 
 
-.chart-wrapper#treelist {
-background-color: rgba(0,102,204,1) ;
-color: white;
-}
+	.chart-wrapper#treelist {
+		background-color:#4e5b96;
+		color: white;
+	}
 
 
 	
@@ -95,6 +92,7 @@ color: white;
 		zzzcolor: black;
 		display: inline-block;
 		margin-right: 6px;
+		
 	}
 
 	.expanded::before {
@@ -118,10 +116,16 @@ transform: rotate(90deg);
 		zzzcolor: black !important;
 	}
 
+
+
+/*
 	#row:hover {
 		cursor: pointer;
 		background-color: #f5f5f5;
 	}
+*/
+
+
 
 	#treelist {
 		overflow-y: auto;
@@ -143,7 +147,6 @@ transform: rotate(90deg);
 		overflow: hidden;
 		float: right;
 	}
-
 	.commentarySwitch {
 		overflow: hidden;
 		float: right;
@@ -153,7 +156,6 @@ transform: rotate(90deg);
 		color: #0571b0;
 		font-weight:700;
 	}
-
 	.bulletinsSwitch {
 		overflow: hidden;
 		float: right;
@@ -170,7 +172,8 @@ transform: rotate(90deg);
 		padding-left: 18px;
 		font-size: 12px;
 		
-		color: #ef476f;
+		color: #4e5b96;  
+		/* #433a69;  #ef476f; */
 		font-weight:700;
 	}
 
@@ -241,7 +244,7 @@ transform: rotate(90deg);
 	.legHistory {
 		display: none;
 		zcolor: blue;
-		color: #ef476f;
+		color: #4e5b96  ;  /*#ef476f;*/
 		ztext-decoration: underline;
 	}
 
@@ -250,12 +253,6 @@ transform: rotate(90deg);
 		color: #06d6a0;
 		ztext-decoration: underline;
 	}
-
-#treelist.chart-wrapper a:hover, span#row.expandable:hover {
-		color: black !important;
-		background-color:  #F0F0F0 !important;
-
-}
 
 	
 	img {
@@ -269,52 +266,53 @@ transform: rotate(90deg);
 		cursor: pointer;
 		object-fit: contain;
 		
+	}
+	.modal-container {
+	  position: fixed;
+	  left: 30;
+	  top: 30; 
+	  z-index: 1;
+	  display: flex;
+	  width: 100vw;
+	  height: 90vh; 
+	  padding: 30px;
+	  background-color: rgba(0, 0, 0, 0.5);
+	  pointer-events: none; 
+	  opacity: 0;
+	  
 		}
-.modal-container {
-  position: fixed;
-  left: 30;
-  top: 30; 
-  z-index: 1;
-  display: flex;
-  width: 100vw;
-  height: 90vh; 
-  padding: 30px;
-  background-color: rgba(0, 0, 0, 0.5);
-  pointer-events: none; 
-  opacity: 0;
-  
+
+	.modal-container.is-open { 
+	  pointer-events: all; 
+	  opacity: 1;
 	}
 
-.modal-container.is-open { 
-  pointer-events: all; 
-  opacity: 1;
-}
 
+	.modal-content {
+	border: 3px solid #4e5b96;
+	  width: 100%; 
+	  height: 100%; 
+	  max-width: 95%; 
+	  max-height: 95%	; 
+	  background-color: #fff; 
+	}
 
-.modal-content {
-border: 3px solid red;
-  zoverflow: scroll;
-  width: 100%; 
-  height: 100%; 
-  max-width: 95%; 
-  max-height: 95%	; 
-  background-color: #fff; 
-}
+	#close {
+	 position: absolute;
+	 right: 0;
+	 top: 0;
+	 width: 30px;
+	 height: 30px;
+	}
 
-#close {
- position: absolute;
- right: 0;
- top: 0;
- width: 30px;
- height: 30px;
-}
+ 
+	span#row *:hover {
+		color: black !important;
+		background-color:  #F0F0F0 !important;
 
-</style>
-
-
-
+	}
+ </style>
 <div class="modal-container"> 
-
   <div class="modal-content">
     <button id="close">X</button>
 	<img class="zoomedImage" 	
@@ -726,7 +724,78 @@ border: 3px solid red;
 			</div>
 		</div> <!--  SECTION END  "plumbCode2014" -->
 
+		<div style="display:none;" id="fuelCode2014" class="col-sm-4">
+			<!--  SECTION BEGIN  "fuelCode2014" -->
+			<div class="chart-wrapper" id="treelist" style="height:86vh">
+				<ul id="myTreeView">
+					<span class="backCodes" style='cursor:pointer'><span
+							style='font-size:20px'>&#8701;</span>&nbsp;&nbsp;Back to Codes</span>
+					<!-- Fuel Chapter 1 tree begin -->
+					<li> <span id="row" class="expandable"><a href="#Ch1_FC_Administration">Chapter 1 Administration</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC101">101 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC101.1">101.1 Title</a></span></li><li><span id="row" class="expandable"><a href="#FC101.2">101.2 Scope</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC101.2.1">101.2.1 Reserved</a></span></li><li><span id="row"><a href="#FC101.2.2">101.2.2 Piping Systems</a></span></li><li><span id="row"><a href="#FC101.2.3">101.2.3 Gas Utilization Appliances</a></span></li><li><span id="row"><a href="#FC101.2.4">101.2.4 Systems and Equipment Outside the Scope</a></span></li><li><span id="row"><a href="#FC101.2.5">101.2.5 Other Fuels</a></span></li></ul></li><li><span id="row"><a href="#FC101.3">101.3 Reserved</a></span></li><li><span id="row"><a href="#FC101.4">101.4 Intent</a></span></li><li><span id="row"><a href="#FC101.5">101.5 Severability</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC102">102 Applicability</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC102.1">102.1 General</a></span></li><li><span id="row" class="expandable"><a href="#FC102.2">102.2 Existing Installations</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC102.2.1">102.2.1 Existing Buildings</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC102.3">102.3 Maintenance</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC102.3.1">102.3.1 Owner Responsibility</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC102.4">102.4 Additions, Alterations or Repairs</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC102.4.1">102.4.1 Minor Additions, Alterations, Renovations and Repairs</a></span></li><li><span id="row" class="expandable"><a href="#FC102.4.2">102.4.2 Special Provisions for Prior Code Buildings</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC102.4.2.1">102.4.2.1 Fuel Gas Piping in Fire-Resistance-Rated Assemblies</a></span></li><li><span id="row"><a href="#FC102.4.2.2">102.4.2.2 Guards and Access to Roofs and Elevated Structures</a></span></li><li><span id="row"><a href="#FC102.4.2.3">102.4.2.3 Seismic Supports</a></span></li><li><span id="row"><a href="#FC102.4.2.4">102.4.2.4 Wind Resistance</a></span></li></ul></li></ul></li><li><span id="row"><a href="#FC102.5">102.5 Change in Occupancy</a></span></li><li><span id="row"><a href="#FC102.6">102.6 Reserved</a></span></li><li><span id="row"><a href="#FC102.7">102.7 Reserved</a></span></li><li><span id="row" class="expandable"><a href="#FC102.8">102.8 Referenced Standards</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC102.8.1">102.8.1 Editions of Referenced Standards</a></span></li></ul></li><li><span id="row"><a href="#FC102.9">102.9 Requirements Not Covered by Code</a></span></li><li><span id="row"><a href="#FC102.10">102.10 Application of References</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC103">103 Department of Buildings</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC103.1">103.1 Enforcement Agency</a></span></li><li><span id="row"><a href="#FC103.2">103.2 Reserved</a></span></li><li><span id="row"><a href="#FC103.3">103.3 Reserved</a></span></li><li><span id="row"><a href="#FC103.4">103.4 Reserved</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC104">104 Duties and Powers of the Commissioner of Buildings</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC104.1">104.1 General</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC105">105 Permits</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC105.1">105.1 General</a></span></li><li><span id="row"><a href="#FC105.2">105.2 Required</a></span></li><li><span id="row"><a href="#FC105.3">105.3 Work Exempt From Permit</a></span></li><li><span id="row"><a href="#FC105.4">105.4 Validity of Permit</a></span></li><li><span id="row"><a href="#FC105.5">105.5 Other Permits</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC106">106 Construction Documents</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC106.1">106.1 General</a></span></li><li><span id="row" class="expandable"><a href="#FC106.2">106.2 Required Documents</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC106.2.1">106.2.1 Composite Plans</a></span></li></ul></li><li><span id="row"><a href="#FC106.3">106.3 Lot Diagram</a></span></li><li><span id="row"><a href="#FC106.4">106.4 Building Classification Statement</a></span></li><li><span id="row"><a href="#FC106.5">106.5 Fuel-Gas-Burning Appliance and Fuel-Gas Piping Plans</a></span></li><li><span id="row"><a href="#FC106.6">106.6 Heating Systems</a></span></li><li><span id="row"><a href="#FC106.7">106.7 Boilers</a></span></li><li><span id="row"><a href="#FC106.8">106.8 Energy Efficiency</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC107">107 Inspections and Testing</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC107.1">107.1 General</a></span></li><li><span id="row" class="expandable"><a href="#FC107.2">107.2 Required Inspections and Testing</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC107.2.1">107.2.1 Approved Inspection Agencies</a></span></li><li><span id="row" class="expandable"><a href="#FC107.2.2">107.2.2 Inspection of Prefabricated Construction Assemblies</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC107.2.2.1">107.2.2.1 Test and Inspection Records</a></span></li></ul></li><li><span id="row"><a href="#FC107.2.3">107.2.3 Exposure of Work</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC107.3">107.3 Testing</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC107.3.1">107.3.1 New, Altered, Extended or Repaired Installations</a></span></li><li><span id="row"><a href="#FC107.3.2">107.3.2 Apparatus, Instruments, Material and Labor for Tests</a></span></li><li><span id="row"><a href="#FC107.3.3">107.3.3 Reinspection and Testing</a></span></li></ul></li><li><span id="row"><a href="#FC107.4">107.4 Sign-Off of Completed Work</a></span></li><li><span id="row"><a href="#FC107.5">107.5 Temporary Connection</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC108">108 Violations</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC108.1">108.1 General</a></span></li><li><span id="row"><a href="#FC108.2">108.2 Authority to Disconnect Service Utilities</a></span></li><li><span id="row"><a href="#FC108.3">108.3 Connection After Order to Disconnect</a></span></li></ul></li></ul></li>
+					<!-- Fuel Chapter 1 tree end -->										
 
+					<!-- Fuel Chapter 2 tree begin -->
+					<li> <span id="row" class="expandable"><a href="#Ch2_FC_Definitions">Chapter 2 Definitions</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC201">201 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC201.1">201.1 Scope</a></span></li><li><span id="row"><a href="#FC201.2">201.2 Interchangeability</a></span></li><li><span id="row"><a href="#FC201.3">201.3 Terms Defined in Other Codes</a></span></li><li><span id="row"><a href="#FC201.4">201.4 Terms Not Defined</a></span></li></ul></li><li><span id="row"><a href="#FC202">202 General Definitions</a></span></li></ul></li>
+					<!-- Fuel Chapter 2 tree end -->										
+
+					<!-- Fuel Chapter 3 tree begin -->
+					<li> <span id="row" class="expandable"><a href="#Ch3_FC_GeneralRegulations">Chapter 3 General Regulations</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC301">301 General</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC301.1">301.1 Scope</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC301.1.1">301.1.1 Other Fuels</a></span></li></ul></li><li><span id="row"><a href="#FC301.2">301.2 Energy Utilization</a></span></li><li><span id="row"><a href="#FC301.3">301.3 Listed and Labeled</a></span></li><li><span id="row"><a href="#FC301.4">301.4 Labeling</a></span></li><li><span id="row"><a href="#FC301.5">301.5 Label Information</a></span></li><li><span id="row"><a href="#FC301.6">301.6 Plumbing Connections</a></span></li><li><span id="row" class="expandable"><a href="#FC301.7">301.7 Fuel Types</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC301.7.1">301.7.1 Appliance Fuel Conversion</a></span></li><li><span id="row"><a href="#FC301.7.2">301.7.2 Liquid Petroleum Gas</a></span></li></ul></li><li><span id="row"><a href="#FC301.8">301.8 Vibration Isolation</a></span></li><li><span id="row"><a href="#FC301.9">301.9 Repair</a></span></li><li><span id="row"><a href="#FC301.10">301.10 Wind Resistance</a></span></li><li><span id="row"><a href="#FC301.11">301.11 Flood Hazard</a></span></li><li><span id="row"><a href="#FC301.12">301.12 Seismic Resistance</a></span></li><li><span id="row"><a href="#FC301.13">301.13 Ducts</a></span></li><li><span id="row"><a href="#FC301.14">301.14 Rodentproofing</a></span></li><li><span id="row"><a href="#FC301.15">301.15 Prohibited Location</a></span></li><li><span id="row"><a href="#FC301.16">301.16 Mechanical Systems</a></span></li><li><span id="row"><a href="#FC301.17">301.17 Electrical Systems</a></span></li><li><span id="row"><a href="#FC301.18">301.18 Noise Control Requirements</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC302">302 Structural Safety</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC302.1">302.1 Structural Safety</a></span></li><li><span id="row"><a href="#FC302.2">302.2 Penetrations of Floor/Ceiling Assemblies and Fire-Resistance-Rated Assemblies</a></span></li><li><span id="row" class="expandable"><a href="#FC302.3">302.3 Cutting, Notching and Boring in Wood Members</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC302.3.1">302.3.1 Engineered Wood Products</a></span></li><li><span id="row"><a href="#FC302.3.2">302.3.2 Joist Notching and Boring</a></span></li><li><span id="row"><a href="#FC302.3.3">302.3.3 Stud Cutting and Notching</a></span></li><li><span id="row"><a href="#FC302.3.4">302.3.4 Bored Holes</a></span></li></ul></li><li><span id="row"><a href="#FC302.4">302.4 Alterations to Trusses</a></span></li><li><span id="row"><a href="#FC302.5">302.5 Cutting, Notching and Boring Holes in Structural Steel Framing</a></span></li><li><span id="row"><a href="#FC302.6">302.6 Cutting, Notching and Boring Holes in Cold-Formed Steel Framing</a></span></li><li><span id="row"><a href="#FC302.7">302.7 Cutting, Notching and Boring Holes in Nonstructural Cold-Formed Steel Wall Framing</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC303">303 Appliance Location</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC303.1">303.1 General</a></span></li><li><span id="row"><a href="#FC303.2">303.2 Hazardous Locations</a></span></li><li><span id="row" class="expandable"><a href="#FC303.3">303.3 Prohibited Locations</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC303.3.1">303.3.1 Gas-Fired Direct Vent Appliances</a></span></li></ul></li><li><span id="row"><a href="#FC303.4">303.4 Protection From Physical Damage</a></span></li><li><span id="row" class="expandable"><a href="#FC303.5">303.5 Indoor Locations</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC303.5.1">303.5.1 Gas-Fired Appliances</a></span></li><li><span id="row"><a href="#FC303.5.2">303.5.2 Maximum Temperature</a></span></li></ul></li><li><span id="row"><a href="#FC303.6">303.6 Outdoor Locations</a></span></li><li><span id="row"><a href="#FC303.7">303.7 Pit Locations</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC304">304 Combustion, Ventilation and Dilution Air</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC304.1">304.1 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC304.1.1">304.1.1 Crawl Space and Attic Space</a></span></li><li><span id="row"><a href="#FC304.1.2">304.1.2 Crawl Space</a></span></li><li><span id="row"><a href="#FC304.1.3">304.1.3 Attic Space</a></span></li></ul></li><li><span id="row"><a href="#FC304.2">304.2 Appliance Location</a></span></li><li><span id="row"><a href="#FC304.3">304.3 Draft Hood/Regulator Location</a></span></li><li><span id="row" class="expandable"><a href="#FC304.4">304.4 Circulation of Air</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC304.4.1">304.4.1 Makeup Air for Fuel Burning Devices</a></span></li><li><span id="row"><a href="#FC304.4.2">304.4.2 Ventilation Air for Fuel Burning Devices</a></span></li><li><span id="row"><a href="#FC304.4.3">304.4.3 Prohibited Sources</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC304.5">304.5 Indoor Combustion Air</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC304.5.1">304.5.1 Standard Method</a></span></li><li><span id="row"><a href="#FC304.5.2">304.5.2 Known Air-Infiltration-Rate Method</a></span></li><li><span id="row" class="expandable"><a href="#FC304.5.3">304.5.3 Indoor Opening Size and Location</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC304.5.3.1">304.5.3.1 Combining Spaces on the Same Story</a></span></li><li><span id="row"><a href="#FC304.5.3.2">304.5.3.2 Combining Spaces in Different Stories</a></span></li></ul></li></ul></li><li><span id="row" class="expandable"><a href="#FC304.6">304.6 Outdoor Combustion Air</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC304.6.1">304.6.1 Two-Permanent-Openings Method</a></span></li><li><span id="row"><a href="#FC304.6.2">304.6.2 One-Permanent-Opening Method</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC304.7">304.7 Combination Indoor and Outdoor Combustion Air</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC304.7.1">304.7.1 Indoor Openings</a></span></li><li><span id="row"><a href="#FC304.7.2">304.7.2 Outdoor Opening Location</a></span></li><li><span id="row"><a href="#FC304.7.3">304.7.3 Outdoor Opening(s) Size</a></span></li></ul></li><li><span id="row"><a href="#FC304.8">304.8 Reserved</a></span></li><li><span id="row" class="expandable"><a href="#FC304.9">304.9 Mechanical Combustion Air Supply</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC304.9.1">304.9.1 Makeup Air</a></span></li><li><span id="row"><a href="#FC304.9.2">304.9.2 Appliance Interlock</a></span></li><li><span id="row"><a href="#FC304.9.3">304.9.3 Reserved</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC304.10">304.10 Opening Obstructions, Locations, and Protection</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC304.10.1">304.10.1 Dampered Openings</a></span></li><li><span id="row"><a href="#FC304.10.2">304.10.2 Caution Sign</a></span></li><li><span id="row"><a href="#FC304.10.3">304.10.3 Opening Location and Protection</a></span></li></ul></li><li><span id="row"><a href="#FC304.11">304.11 Combustion Air Ducts</a></span></li><li><span id="row"><a href="#FC304.12">304.12 Protection From Fumes and Gases</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC305">305 Installation</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC305.1">305.1 General</a></span></li><li><span id="row"><a href="#FC305.2">305.2 Hazardous Area</a></span></li><li><span id="row" class="expandable"><a href="#FC305.3">305.3 Elevation of Ignition Source</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC305.3.1">305.3.1 Installation in Residential Garages</a></span></li><li><span id="row"><a href="#FC305.3.2">305.3.2 Parking Garages</a></span></li></ul></li><li><span id="row"><a href="#FC305.4">305.4 Public Garages, Motor Fuel-Dispensing Facilities and Repair Garages</a></span></li><li><span id="row"><a href="#FC305.5">305.5 Private Garages</a></span></li><li><span id="row"><a href="#FC305.6">305.6 Construction and Protection</a></span></li><li><span id="row"><a href="#FC305.7">305.7 Clearances From Grade</a></span></li><li><span id="row"><a href="#FC305.8">305.8 Clearances to Combustible Construction</a></span></li><li><span id="row"><a href="#FC305.9">305.9 Parking Structures</a></span></li><li><span id="row"><a href="#FC305.10">305.10 Repair Garages</a></span></li><li><span id="row"><a href="#FC305.11">305.11 Installation in Aircraft Hangars</a></span></li><li><span id="row"><a href="#FC305.12">305.12 Avoid Strain on Gas Piping</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC306">306 Access and Service Space</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC306.1">306.1 Clearances for Maintenance and Replacement</a></span></li><li><span id="row"><a href="#FC306.2">306.2 Appliances in Rooms</a></span></li><li><span id="row" class="expandable"><a href="#FC306.3">306.3 Appliances in Attics</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC306.3.1">306.3.1 Electrical Requirements</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC306.4">306.4 Appliances Under Floors</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC306.4.1">306.4.1 Electrical Requirements</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC306.5">306.5 Equipment and Appliances on Roofs or Elevated Structures</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC306.5.1">306.5.1 Sloped Roofs</a></span></li><li><span id="row"><a href="#FC306.5.2">306.5.2 Electrical Requirements</a></span></li></ul></li><li><span id="row"><a href="#FC306.6">306.6 Guards</a></span></li><li><span id="row"><a href="#FC306.7">306.7 Rooftop Access and Obstructions</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC307">307 Condensate Disposal</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC307.1">307.1 Evaporators and Cooling Coils</a></span></li><li><span id="row" class="expandable"><a href="#FC307.2">307.2 Fuel-Burning Appliances</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC307.2.1">307.2.1 Condensate Disposal</a></span></li></ul></li><li><span id="row"><a href="#FC307.3">307.3 Drain Pipe Materials and Sizes</a></span></li><li><span id="row"><a href="#FC307.4">307.4 Traps</a></span></li><li><span id="row"><a href="#FC307.5">307.5 Auxiliary Drain Pan</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC308">308 Clearance Reduction</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC308.1">308.1 Scope</a></span></li><li><span id="row"><a href="#FC308.2">308.2 Reduction Table</a></span></li><li><span id="row" class="expandable"><a href="#FC308.3">308.3 Clearances for Indoor Air-Conditioning Appliances</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC308.3.1">308.3.1 Appliances Installed in Rooms That Are Large in Comparison With the Size of the Appliance</a></span></li><li><span id="row"><a href="#FC308.3.2">308.3.2 Appliances Installed in Rooms That Are Not Large in Comparison With the Size of the Appliance</a></span></li><li><span id="row"><a href="#FC308.3.3">308.3.3 Clearance Reduction</a></span></li><li><span id="row"><a href="#FC308.3.4">308.3.4 Plenum Clearances</a></span></li><li><span id="row"><a href="#FC308.3.5">308.3.5 Clearance From Supply Ducts</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC308.4">308.4 Central-Heating Boilers and Furnaces</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC308.4.1">308.4.1 Appliances Installed in Rooms That Are Large in Comparison With the Size of the Appliance</a></span></li><li><span id="row"><a href="#FC308.4.2">308.4.2 Appliances Installed in Rooms That Are Not Large in Comparison With the Size of the Appliance</a></span></li><li><span id="row"><a href="#FC308.4.3">308.4.3 Clearance Reduction</a></span></li><li><span id="row"><a href="#FC308.4.4">308.4.4 Clearance for Servicing Appliances</a></span></li><li><span id="row"><a href="#FC308.4.5">308.4.5 Plenum Clearances</a></span></li><li><span id="row"><a href="#FC308.4.6">308.4.6 Clearance From Supply Ducts</a></span></li></ul></li></ul></li><li><span id="row" class="expandable"><a href="#FC309">309 Electrical</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC309.1">309.1 Grounding</a></span></li><li><span id="row"><a href="#FC309.2">309.2 Connections</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC310">310 Electrical Bonding</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC310.1">310.1 Pipe and Tubing</a></span></li></ul></li></ul></li>
+					<!-- Fuel Chapter 3 tree end -->										
+
+					<!-- Fuel Chapter 4 tree begin -->
+					<li> <span id="row" class="expandable"><a href="#Ch4_FC_GasPipingInstall">Chapter 4 Gas Piping Installations</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC401">401 General</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC401.1">401.1 Scope</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC401.1.1">401.1.1 Meters and Service Piping</a></span></li><li><span id="row"><a href="#FC401.1.2">401.1.2 Reserved</a></span></li></ul></li><li><span id="row"><a href="#FC401.2">401.2 Reserved</a></span></li><li><span id="row"><a href="#FC401.3">401.3 Modifications to Existing Systems</a></span></li><li><span id="row"><a href="#FC401.4">401.4 Additional Appliances</a></span></li><li><span id="row"><a href="#FC401.5">401.5 Identification</a></span></li><li><span id="row"><a href="#FC401.6">401.6 Interconnections</a></span></li><li><span id="row"><a href="#FC401.7">401.7 Piping Meter Identification</a></span></li><li><span id="row"><a href="#FC401.8">401.8 Minimum Sizes</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC402">402 Pipe Sizing</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC402.1">402.1 General Considerations</a></span></li><li><span id="row"><a href="#FC402.2">402.2 Maximum Gas Demand</a></span></li><li><span id="row"><a href="#FC402.3">402.3 Sizing</a></span></li><li><span id="row" class="expandable"><a href="#FC402.4">402.4 Sizing Tables and Equations</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC402.4.1">402.4.1 Longest Length Method</a></span></li><li><span id="row"><a href="#FC402.4.2">402.4.2 Branch Length Method</a></span></li><li><span id="row"><a href="#FC402.4.3">402.4.3 Hybrid Pressure</a></span></li></ul></li><li><span id="row"><a href="#FC402.5">402.5 Allowable Pressure Drop</a></span></li><li><span id="row"><a href="#FC402.6">402.6 Gas Distribution Pressures</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC403">403 Piping Materials</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC403.1">403.1 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC403.1.1">403.1.1 Pipe Size and Pressure Limitations</a></span></li></ul></li><li><span id="row"><a href="#FC403.2">403.2 Used Materials</a></span></li><li><span id="row"><a href="#FC403.3">403.3 Other Materials</a></span></li><li><span id="row" class="expandable"><a href="#FC403.4">403.4 Metallic Pipe</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC403.4.1">403.4.1 Cast Iron</a></span></li><li><span id="row"><a href="#FC403.4.2">403.4.2 Steel</a></span></li><li><span id="row"><a href="#FC403.4.3">403.4.3 Copper and Brass</a></span></li><li><span id="row"><a href="#FC403.4.4">403.4.4 Aluminum</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC403.5">403.5 Metallic Tubing</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC403.5.1">403.5.1 Standards</a></span></li><li><span id="row"><a href="#FC403.5.2">403.5.2 Seismic Requirements</a></span></li><li><span id="row"><a href="#FC403.5.3">403.5.3 Special Inspection Required</a></span></li></ul></li><li><span id="row"><a href="#FC403.6">403.6 Reserved</a></span></li><li><span id="row"><a href="#FC403.7">403.7 Workmanship and Defects</a></span></li><li><span id="row"><a href="#FC403.8">403.8 Protective Coating</a></span></li><li><span id="row" class="expandable"><a href="#FC403.9">403.9 Metallic Pipe Threads</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC403.9.1">403.9.1 Damaged Threads</a></span></li><li><span id="row"><a href="#FC403.9.2">403.9.2 Number of Threads</a></span></li><li><span id="row"><a href="#FC403.9.3">403.9.3 Thread Compounds</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC403.10">403.10 Metallic Piping Joints and Fittings</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC403.10.1">403.10.1 Pipe Joints</a></span></li><li><span id="row"><a href="#FC403.10.2">403.10.2 Tubing Joints</a></span></li><li><span id="row"><a href="#FC403.10.3">403.10.3 Flared Joints</a></span></li><li><span id="row"><a href="#FC403.10.4">403.10.4 Metallic Fittings</a></span></li></ul></li><li><span id="row"><a href="#FC403.11">403.11 Reserved</a></span></li><li><span id="row" class="expandable"><a href="#FC403.12">403.12 Flanges</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC403.12.1">403.12.1 Flange Facings</a></span></li></ul></li><li><span id="row"><a href="#FC403.13">403.13 Flange Gaskets</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC404">404 Piping System Installation</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC404.1">404.1 Prohibited Locations</a></span></li><li><span id="row"><a href="#FC404.2">404.2 Piping in Solid Partitions and Walls</a></span></li><li><span id="row"><a href="#FC404.3">404.3 Piping in Concealed Locations</a></span></li><li><span id="row"><a href="#FC404.4">404.4 Piping Through Foundation Wall</a></span></li><li><span id="row"><a href="#FC404.5">404.5 Branch Take-Off</a></span></li><li><span id="row" class="expandable"><a href="#FC404.6">404.6 Piping in Solid Floors</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC404.6.1">404.6.1 Conduit With One End Terminating Outdoors</a></span></li><li><span id="row"><a href="#FC404.6.2">404.6.2 Conduit With Both Ends Terminating Indoors</a></span></li></ul></li><li><span id="row"><a href="#FC404.7">404.7 Above-Ground Outdoor Piping</a></span></li><li><span id="row"><a href="#FC404.8">404.8 Reserved</a></span></li><li><span id="row" class="expandable"><a href="#FC404.9">404.9 Protection Against Corrosion</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC404.9.1">404.9.1 Prohibited Use</a></span></li><li><span id="row"><a href="#FC404.9.2">404.9.2 Protective Coatings and Wrapping</a></span></li></ul></li><li><span id="row"><a href="#FC404.10">404.10 Minimum Burial Depth</a></span></li><li><span id="row"><a href="#FC404.11">404.11 Trenches</a></span></li><li><span id="row" class="expandable"><a href="#FC404.12">404.12 Piping Underground Beneath Buildings</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC404.12.1">404.12.1 Conduit With One End Terminating Outdoors</a></span></li><li><span id="row"><a href="#FC404.12.2">404.12.2 Conduit With Both Ends Terminating Indoors</a></span></li></ul></li><li><span id="row"><a href="#FC404.13">404.13 Outlet Closures</a></span></li><li><span id="row"><a href="#FC404.14">404.14 Location of Outlets</a></span></li><li><span id="row"><a href="#FC404.15">404.15 Reserved</a></span></li><li><span id="row"><a href="#FC404.16">404.16 Prohibited Devices</a></span></li><li><span id="row"><a href="#FC404.17">404.17 Testing of Piping</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC405">405 Piping Bends and Changes in Direction</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC405.1">405.1 General</a></span></li><li><span id="row"><a href="#FC405.2">405.2 Reserved</a></span></li><li><span id="row"><a href="#FC405.3">405.3 Reserved</a></span></li><li><span id="row"><a href="#FC405.4">405.4 Elbows</a></span></li><li><span id="row" class="expandable"><a href="#FC405.5">405.5 Pipe Movement</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC405.5.1">405.5.1 Seismic Requirements</a></span></li><li><span id="row"><a href="#FC405.5.2">405.5.2 Inspection</a></span></li></ul></li></ul></li><li><span id="row" class="expandable"><a href="#FC406">406 Inspection, Testing and Purging</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC406.1">406.1 General</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC406.1.1">406.1.1 Inspections</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC406.1.1.1">406.1.1.1 Welder's Qualifications</a></span></li><li><span id="row"><a href="#FC406.1.1.2">406.1.1.2 Welding Requirements</a></span></li><li><span id="row"><a href="#FC406.1.1.3">406.1.1.3 Welding Records</a></span></li></ul></li><li><span id="row"><a href="#FC406.1.2">406.1.2 Repairs and Additions</a></span></li><li><span id="row"><a href="#FC406.1.3">406.1.3 New Branches</a></span></li><li><span id="row"><a href="#FC406.1.4">406.1.4 System Testing</a></span></li><li><span id="row"><a href="#FC406.1.5">406.1.5 Regulators and Valve Assemblies</a></span></li></ul></li><li><span id="row"><a href="#FC406.2">406.2 Test Medium</a></span></li><li><span id="row" class="expandable"><a href="#FC406.3">406.3 Test Preparation</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC406.3.1">406.3.1 Expansion Joints</a></span></li><li><span id="row"><a href="#FC406.3.2">406.3.2 Appliance and Equipment Isolation</a></span></li><li><span id="row"><a href="#FC406.3.3">406.3.3 Appliance and Equipment Disconnection</a></span></li><li><span id="row"><a href="#FC406.3.4">406.3.4 Valve Isolation</a></span></li><li><span id="row"><a href="#FC406.3.5">406.3.5 Testing Precautions</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC406.4">406.4 Test Pressure Measurement</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC406.4.1">406.4.1 Minimum Standards for Nonmercury Gauges</a></span></li><li><span id="row"><a href="#FC406.4.2">406.4.2 Analog Gauges Used to Measure Pressure in the Magnitude of 3 psig (20 kPa Gauge)</a></span></li><li><span id="row"><a href="#FC406.4.3">406.4.3 Analog Gauges Used to Measure Pressure in the Magnitude of 5 psig (34.5 kPa Gauge)</a></span></li><li><span id="row"><a href="#FC406.4.4">406.4.4 Digital Gauges Used to Measure Pressure in the Magnitude of 3 psig (20 kPa Gauge) and Higher</a></span></li></ul></li><li><span id="row"><a href="#FC406.4.5">406.4.5 Witnessing Tests of Gas-Piping Systems</a></span></li><li><span id="row"><a href="#FC406.4.6">406.4.6 Notification</a></span></li><li><span id="row" class="expandable"><a href="#FC406.5">406.5 Detection of Leaks and Defects</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC406.5.1">406.5.1 Detection Methods</a></span></li><li><span id="row"><a href="#FC406.5.2">406.5.2 Corrections</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC406.6">406.6 Piping System and Equipment Leakage Check</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC406.6.1">406.6.1 Check Gases</a></span></li><li><span id="row" class="expandable"><a href="#FC406.6.2">406.6.2 Before Turning Gas On</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC406.6.2.1">406.6.2.1 Establishing Gas Supply</a></span></li><li><span id="row"><a href="#FC406.6.2.2">406.6.2.2 Alterations to Gas Piping Systems</a></span></li></ul></li><li><span id="row"><a href="#FC406.6.3">406.6.3 Leak Check</a></span></li><li><span id="row" class="expandable"><a href="#FC406.6.4">406.6.4 Placing Appliances and Equipment in Operation</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC406.6.4.1">406.6.4.1 Requirements for Placing Equipment in Operation</a></span></li></ul></li></ul></li><li><span id="row" class="expandable"><a href="#FC406.7">406.7 Purging</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC406.7.1">406.7.1 Piping Systems Required to Be Purged Outdoors</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC406.7.1.1">406.7.1.1 Removal From Service</a></span></li><li><span id="row"><a href="#FC406.7.1.2">406.7.1.2 Placing in Operation</a></span></li><li><span id="row"><a href="#FC406.7.1.3">406.7.1.3 Outdoor Discharge of Purged Gases</a></span></li><li><span id="row"><a href="#FC406.7.1.4">406.7.1.4 Combustible Gas Indicator</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC406.7.2">406.7.2 Piping Systems Allowed to Be Purged Indoors or Outdoors</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC406.7.2.1">406.7.2.1 Purging Procedure</a></span></li><li><span id="row"><a href="#FC406.7.2.2">406.7.2.2 Combustible Gas Detector</a></span></li></ul></li><li><span id="row"><a href="#FC406.7.3">406.7.3 Purging Appliances and Equipment</a></span></li></ul></li></ul></li><li><span id="row" class="expandable"><a href="#FC407">407 Piping Support</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC407.1">407.1 General</a></span></li><li><span id="row"><a href="#FC407.2">407.2 Design and Installation</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC408">408 Drips and Sloped Piping</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC408.1">408.1 Slopes</a></span></li><li><span id="row"><a href="#FC408.2">408.2 Drips</a></span></li><li><span id="row"><a href="#FC408.3">408.3 Reserved</a></span></li><li><span id="row"><a href="#FC408.4">408.4 Sediment Trap</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC409">409 Shutoff Valves</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC409.1">409.1 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC409.1.1">409.1.1 Valve Approval</a></span></li><li><span id="row"><a href="#FC409.1.2">409.1.2 Prohibited Locations</a></span></li><li><span id="row"><a href="#FC409.1.3">409.1.3 Access to Shutoff Valves</a></span></li></ul></li><li><span id="row"><a href="#FC409.2">409.2 Meter Valve</a></span></li><li><span id="row" class="expandable"><a href="#FC409.3">409.3 Shutoff Valves for Multiple-House Line Systems</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC409.3.1">409.3.1 Multiple Tenant Buildings</a></span></li><li><span id="row"><a href="#FC409.3.2">409.3.2 Individual Buildings</a></span></li><li><span id="row"><a href="#FC409.3.3">409.3.3 Identification of Shutoff Valves</a></span></li></ul></li><li><span id="row"><a href="#FC409.4">409.4 MP Regulator Valves</a></span></li><li><span id="row" class="expandable"><a href="#FC409.5">409.5 Appliance Shutoff Valve</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC409.5.1">409.5.1 Located Within the Same Room</a></span></li><li><span id="row"><a href="#FC409.5.2">409.5.2 Vented Decorative Appliances and Room Heaters</a></span></li></ul></li><li><span id="row"><a href="#FC409.6">409.6 Shutoff Valve for Laboratories</a></span></li><li><span id="row"><a href="#FC409.7">409.7 Outside Gas Cut-Off</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC410">410 Flow Controls</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC410.1">410.1 Pressure Regulators</a></span></li><li><span id="row"><a href="#FC410.2">410.2 MP Regulators</a></span></li><li><span id="row" class="expandable"><a href="#FC410.3">410.3 Venting of Regulators</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC410.3.1">410.3.1 Vent Piping</a></span></li></ul></li><li><span id="row"><a href="#FC410.4">410.4 Flashback Arrestor Check Valve</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC411">411 Appliance and Manufactured Home Connections</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC411.1">411.1 Connecting Appliances</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC411.1.1">411.1.1 Commercial Cooking Appliances</a></span></li><li><span id="row"><a href="#FC411.1.2">411.1.2 Protection Against Damage</a></span></li><li><span id="row" class="expandable"><a href="#FC411.1.3">411.1.3 Connector Installation</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC411.1.3.1">411.1.3.1 Maximum Length</a></span></li><li><span id="row"><a href="#FC411.1.3.2">411.1.3.2 Minimum Size</a></span></li><li><span id="row"><a href="#FC411.1.3.3">411.1.3.3 Prohibited Locations and Penetrations</a></span></li><li><span id="row"><a href="#FC411.1.3.4">411.1.3.4 Shutoff Valve</a></span></li></ul></li><li><span id="row"><a href="#FC411.1.4">411.1.4 Movable Appliances</a></span></li><li><span id="row"><a href="#FC411.1.5">411.1.5 Connection of Gas Engine-Powered Air Conditioners</a></span></li><li><span id="row"><a href="#FC411.1.6">411.1.6 Unions</a></span></li></ul></li><li><span id="row"><a href="#FC411.2">411.2 Manufactured Home Connections</a></span></li><li><span id="row"><a href="#FC411.3">411.3 Suspended Low-Intensity Infrared Tube Heaters</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC412">412 Liquefied Petroleum Gas Motor Vehicle Fuel-Dispensing Stations</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC412.1">412.1 Applicability</a></span></li><li><span id="row"><a href="#FC412.2">412.2 Reserved</a></span></li><li><span id="row"><a href="#FC412.3">412.3 Reserved</a></span></li><li><span id="row"><a href="#FC412.4">412.4 Reserved</a></span></li><li><span id="row"><a href="#FC412.5">412.5 Reserved</a></span></li><li><span id="row"><a href="#FC412.6">412.6 Reserved</a></span></li><li><span id="row"><a href="#FC412.7">412.7 Reserved</a></span></li><li><span id="row"><a href="#FC412.8">412.8 Reserved</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC413">413 Compressed Natural Gas Motor Vehicle Fuel-Dispensing Stations</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC413.1">413.1 Applicability</a></span></li><li><span id="row"><a href="#FC413.2">413.2 Reserved</a></span></li><li><span id="row"><a href="#FC413.3">413.3 Reserved</a></span></li><li><span id="row"><a href="#FC413.4">413.4 Reserved</a></span></li><li><span id="row"><a href="#FC413.5">413.5 Reserved</a></span></li><li><span id="row"><a href="#FC413.6">413.6 Reserved</a></span></li><li><span id="row"><a href="#FC413.7">413.7 Reserved</a></span></li><li><span id="row"><a href="#FC413.8">413.8 Reserved</a></span></li></ul></li><li><span id="row"><a href="#FC414">414 Reserved</a></span></li><li><span id="row" class="expandable"><a href="#FC415">415 Piping Support Intervals</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC415.1">415.1 Interval of Support</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC416">416 Overpressure Protection Devices</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC416.1">416.1 General</a></span></li><li><span id="row"><a href="#FC416.2">416.2 Protection Methods</a></span></li><li><span id="row"><a href="#FC416.3">416.3 Device Maintenance</a></span></li><li><span id="row"><a href="#FC416.4">416.4 Where Required</a></span></li><li><span id="row" class="expandable"><a href="#FC416.5">416.5 Devices</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC416.5.1">416.5.1 Construction and Installation</a></span></li><li><span id="row"><a href="#FC416.5.2">416.5.2 External Control Piping</a></span></li><li><span id="row"><a href="#FC416.5.3">416.5.3 Setting</a></span></li><li><span id="row"><a href="#FC416.5.4">416.5.4 Unauthorized Operation</a></span></li><li><span id="row"><a href="#FC416.5.5">416.5.5 Vents</a></span></li><li><span id="row"><a href="#FC416.5.6">416.5.6 Size of Fittings, Pipe and Openings</a></span></li></ul></li></ul></li></ul></li>
+					<!-- Fuel Chapter 4 tree end -->										
+
+					<!-- Fuel Chapter 5 tree begin -->
+					<li> <span id="row" class="expandable"><a href="#Ch5_FC_ChimneysVents">Chapter 5 Chimneys and Vents</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC501">501 General</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC501.1">501.1 Scope</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC501.1.1">501.1.1 Adjoining Chimneys and Vents</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC501.1.1.1">501.1.1.1 Responsibility of Owner of Taller Building</a></span></li><li><span id="row"><a href="#FC501.1.1.2">501.1.1.2 Protection of Draft</a></span></li><li><span id="row"><a href="#FC501.1.1.3">501.1.1.3 Written Notification</a></span></li><li><span id="row"><a href="#FC501.1.1.4">501.1.1.4 Approval</a></span></li><li><span id="row"><a href="#FC501.1.1.5">501.1.1.5 Refusal of Consent</a></span></li><li><span id="row"><a href="#FC501.1.1.6">501.1.1.6 Procedure</a></span></li><li><span id="row"><a href="#FC501.1.1.7">501.1.1.7 Existing Violations</a></span></li><li><span id="row"><a href="#FC501.1.1.8">501.1.1.8 Variance</a></span></li></ul></li></ul></li><li><span id="row" class="expandable"><a href="#FC501.2">501.2 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC501.2.1">501.2.1 Design</a></span></li><li><span id="row"><a href="#FC501.2.2">501.2.2 Outlets</a></span></li><li><span id="row"><a href="#FC501.2.3">501.2.3 Support</a></span></li><li><span id="row"><a href="#FC501.2.4">501.2.4 Changes in Appliance Fuels</a></span></li><li><span id="row"><a href="#FC501.2.5">501.2.5 Exhaust Gases From Internal Combustion Engines and Turbines</a></span></li></ul></li><li><span id="row"><a href="#FC501.3">501.3 Masonry Chimneys</a></span></li><li><span id="row"><a href="#FC501.4">501.4 Minimum Size of Chimney or Vent</a></span></li><li><span id="row"><a href="#FC501.5">501.5 Abandoned Inlet Openings</a></span></li><li><span id="row"><a href="#FC501.6">501.6 Positive Pressure</a></span></li><li><span id="row" class="expandable"><a href="#FC501.7">501.7 Connection to Fireplace</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC501.7.1">501.7.1 Closure and Access</a></span></li><li><span id="row"><a href="#FC501.7.2">501.7.2 Connection to Factory-Built Fireplace Flue</a></span></li><li><span id="row"><a href="#FC501.7.3">501.7.3 Connection to Masonry Fireplace Flue</a></span></li></ul></li><li><span id="row"><a href="#FC501.8">501.8 Appliances Not Required to Be Vented</a></span></li><li><span id="row"><a href="#FC501.9">501.9 Chimney Entrance</a></span></li><li><span id="row"><a href="#FC501.10">501.10 Connections to Exhauster</a></span></li><li><span id="row"><a href="#FC501.11">501.11 Masonry Chimneys</a></span></li><li><span id="row"><a href="#FC501.12">501.12 Residential and Low-Heat Appliances Flue Lining Systems</a></span></li><li><span id="row"><a href="#FC501.13">501.13 Category I Appliance Flue Lining Systems</a></span></li><li><span id="row"><a href="#FC501.14">501.14 Category II, III and IV Appliance Venting Systems</a></span></li><li><span id="row" class="expandable"><a href="#FC501.15">501.15 Existing Chimneys and Vents</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC501.15.1">501.15.1 Size</a></span></li><li><span id="row"><a href="#FC501.15.2">501.15.2 Flue Passageways</a></span></li><li><span id="row"><a href="#FC501.15.3">501.15.3 Cleanout</a></span></li><li><span id="row" class="expandable"><a href="#FC501.15.4">501.15.4 Clearances</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC501.15.4.1">501.15.4.1 Fireblocking</a></span></li></ul></li></ul></li><li><span id="row"><a href="#FC501.16">501.16 Drains</a></span></li><li><span id="row"><a href="#FC501.17">501.17 Thermal Safety (Spill) Switches</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC502">502 Vents</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC502.1">502.1 General</a></span></li><li><span id="row"><a href="#FC502.2">502.2 Connectors Required</a></span></li><li><span id="row"><a href="#FC502.3">502.3 Vent Application</a></span></li><li><span id="row"><a href="#FC502.4">502.4 Insulation Shield</a></span></li><li><span id="row"><a href="#FC502.5">502.5 Installation</a></span></li><li><span id="row"><a href="#FC502.6">502.6 Support of Vents</a></span></li><li><span id="row"><a href="#FC502.7">502.7 Protection Against Physical Damage</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC503">503 Venting of Appliances</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.1">503.1 General</a></span></li><li><span id="row" class="expandable"><a href="#FC503.2">503.2 Venting Systems Required</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.2.1">503.2.1 Ventilating Hoods</a></span></li><li><span id="row"><a href="#FC503.2.2">503.2.2 Direct-Vent Appliances</a></span></li><li><span id="row"><a href="#FC503.2.3">503.2.3 Appliances With Integral Vents</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC503.3">503.3 Design and Construction</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.3.1">503.3.1 Appliance Draft Requirements</a></span></li><li><span id="row"><a href="#FC503.3.2">503.3.2 Design and Construction</a></span></li><li><span id="row"><a href="#FC503.3.3">503.3.3 Mechanical Draft Systems</a></span></li><li><span id="row"><a href="#FC503.3.4">503.3.4 Ventilating Hoods and Exhaust Systems</a></span></li><li><span id="row"><a href="#FC503.3.5">503.3.5 Air Ducts and Furnace Plenums</a></span></li><li><span id="row"><a href="#FC503.3.6">503.3.6 Above-Ceiling Air-Handling Spaces</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC503.4">503.4 Type of Venting System to Be Used</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.4.1">503.4.1 Plastic Piping</a></span></li><li><span id="row"><a href="#FC503.4.2">503.4.2 Special Gas Vent</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC503.5">503.5 Masonry, Metal, and Factory-Built Chimneys</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.5.1">503.5.1 Factory-Built Chimneys</a></span></li><li><span id="row"><a href="#FC503.5.2">503.5.2 Metal Chimneys</a></span></li><li><span id="row"><a href="#FC503.5.3">503.5.3 Masonry Chimneys</a></span></li><li><span id="row"><a href="#FC503.5.4">503.5.4 Chimney Termination</a></span></li><li><span id="row"><a href="#FC503.5.5">503.5.5 Size of Chimneys</a></span></li><li><span id="row" class="expandable"><a href="#FC503.5.6">503.5.6 Inspection of Chimneys</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.5.6.1">503.5.6.1 Chimney Lining</a></span></li><li><span id="row"><a href="#FC503.5.6.2">503.5.6.2 Cleanouts</a></span></li><li><span id="row"><a href="#FC503.5.6.3">503.5.6.3 Unsafe Chimneys</a></span></li><li><span id="row"><a href="#FC503.5.6.4">503.5.6.4 Test Run</a></span></li><li><span id="row" class="expandable"><a href="#FC503.5.6.5">503.5.6.5 Requirement of a Smoke Test</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.5.6.5.1">503.5.6.5.1 Smoke Test</a></span></li></ul></li></ul></li><li><span id="row" class="expandable"><a href="#FC503.5.7">503.5.7 Chimneys Serving Appliances Burning Other Fuels</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.5.7.1">503.5.7.1 Solid Fuel-Burning Appliances</a></span></li><li><span id="row"><a href="#FC503.5.7.2">503.5.7.2 Liquid Fuel-Burning Appliances</a></span></li><li><span id="row"><a href="#FC503.5.7.3">503.5.7.3 Combination Gas and Solid Fuel-Burning Appliances</a></span></li><li><span id="row"><a href="#FC503.5.7.4">503.5.7.4 Combination Gas- And Oil Fuel-Burning Appliances</a></span></li></ul></li><li><span id="row"><a href="#FC503.5.8">503.5.8 Support of Chimneys</a></span></li><li><span id="row"><a href="#FC503.5.9">503.5.9 Cleanouts</a></span></li><li><span id="row"><a href="#FC503.5.10">503.5.10 Space Surrounding Lining or Vent</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC503.6">503.6 Gas Vents</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.6.1">503.6.1 Installation, General</a></span></li><li><span id="row"><a href="#FC503.6.2">503.6.2 Type B-W Vent Capacity</a></span></li><li><span id="row"><a href="#FC503.6.3">503.6.3 Gas Vents Installed Within Masonry Chimneys</a></span></li><li><span id="row" class="expandable"><a href="#FC503.6.4">503.6.4 Gas Vent Terminations</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.6.4.1">503.6.4.1 Decorative Shrouds</a></span></li><li><span id="row"><a href="#FC503.6.4.2">503.6.4.2 Rain and Debris</a></span></li></ul></li><li><span id="row"><a href="#FC503.6.5">503.6.5 Minimum Height</a></span></li><li><span id="row"><a href="#FC503.6.6">503.6.6 Roof Terminations</a></span></li><li><span id="row"><a href="#FC503.6.7">503.6.7 Forced Air Inlets</a></span></li><li><span id="row"><a href="#FC503.6.8">503.6.8 Exterior Wall Penetrations</a></span></li><li><span id="row" class="expandable"><a href="#FC503.6.9">503.6.9 Size of Gas Vents</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.6.9.1">503.6.9.1 Category I Appliances</a></span></li><li><span id="row"><a href="#FC503.6.9.2">503.6.9.2 Vent Offsets</a></span></li><li><span id="row"><a href="#FC503.6.9.3">503.6.9.3 Category II, III, and IV Appliances</a></span></li><li><span id="row"><a href="#FC503.6.9.4">503.6.9.4 Mechanical Draft</a></span></li></ul></li><li><span id="row"><a href="#FC503.6.10">503.6.10 Multistory Prohibited</a></span></li><li><span id="row"><a href="#FC503.6.11">503.6.11 Support of Gas Vents</a></span></li><li><span id="row"><a href="#FC503.6.12">503.6.12 Marking</a></span></li><li><span id="row"><a href="#FC503.6.13">503.6.13 Fastener Penetrations</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC503.7">503.7 Single-Wall Metal Pipe</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.7.1">503.7.1 Construction</a></span></li><li><span id="row"><a href="#FC503.7.2">503.7.2 Climate Protection</a></span></li><li><span id="row"><a href="#FC503.7.3">503.7.3 Termination</a></span></li><li><span id="row"><a href="#FC503.7.4">503.7.4 Limitations of Use</a></span></li><li><span id="row"><a href="#FC503.7.5">503.7.5 Roof Penetrations</a></span></li><li><span id="row"><a href="#FC503.7.6">503.7.6 Installation</a></span></li><li><span id="row"><a href="#FC503.7.7">503.7.7 Single-Wall Penetrations of Combustible Walls</a></span></li><li><span id="row"><a href="#FC503.7.8">503.7.8 Clearances</a></span></li><li><span id="row"><a href="#FC503.7.9">503.7.9 Size of Single-Wall Metal Pipe</a></span></li><li><span id="row"><a href="#FC503.7.10">503.7.10 Pipe Geometry</a></span></li><li><span id="row"><a href="#FC503.7.11">503.7.11 Termination Capacity</a></span></li><li><span id="row"><a href="#FC503.7.12">503.7.12 Support of Single-Wall Metal Pipe</a></span></li><li><span id="row"><a href="#FC503.7.13">503.7.13 Marking</a></span></li></ul></li><li><span id="row"><a href="#FC503.8">503.8 Venting System Termination Location</a></span></li><li><span id="row"><a href="#FC503.9">503.9 Condensation Drainage</a></span></li><li><span id="row" class="expandable"><a href="#FC503.10">503.10 Vent Connectors for Category I Appliances</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.10.1">503.10.1 Where Required</a></span></li><li><span id="row" class="expandable"><a href="#FC503.10.2">503.10.2 Materials</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.10.2.1">503.10.2.1 General</a></span></li><li><span id="row"><a href="#FC503.10.2.2">503.10.2.2 Vent Connectors Located in Unconditioned Areas</a></span></li><li><span id="row"><a href="#FC503.10.2.3">503.10.2.3 Residential-Type Appliance Connectors</a></span></li><li><span id="row"><a href="#FC503.10.2.4">503.10.2.4 Low-Heat Equipment</a></span></li><li><span id="row"><a href="#FC503.10.2.5">503.10.2.5 Medium-Heat Appliances</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC503.10.3">503.10.3 Size of Vent Connector</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.10.3.1">503.10.3.1 Single Draft Hood and Fan-Assisted</a></span></li><li><span id="row"><a href="#FC503.10.3.2">503.10.3.2 Multiple Draft Hoods</a></span></li><li><span id="row"><a href="#FC503.10.3.3">503.10.3.3 Multiple Appliances</a></span></li><li><span id="row"><a href="#FC503.10.3.4">503.10.3.4 Common Connector/Manifold</a></span></li><li><span id="row"><a href="#FC503.10.3.5">503.10.3.5 Size Increase</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC503.10.4">503.10.4 Two or More Appliances Connected to a Single Vent or Chimney</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.10.4.1">503.10.4.1 Two or More Openings</a></span></li></ul></li><li><span id="row"><a href="#FC503.10.5">503.10.5 Clearance</a></span></li><li><span id="row"><a href="#FC503.10.6">503.10.6 Flow Resistance</a></span></li><li><span id="row"><a href="#FC503.10.7">503.10.7 Joints</a></span></li><li><span id="row"><a href="#FC503.10.8">503.10.8 Slope</a></span></li><li><span id="row"><a href="#FC503.10.9">503.10.9 Length of Vent Connector</a></span></li><li><span id="row"><a href="#FC503.10.10">503.10.10 Support</a></span></li><li><span id="row"><a href="#FC503.10.11">503.10.11 Chimney Connection</a></span></li><li><span id="row"><a href="#FC503.10.12">503.10.12 Inspection</a></span></li><li><span id="row"><a href="#FC503.10.13">503.10.13 Fireplaces</a></span></li><li><span id="row"><a href="#FC503.10.14">503.10.14 Passage Through Ceilings, Floors, or Walls</a></span></li><li><span id="row"><a href="#FC503.10.15">503.10.15 Medium-Heat Connectors</a></span></li></ul></li><li><span id="row"><a href="#FC503.11">503.11 Vent Connectors for Category II, III, and IV Appliances</a></span></li><li><span id="row" class="expandable"><a href="#FC503.12">503.12 Draft Hoods and Draft Controls</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.12.1">503.12.1 Appliances Requiring Draft Hoods</a></span></li><li><span id="row" class="expandable"><a href="#FC503.12.2">503.12.2 Installation</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC503.12.2.1">503.12.2.1 Draft Hood Required</a></span></li><li><span id="row"><a href="#FC503.12.2.2">503.12.2.2 Special Design Draft Hood</a></span></li></ul></li><li><span id="row"><a href="#FC503.12.3">503.12.3 Draft Control Devices</a></span></li><li><span id="row"><a href="#FC503.12.4">503.12.4 Additional Devices</a></span></li><li><span id="row"><a href="#FC503.12.5">503.12.5 Location</a></span></li><li><span id="row"><a href="#FC503.12.6">503.12.6 Positioning</a></span></li><li><span id="row"><a href="#FC503.12.7">503.12.7 Clearance</a></span></li></ul></li><li><span id="row"><a href="#FC503.13">503.13 Manually Operated Dampers</a></span></li><li><span id="row"><a href="#FC503.14">503.14 Automatically Operated Vent Dampers</a></span></li><li><span id="row"><a href="#FC503.15">503.15 Obstructions</a></span></li><li><span id="row"><a href="#FC503.16">503.16 Outside Wall Penetrations</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC504">504 Sizing of Category I Appliance Venting Systems</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC504.1">504.1 Definitions</a></span></li><li><span id="row" class="expandable"><a href="#FC504.2">504.2 Application of Single-Appliance Vent Tables 504.2(1) Through 504.2(6)</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC504.2.1">504.2.1 Vent Obstructions</a></span></li><li><span id="row"><a href="#FC504.2.2">504.2.2 Minimum Size</a></span></li><li><span id="row"><a href="#FC504.2.3">504.2.3 Vent Offsets</a></span></li><li><span id="row"><a href="#FC504.2.4">504.2.4 Zero Lateral</a></span></li><li><span id="row"><a href="#FC504.2.5">504.2.5 Reserved</a></span></li><li><span id="row"><a href="#FC504.2.6">504.2.6 Multiple Input Rate Appliances</a></span></li><li><span id="row"><a href="#FC504.2.7">504.2.7 Liner System Sizing</a></span></li><li><span id="row"><a href="#FC504.2.8">504.2.8 Vent Area and Diameter</a></span></li><li><span id="row"><a href="#FC504.2.9">504.2.9 Chimney and Vent Locations</a></span></li><li><span id="row"><a href="#FC504.2.10">504.2.10 Corrugated Vent Connector Size</a></span></li><li><span id="row"><a href="#FC504.2.11">504.2.11 Vent Connector Size Limitation</a></span></li><li><span id="row"><a href="#FC504.2.12">504.2.12 Component Commingling</a></span></li><li><span id="row"><a href="#FC504.2.13">504.2.13 Draft Hood Conversion Accessories</a></span></li><li><span id="row"><a href="#FC504.2.14">504.2.14 Table Interpolation</a></span></li><li><span id="row"><a href="#FC504.2.15">504.2.15 Extrapolation Prohibited</a></span></li><li><span id="row"><a href="#FC504.2.16">504.2.16 Engineering Calculations</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC504.3">504.3 Application of Multiple Appliance Vent Tables 504.3(1) Through 504.3(7)</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC504.3.1">504.3.1 Vent Obstructions</a></span></li><li><span id="row"><a href="#FC504.3.2">504.3.2 Connector Length Limit</a></span></li><li><span id="row"><a href="#FC504.3.3">504.3.3 Connectors With Longer Lengths</a></span></li><li><span id="row"><a href="#FC504.3.4">504.3.4 Vent Connector Manifold</a></span></li><li><span id="row"><a href="#FC504.3.5">504.3.5 Common Vertical Vent Offset</a></span></li><li><span id="row"><a href="#FC504.3.6">504.3.6 Elbows in Vents</a></span></li><li><span id="row"><a href="#FC504.3.7">504.3.7 Elbows in Connectors</a></span></li><li><span id="row"><a href="#FC504.3.8">504.3.8 Common Vent Minimum Size</a></span></li><li><span id="row" class="expandable"><a href="#FC504.3.9">504.3.9 Common Vent Fittings</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC504.3.9.1">504.3.9.1 Tee and Wye Fittings</a></span></li><li><span id="row"><a href="#FC504.3.10">504.3.10 Reserved</a></span></li><li><span id="row"><a href="#FC504.3.11">504.3.11 Connector Rise Measurement</a></span></li><li><span id="row"><a href="#FC504.3.12">504.3.12 Vent Height Measurement</a></span></li><li><span id="row"><a href="#FC504.3.13">504.3.13 Multistory Height Measurement</a></span></li><li><span id="row"><a href="#FC504.3.14">504.3.14 Multistory Lowest Portion Sizing</a></span></li><li><span id="row"><a href="#FC504.3.15">504.3.15 Multistory Common Vents</a></span></li><li><span id="row"><a href="#FC504.3.16">504.3.16 Multistory Common Vents Offsets</a></span></li><li><span id="row"><a href="#FC504.3.17">504.3.17 Vertical Vent Maximum Size</a></span></li><li><span id="row"><a href="#FC504.3.18">504.3.18 Multiple Input Rate Appliances</a></span></li><li><span id="row"><a href="#FC504.3.19">504.3.19 Liner System Sizing and Connections</a></span></li><li><span id="row"><a href="#FC504.3.20">504.3.20 Chimney and Vent Location</a></span></li><li><span id="row"><a href="#FC504.3.21">504.3.21 Connector Maximum and Minimum Size</a></span></li><li><span id="row"><a href="#FC504.3.22">504.3.22 Component Commingling</a></span></li><li><span id="row"><a href="#FC504.3.23">504.3.23 Draft Hood Conversion Accessories</a></span></li><li><span id="row"><a href="#FC504.3.24">504.3.24 Multiple Sizes Permitted</a></span></li><li><span id="row"><a href="#FC504.3.25">504.3.25 Table Interpolation</a></span></li><li><span id="row"><a href="#FC504.3.26">504.3.26 Extrapolation Prohibited</a></span></li><li><span id="row"><a href="#FC504.3.27">504.3.27 Engineering Calculations</a></span></li></ul></li></ul></li></ul></li><li><span id="row" class="expandable"><a href="#FC505">505 Direct-Vent, Integral Vent, Mechanical Vent and Ventilation/Exhaust Hood Venting</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC505.1">505.1 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC505.1.1">505.1.1 Commercial Cooking Appliances Vented by Exhaust Hoods</a></span></li><li><span id="row"><a href="#FC505.1.2">505.1.2 Interlock Requirements</a></span></li></ul></li></ul></li><li><span id="row" class="expandable"><a href="#FC506">506 Factory-Built Chimneys</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC506.1">506.1 Building Heating Appliances</a></span></li><li><span id="row"><a href="#FC506.2">506.2 Support</a></span></li><li><span id="row"><a href="#FC506.3">506.3 Medium-Heat Appliances</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC507">507 Changes in Appliance Fuels</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC507.1">507.1 Changes in Appliance Fuels</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC508">508 Exhaust Gases From Internal Combustion Engines and Turbines</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC508.1">508.1 Exhaust Pipe Construction</a></span></li></ul></li></ul></li>
+					<!-- Fuel Chapter 5 tree end -->										
+
+					<!-- Fuel Chapter 6 tree begin -->
+					<li> <span id="row" class="expandable"><a href="#Ch6_FC_SpecificAppliances">Chapter 6 Specific Appliances</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC601">601 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC601.1">601.1 Scope</a></span></li><li><span id="row"><a href="#FC601.2">601.2 Fireplaces</a></span></li><li><span id="row"><a href="#FC601.3">601.3 Flame Safeguard Device</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC602">602 Decorative Gas-Fired Appliances for Installlation in Fireplaces</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC602.1">602.1 General</a></span></li><li><span id="row"><a href="#FC602.2">602.2 Flame Safeguard Device</a></span></li><li><span id="row"><a href="#FC602.3">602.3 Prohibited Installations</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC603">603 Log Lighters</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC603.1">603.1 General</a></span></li><li><span id="row"><a href="#FC603.2">603.2 Automatic Valves</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC604">604 Vented Gas Fireplaces (Decorative Appliances)</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC604.1">604.1 General</a></span></li><li><span id="row"><a href="#FC604.2">604.2 Access</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC605">605 Vented Gas Fireplace Heaters</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC605.1">605.1 General</a></span></li><li><span id="row"><a href="#FC605.2">605.2 Separate Flues</a></span></li><li><span id="row"><a href="#FC605.3">605.3 Combustion Air Supply</a></span></li></ul></li><li><span id="row"><a href="#FC606">606 Reserved</a></span></li><li><span id="row" class="expandable"><a href="#FC607">607 Commercial-Industrial Incinerators and Crematories</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC607.1">607.1 Incinerators and Crematories, Commercial-Industrial</a></span></li><li><span id="row"><a href="#FC607.2">607.2 Compliance</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC608">608 Vented Wall Furnaces</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC608.1">608.1 General</a></span></li><li><span id="row"><a href="#FC608.2">608.2 Venting</a></span></li><li><span id="row"><a href="#FC608.3">608.3 Location</a></span></li><li><span id="row"><a href="#FC608.4">608.4 Door Swing</a></span></li><li><span id="row"><a href="#FC608.5">608.5 Ducts Prohibited</a></span></li><li><span id="row"><a href="#FC608.6">608.6 Access</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC609">609 Floor Furnaces</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC609.1">609.1 General</a></span></li><li><span id="row"><a href="#FC609.2">609.2 Placement</a></span></li><li><span id="row"><a href="#FC609.3">609.3 Bracing</a></span></li><li><span id="row"><a href="#FC609.4">609.4 Clearance</a></span></li><li><span id="row"><a href="#FC609.5">609.5 Reserved</a></span></li><li><span id="row"><a href="#FC609.6">609.6 Reserved</a></span></li><li><span id="row"><a href="#FC609.7">609.7 Enclosures</a></span></li><li><span id="row"><a href="#FC609.8">609.8 Duct Temperature</a></span></li><li><span id="row"><a href="#FC609.9">609.9 One- And Two-Family Dwellings</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC610">610 Duct Furnaces</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC610.1">610.1 General</a></span></li><li><span id="row"><a href="#FC610.2">610.2 Access Panels</a></span></li><li><span id="row"><a href="#FC610.3">610.3 Location of Draft Hood and Controls</a></span></li><li><span id="row"><a href="#FC610.4">610.4 Circulating Air</a></span></li><li><span id="row"><a href="#FC610.5">610.5 Unvented Duct Furnaces</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC611">611 Nonrecirculating Direct-Fired Industrial Air Heaters</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC611.1">611.1 General</a></span></li><li><span id="row"><a href="#FC611.2">611.2 Installation</a></span></li><li><span id="row"><a href="#FC611.3">611.3 Clearance From Combustible Materials</a></span></li><li><span id="row"><a href="#FC611.4">611.4 Supply Air</a></span></li><li><span id="row"><a href="#FC611.5">611.5 Outdoor Air Louvers</a></span></li><li><span id="row"><a href="#FC611.6">611.6 Atmospheric Vents and Gas Reliefs or Bleeds</a></span></li><li><span id="row"><a href="#FC611.7">611.7 Relief Opening</a></span></li><li><span id="row"><a href="#FC611.8">611.8 Access</a></span></li><li><span id="row"><a href="#FC611.9">611.9 Purging</a></span></li><li><span id="row"><a href="#FC611.10">611.10 Controls</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC612">612 Recirculating Direct-Fired Industrial Air Heaters</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC612.1">612.1 General</a></span></li><li><span id="row"><a href="#FC612.2">612.2 Location</a></span></li><li><span id="row"><a href="#FC612.3">612.3 Installation</a></span></li><li><span id="row"><a href="#FC612.4">612.4 Clearance From Combustible Materials</a></span></li><li><span id="row"><a href="#FC612.5">612.5 Air Supply</a></span></li><li><span id="row"><a href="#FC612.6">612.6 Atmospheric Vents, Gas Reliefs or Bleeds</a></span></li><li><span id="row"><a href="#FC612.7">612.7 Relief Opening</a></span></li><li><span id="row"><a href="#FC612.8">612.8 Controls</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC613">613 Clothes Dryers</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC613.1">613.1 General</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC614">614 Clothes Dryer Exhaust</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC614.1">614.1 Installation</a></span></li><li><span id="row"><a href="#FC614.2">614.2 Duct Penetrations</a></span></li><li><span id="row"><a href="#FC614.3">614.3 Cleaning Access</a></span></li><li><span id="row"><a href="#FC614.4">614.4 Exhaust Installation</a></span></li><li><span id="row"><a href="#FC614.5">614.5 Makeup Air</a></span></li><li><span id="row" class="expandable"><a href="#FC614.6">614.6 Domestic Clothes Dryer Exhaust Ducts</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC614.6.1">614.6.1 Material and Size</a></span></li><li><span id="row"><a href="#FC614.6.2">614.6.2 Duct Installation</a></span></li><li><span id="row"><a href="#FC614.6.3">614.6.3 Protection Required</a></span></li><li><span id="row"><a href="#FC614.6.4">614.6.4 Transition Ducts</a></span></li><li><span id="row" class="expandable"><a href="#FC614.6.5">614.6.5 Duct Length</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC614.6.5.1">614.6.5.1 Specified Length</a></span></li><li><span id="row"><a href="#FC614.6.5.2">614.6.5.2 Manufacturer's Instructions</a></span></li></ul></li><li><span id="row"><a href="#FC614.6.6">614.6.6 Length Identification</a></span></li><li><span id="row"><a href="#FC614.6.7">614.6.7 Exhaust Duct Required</a></span></li></ul></li><li><span id="row"><a href="#FC614.7">614.7 Commercial Clothes Dryers</a></span></li><li><span id="row"><a href="#FC614.8">614.8 Common Exhaust Systems for Clothes Dryers Located in Multistory Structures</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC615">615 Sauna Heaters</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC615.1">615.1 General</a></span></li><li><span id="row" class="expandable"><a href="#FC615.2">615.2 Location and Protection</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC615.2.1">615.2.1 Guards</a></span></li></ul></li><li><span id="row"><a href="#FC615.3">615.3 Access</a></span></li><li><span id="row"><a href="#FC615.4">615.4 Combustion and Dilution Air Intakes</a></span></li><li><span id="row"><a href="#FC615.5">615.5 Combustion and Ventilation Air</a></span></li><li><span id="row" class="expandable"><a href="#FC615.6">615.6 Heat and Time Controls</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC615.6.1">615.6.1 Timers</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC615.7">615.7 Sauna Room</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC615.7.1">615.7.1 Warning Notice</a></span></li></ul></li></ul></li><li><span id="row" class="expandable"><a href="#FC616">616 Engine and Gas Turbine-Powered Equipment and Appliances</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC616.1">616.1 Powered Equipment</a></span></li><li><span id="row"><a href="#FC616.2">616.2 Gas Supply Connection</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC617">617 Pool and Spa Heaters</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC617.1">617.1 General</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC618">618 Forced-Air Warm-Air Furnaces</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC618.1">618.1 General</a></span></li><li><span id="row"><a href="#FC618.2">618.2 Forced-Air Furnaces</a></span></li><li><span id="row"><a href="#FC618.3">618.3 Dampers</a></span></li><li><span id="row"><a href="#FC618.4">618.4 Circulating Air Ducts for Forced-Air Warm-Air Furnaces</a></span></li><li><span id="row"><a href="#FC618.5">618.5 Prohibited Sources</a></span></li><li><span id="row"><a href="#FC618.6">618.6 Screen</a></span></li><li><span id="row"><a href="#FC618.7">618.7 Return-Air Limitation</a></span></li><li><span id="row"><a href="#FC618.8">618.8 Furnace Plenums and Air Ducts</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC619">619 Conversion Burners</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC619.1">619.1 Conversion Burners</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC620">620 Unit Heaters</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC620.1">620.1 General</a></span></li><li><span id="row"><a href="#FC620.2">620.2 Support</a></span></li><li><span id="row"><a href="#FC620.3">620.3 Ductwork</a></span></li><li><span id="row"><a href="#FC620.4">620.4 Clearance</a></span></li><li><span id="row"><a href="#FC620.5">620.5 Installation in Commercial Garages and Aircraft Hangars</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC621">621 Unvented Room Heaters</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC621.1">621.1 General</a></span></li><li><span id="row"><a href="#FC621.2">621.2 Reserved</a></span></li><li><span id="row"><a href="#FC621.3">621.3 Reserved</a></span></li><li><span id="row"><a href="#FC621.4">621.4 Reserved</a></span></li><li><span id="row"><a href="#FC621.5">621.5 Reserved</a></span></li><li><span id="row"><a href="#FC621.6">621.6 Reserved</a></span></li><li><span id="row"><a href="#FC621.7">621.7 Reserved</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC622">622 Vented Room Heaters</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC622.1">622.1 General</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC623">623 Cooking Appliances</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC623.1">623.1 Cooking Appliances</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC623.1.1">623.1.1 LPG</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC623.2">623.2 Prohibited Location</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC623.2.1">623.2.1 Barbeque Grills</a></span></li></ul></li><li><span id="row"><a href="#FC623.3">623.3 Domestic Appliances</a></span></li><li><span id="row"><a href="#FC623.4">623.4 Domestic Range Installation</a></span></li><li><span id="row" class="expandable"><a href="#FC623.5">623.5 Open-Top Broiler Unit Hoods</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC623.5.1">623.5.1 Clearances</a></span></li></ul></li><li><span id="row"><a href="#FC623.6">623.6 Commercial Cooking Appliance Venting</a></span></li><li><span id="row"><a href="#FC623.7">623.7 Domestic Ventilation</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC624">624 Water Heaters</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC624.1">624.1 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC624.1.1">624.1.1 Installation Requirements</a></span></li></ul></li><li><span id="row"><a href="#FC624.2">624.2 Water Heaters Utilized for Space Heating</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC625">625 Refrigerators</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC625.1">625.1 General</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC626">626 Gas-Fired Toilets</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC626.1">626.1 General</a></span></li><li><span id="row"><a href="#FC626.2">626.2 Reserved</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC627">627 Air Conditioning Appliances</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC627.1">627.1 General</a></span></li><li><span id="row"><a href="#FC627.2">627.2 Independent Piping</a></span></li><li><span id="row"><a href="#FC627.3">627.3 Connection of Gas Engine-Powered Air Conditioners</a></span></li><li><span id="row"><a href="#FC627.4">627.4 Clearances for Indoor Installation</a></span></li><li><span id="row"><a href="#FC627.5">627.5 Alcove and Closet Installation</a></span></li><li><span id="row"><a href="#FC627.6">627.6 Installation</a></span></li><li><span id="row"><a href="#FC627.7">627.7 Plenums and Air Ducts</a></span></li><li><span id="row"><a href="#FC627.8">627.8 Refrigeration Coils</a></span></li><li><span id="row"><a href="#FC627.9">627.9 Cooling Units Used With Heating Boilers</a></span></li><li><span id="row"><a href="#FC627.10">627.10 Switches in Electrical Supply Line</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC628">628 Illuminating Appliances</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC628.1">628.1 General</a></span></li><li><span id="row"><a href="#FC628.2">628.2 Mounting on Buildings</a></span></li><li><span id="row"><a href="#FC628.3">628.3 Mounting on Posts</a></span></li><li><span id="row"><a href="#FC628.4">628.4 Appliance Pressure Regulators</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC629">629 Small Ceramic Kilns</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC629.1">629.1 General</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC630">630 Infrared Radiant Heaters</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC630.1">630.1 General</a></span></li><li><span id="row"><a href="#FC630.2">630.2 Support</a></span></li><li><span id="row"><a href="#FC630.3">630.3 Combustion and Ventilation Air</a></span></li><li><span id="row"><a href="#FC630.4">630.4 Installation in Commercial Garages and Air-Craft Hangars</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC631">631 Boilers</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC631.1">631.1 Standards</a></span></li><li><span id="row"><a href="#FC631.2">631.2 Installation</a></span></li><li><span id="row"><a href="#FC631.3">631.3 Clearance to Combustible Materials</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC632">632 Equipment Installed in Existing Unlisted Boilers</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC632.1">632.1 General</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC633">633 Fuel Cell Power Plants</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC633.1">633.1 General</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC634">634 Chimney Damper Opening Area</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC634.1">634.1 Free Opening Area of Chimney Dampers</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FC635">635 Gaseous Hydrogen Systems</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC635.1">635.1 Installation</a></span></li></ul></li></ul></li>
+					<!-- Fuel Chapter 6 tree end -->										
+
+					<!-- Fuel Chapter 7 tree begin -->
+					<li> <span id="row" class="expandable"><a href="#Ch7_FC_GasHydroSystems">Chapter 7 Gaseous Hydrogen Systems</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC701">701 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC701.1">701.1 Scope</a></span></li><li><span id="row"><a href="#FC701.2">701.2 Permits</a></span></li></ul></li></ul></li>
+					<!-- Fuel Chapter 7 tree end -->										
+
+					<!-- Fuel Chapter 8 tree begin -->
+					<li> <span id="row" class="expandable"><a href="#Ch8_FC_ReferencedStandards">Chapter 8 Referenced Standards</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FC801">801 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FC801.1">801.1 General</a></span></li><li><span id="row"><a href="#FC801.2">801.2 Subsequent additions, modifications or deletions</a></span></li><li><span id="row"><a href="#FC801.3">801.3 Applicability</a></span></li></ul></li><li><span id="row"><a href="#FC802">802 Standards</a></span></li></ul></li>
+					<!-- Fuel Chapter 8 tree end -->										
+
+					<!-- Fuel Chapter Appendix A tree begin -->
+					<li><span id="row" class="expandable"><a href="#AppA_FC_Reserved">Appendix A Reserved</a></span></li>
+					<!-- Fuel Chapter Appendix A tree end -->										
+
+					<!-- Fuel Chapter Appendix B tree begin -->
+					<li><span id="row" class="expandable"><a href="#AppB_FC_Reserved">Appendix B Reserved</a></span></li>
+					<!-- Fuel Chapter Appendix B tree end -->										
+
+					<!-- Fuel Chapter Appendix C tree begin -->
+					<li><span id="row" class="expandable"><a href="#AppC_FC_Reserved">Appendix C Reserved</a></span></li>
+					<!-- Fuel Chapter Appendix C tree end -->										
+
+					<!-- Fuel Chapter Appendix D tree begin -->
+					<li><span id="row" class="expandable"><a href="#AppD_FC_Reserved">Appendix D Reserved</a></span></li>
+					<!-- Fuel Chapter Appendix D tree end -->										
+
+					<!-- Fuel Chapter Appendix E tree begin -->
+					<li> <span id="row" class="expandable"><a href="#AppE_FC_MetersGasServicePiping">Appendix E Meters and Gas Service Piping</a></span><ul class="non-expandable"><li><span id="row"><a href="#FCE.1">E.1 General</a></span></li><li><span id="row" class="expandable"><a href="#FCE.2">E.2 Gas Regulator and Gas Regulator Vent Outlets</a></span><ul class="non-expandable"><li><span id="row"><a href="#FCE.2.1">E.2.1</a></span></li><li><span id="row"><a href="#FCE.2.2">E.2.2</a></span></li><li><span id="row"><a href="#FCE.2.3">E.2.3</a></span></li></ul></li><li><span id="row"><a href="#FCE.3">E.3 Gas Meter Location</a></span></li><li><span id="row"><a href="#FCE.4">E.4 Gas Meter Room Ventilation</a></span></li><li><span id="row"><a href="#FCE.5">E.5 Gas Service Piping Connections</a></span></li><li><span id="row"><a href="#FCE.6">E.6 Outside Gas Cut-Off</a></span></li></ul></li>
+					<!-- Fuel Chapter Appendix E tree end -->										
+
+					<!-- Fuel Chapter Appendix F tree begin -->
+					<li><span id="row" class="expandable"><a href="#AppF_FC_Reserved">Appendix F Reserved</a></span></li>
+					<!-- Fuel Chapter Appendix F tree end -->										
+
+					<!-- Fuel Chapter Appendix G tree begin -->
+					<li> <span id="row" class="expandable"><a href="#AppG_FC_HighPressureNatGas">Appendix G High Pressure Natural Gas Installations</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FCG.1">G.1 General</a></span><ul class="non-expandable"><li><span id="row"><a href="#FCG.1.1">G.1.1 Fire Department Approval</a></span></li><li><span id="row"><a href="#FCG.1.2">G.1.2 Certificate of Fitness</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FCG.2">G.2 Construction Requirements</a></span><ul class="non-expandable"><li><span id="row"><a href="#FCG.2.1">G.2.1 Structural Requirements</a></span></li><li><span id="row" class="expandable"><a href="#FCG.2.2">G.2.2 Fire-Resistance Rated Rooms and Spaces</a></span><ul class="non-expandable"><li><span id="row"><a href="#FCG.2.2.1">G.2.2.1 Shaft Requirements</a></span></li></ul></li><li><span id="row"><a href="#FCG.2.3">G.2.3 Automatic Sprinkler System</a></span></li><li><span id="row" class="expandable"><a href="#FCG.2.4">G.2.4 Gas Detection</a></span><ul class="non-expandable"><li><span id="row"><a href="#FCG.2.4.1">G.2.4.1 Gas Detection System</a></span></li><li><span id="row"><a href="#FCG.2.4.2">G.2.4.2 Supervision</a></span></li><li><span id="row"><a href="#FCG.2.4.3">G.2.4.3 Power Supply</a></span></li><li><span id="row"><a href="#FCG.2.4.4">G.2.4.4 Alarm</a></span></li><li><span id="row"><a href="#FCG.2.4.5">G.2.4.5 Alarm Transmission</a></span></li><li><span id="row"><a href="#FCG.2.4.6">G.2.4.6 Shutoff Valves Closure</a></span></li></ul></li><li><span id="row" class="expandable"><a href="#FCG.2.5">G.2.5 Ventilation</a></span><ul class="non-expandable"><li><span id="row"><a href="#FCG.2.5.1">G.2.5.1 Explosion Prevention</a></span></li></ul></li></ul></li><li><span id="row" class="expandable"><a href="#FCG.3">G.3 High Hazard</a></span><ul class="non-expandable"><li><span id="row" class="expandable"><a href="#FCG.3.1">G.3.1 Explosion Venting</a></span><ul class="non-expandable"><li><span id="row"><a href="#FCG.3.1.1">G.3.1.1 Gas Turbines</a></span></li><li><span id="row"><a href="#FCG.3.1.2">G.3.1.2 Gas Turbine Rooms</a></span></li></ul></li><li><span id="row"><a href="#FCG.3.2">G.3.2 Emergency Ventilation</a></span></li><li><span id="row"><a href="#FCG.3.3">G.3.3 Electrical Equipment</a></span></li></ul></li><li><span id="row"><a href="#FCG.4">G.4 Gas Meter Room</a></span></li><li><span id="row" class="expandable"><a href="#FCG.5">G.5 Piping Requirements</a></span><ul class="non-expandable"><li><span id="row"><a href="#FCG.5.1">G.5.1 Piping Material</a></span></li><li><span id="row"><a href="#FCG.5.2">G.5.2 Double Wall Piping</a></span></li><li><span id="row"><a href="#FCG.5.3">G.5.3 Piping Identification</a></span></li><li><span id="row"><a href="#FCG.5.4">G.5.4 Emergency Gas Shutoff</a></span></li></ul></li><li><span id="row"><a href="#FCG.6">G.6 Special Inspection Required</a></span></li><li><span id="row"><a href="#FCG.7">G.7 Cleaning and Purging Procedures</a></span></li></ul></li>
+					<!-- Fuel Chapter Appendix G tree end -->										
+
+
+				</ul>
+			</div>
+		</div> <!--  SECTION END  "fuelCode2014" -->
+		
+		
 		<div class="col-sm-10" id="codeCol"> <!--  SECTION BEGIN  "codeCol" LISTS ALL BOOKS -->
 			<div class="chart-wrapper">
 				<div class="chart-title">
@@ -761,7 +830,8 @@ border: 3px solid red;
 								<small class="text-muted">adopts the IPC 2009 with amendments</small>
 							</div>
 						</a>
-						<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+						<a href="#"  id="fuelCode2014List"
+							class="list-group-item list-group-item-action flex-column align-items-start">
 							<div class="d-flex w-100 justify-content-between">
 								<h5 class="mb-1">NYC Fuel Gas Code 2014</h5>
 								<small class="text-muted">adopts the IFGC 2009 with amendments</small>
@@ -1286,6 +1356,62 @@ border: 3px solid red;
 			</div> <!-- SECTION END "chart-wrapper" -->
 		</div> <!-- SECTION END "plumbCode2014content" -->			
 
+
+		<div style="display:none;" id="fuelCode2014content" class="col-sm-8"> <!--  SECTION BEGIN "fuelCode2014content"-->
+			<div class="chart-wrapper">
+				<div class="chart-title">
+					NYC Fuel Code 2014
+					<div class='commentarySwitch'>Commentary:&nbsp;<input class="toggle-commentary" type="checkbox"
+							data-toggle="toggle" data-size="mini"></div>
+					<div class='legHistorySwitch'>Legislative History:&nbsp;<input class="toggle-legHistory" type="checkbox"
+							data-toggle="toggle" data-size="mini"></div>
+					<div class='bulletinsSwitch'>Related Bulletins:&nbsp;<input class="toggle-bulletin" type="checkbox"
+							data-toggle="toggle" data-size="mini"></div>
+					<div class='deptRulesSwitch'>Department Rules:&nbsp;<input class="toggle-rules" type="checkbox"
+							data-toggle="toggle" data-size="mini"></div>
+					<div id='searchForm'>
+						<!-- <input type="text" id="search" name="keyword" class="form-control input-sm" placeholder="Search Text"> -->
+						<input type="search" size="8em;" placeholder="Search Text">
+						<button data-search="next">&darr;</button>
+						<button data-search="prev">&uarr;</button>
+						<button data-search="clear">✖</button>
+					</div>
+				</div>
+				<div class="chart-stage" id="codeContainer" style="height:80vh"> 
+					<div id="fccode"> <!-- SECTION BEGIN "code" INSERT CHAPTER HTML-->
+						<div code-include-html="ch1_fuel.html"></div>
+						<div code-include-html="ch2_fuel.html"></div>
+						<div code-include-html="ch3_fuel.html"></div>
+						<div code-include-html="ch4_fuel.html"></div>
+						<div code-include-html="ch5_fuel.html"></div>
+						<div code-include-html="ch6_fuel.html"></div>
+						<div code-include-html="ch7_fuel.html"></div>
+						<div code-include-html="ch8_fuel.html"></div>
+						<div code-include-html="appE_fuel.html"></div>
+						<div code-include-html="appG_fuel.html"></div>
+					</div> <!-- SECTION END "fccode" -->
+				</div> <!-- SECTION END "codeContainer" -->
+			</div> <!-- SECTION END "chart-wrapper" -->
+		</div> <!-- SECTION END "fuelCode2014content" -->			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
 	</div> <!-- SECTION END "container-fluid"  -->
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -1295,15 +1421,24 @@ border: 3px solid red;
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.es6.js"></script>
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 	<script>
+//var cnts=0;
+
 		$(document).ready(function () {
+
+
 			var toggler = document.getElementsByClassName("expandable");
 			var i;
 			for (i = 0; i < toggler.length; i++) {
-				toggler[i].addEventListener("click", function () {
-					this.parentElement.querySelector(".non-expandable").classList.toggle("active");
-					this.classList.toggle("expanded");
+				toggler[i].addEventListener("click", function () {					
+					let eee=this.parentElement.querySelector(".non-expandable");
+					if (eee !=null) {				
+						eee.classList.toggle("active");
+						this.classList.toggle("expanded");
+					};					
+					//this.parentElement.querySelector(".non-expandable").classList.toggle("active");
+					//this.classList.toggle("expanded");
 				});
-			}
+			};
 			$(function () {
 				$('.toggle-commentary').change(function () {
 					console.log('Toggle: ' + $(this).prop('checked'))
@@ -1455,6 +1590,10 @@ border: 3px solid red;
 				$('#mechCode2014content').hide();
 				$('#plumbCode2014').hide();
 				$('#plumbCode2014content').hide();
+				$('#fuelCode2014').hide();
+				$('#fuelCode2014content').hide();
+				let qq1=document.querySelectorAll(".expanded");qq1.forEach(e=>e.classList.toggle("expanded"));
+				let qq2=document.querySelectorAll(".active");qq2.forEach(e=>e.classList.toggle("active"));
 			})
 			$('#genAdmin2014List').on('click', function () {
 				$('#yearCol').hide();
@@ -1465,6 +1604,8 @@ border: 3px solid red;
 				$('#mech2014content').hide();
 				$('#plumbCode2014').hide();
 				$('#plumbCode2014content').hide();
+				$('#fuelCode2014').hide();
+				$('#fuelCode2014content').hide();
 
 				$('#genAdmin2014').show();
 				$('#genAdmin2014content').show();
@@ -1479,6 +1620,8 @@ border: 3px solid red;
 				$('#mechCode2014content').hide();
 				$('#plumbCode2014').hide();
 				$('#plumbCode2014content').hide();
+				$('#fuelCode2014').hide();
+				$('#fuelCode2014content').hide();
 
 				$('#bldgCode2014').show();				
 				$('#bldgCode2014content').show();
@@ -1492,6 +1635,8 @@ border: 3px solid red;
 				$('#bldgCode2014content').hide();
 				$('#plumbCode2014').hide();
 				$('#plumbCode2014content').hide();
+				$('#fuelCode2014').hide();
+				$('#fuelCode2014content').hide();
 
 				$('#mechCode2014').show();
 				$('#mechCode2014content').show();
@@ -1506,10 +1651,29 @@ border: 3px solid red;
 				$('#bldgCode2014content').hide();
 				$('#mechCode2014').hide();
 				$('#mechCode2014content').hide();
+				$('#fuelCode2014').hide();
+				$('#fuelCode2014content').hide();
 
 				$('#plumbCode2014').show();
 				$('#plumbCode2014content').show();
 			})			
+
+			$('#fuelCode2014List').on('click', function () {
+				$('#yearCol').hide();
+				$('#codeCol').hide();
+				$('#genAdmin2014').hide();
+				$('#genAdmin2014content').hide();
+				$('#bldgCode2014').hide();
+				$('#bldgCode2014content').hide();
+				$('#mechCode2014').hide();
+				$('#mechCode2014content').hide();
+				$('#plumbCode2014').hide();
+				$('#plumbCode2014content').hide();
+				
+				$('#fuelCode2014').show();
+				$('#fuelCode2014content').show();				
+			})			
+
 
 			$('#codeYear').on('change', function () {
 				if (this.value == '1') {
@@ -1540,18 +1704,10 @@ function includeHTML() {
   var z, i, elmnt, file, xhttp;
   /* Loop through a collection of all HTML elements: */
   z = document.getElementsByTagName("*");
-  
   for (i = 0; i < z.length; i++) {
     elmnt = z[i];
-    /*search for elements with a certain atrribute:*/
     file = elmnt.getAttribute("code-include-html");
-	if (elmnt.tagName=="IMG" && elmnt.className !== "zoomedImage"){ 
-			elmnt.addEventListener("click", function(elmnt){
-			openModal()})
-			0;
-	}
-    if (file) {
-	/* Make an HTTP request using the attribute value as the file name: */
+   if (file) {
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4) {
@@ -1561,20 +1717,27 @@ function includeHTML() {
           if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
           elmnt.removeAttribute("code-include-html");
           includeHTML();
-        }
-      }
+        }       }
       xhttp.open("GET", file, true);
       xhttp.send();
       return;
-    }}}
+    }}  //end of for...eachs
+	document.querySelectorAll("img").forEach(  (elg) => {
+		elg.addEventListener("click", function(){
+				openModal(elg);
+				})});	
+}
 var modal = document.querySelector('.modal-container')
 var closeButton = document.getElementById('close')
-var openModal = function() {
- modal.classList.add('is-open')
+var openModal = function(elmnt) {
+	modal.querySelector("img").src=elmnt.outerHTML.match(/"(.*?)"/)[1]
+	modal.classList.add('is-open');
 }
+
 var closeModal = function() {
- modal.classList.remove('is-open')
+	modal.classList.remove('is-open')
 }
+
 closeButton.addEventListener('click', closeModal)
 includeHTML();
 </script>
